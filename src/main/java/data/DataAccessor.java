@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package data;
 
 /**
  *
- * @author Christian Ambjørn Kehr
+ * @author Mkhansen
  */
-public class Logicfacade {
+public class DataAccessor {
     
 }
