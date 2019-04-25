@@ -17,7 +17,6 @@ import java.util.Properties;
 public class DBConnector {
 
     private Connection connection = null;
-
     //Constants
     private static final String IP = "174.138.1.102";
     private static final String PORT = "3306";
@@ -43,7 +42,6 @@ public class DBConnector {
             throw new SQLException(ex.getMessage());
         }
     }
-
     public Connection getConnection() {
         return this.connection;
     }
