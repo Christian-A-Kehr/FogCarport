@@ -20,9 +20,9 @@ public class DBConnector {
     //Constants
     private static final String IP = "174.138.1.102";
     private static final String PORT = "3306";
-    public static final String DATABASE = "CupCake";
-    private static final String USERNAME = "CupCake_User";
-    private static final String PASSWORD = "kage";
+    public static final String DATABASE = "Fog";
+    private static final String USERNAME = "TOPDOG";
+    private static final String PASSWORD = "unlimitedpower";
 
     public DBConnector() throws SQLException {
         try {
