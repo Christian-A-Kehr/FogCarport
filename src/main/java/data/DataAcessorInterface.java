@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Christian Ambjørn Kehr
  */
 
-// implement in a Datamapper to get all lists and single objectes in database. 
+// implement in a Datamapper to get all lists and single objects in database. 
 public interface DataAcessorInterface {
     
     
@@ -28,12 +28,12 @@ public interface DataAcessorInterface {
     // used to get an offer from database
     public Offer getOffer (int Id);
 
-    // Used to recover offers data to JSP and create object
+    // Used to recover offers data to JSP and create objects
     public Carport getCarport (int Id);
     
+    public Roof getRoof (String name);
     
-    
-    
+    public Customer getCustomer (String name);
     
     
     

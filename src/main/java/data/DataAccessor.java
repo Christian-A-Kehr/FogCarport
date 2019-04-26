@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Mkhansen
  */
-public class DataAccessor {
+public class DataAccessor implements DataAcessorInterface{
     public static void main(String[] args) {
       
 //        System.out.println(getCupCakePrice("Jordbær"));
@@ -51,5 +51,40 @@ public class DataAccessor {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public ArrayList<Material> getAllMaterials() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Material> GetListSpecificMaterials(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Material getMaterial(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Offer getOffer(int Id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Carport getCarport(int Id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Roof getRoof(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Customer getCustomer(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
