@@ -39,31 +39,6 @@ public class DataAccessorTest /*extends junit.extensions.Dbunit*/{
     }
 
     /**
-     * Test of main method, of class DataAccessor.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        DataAccessor.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAllCupCakes method, of class DataAccessor.
-     */
-    @Test
-    public void testGetAllCupCakes() {
-        System.out.println("getAllCupCakes");
-        ArrayList<CompleteCupCake> expResult = null;
-        ArrayList<CompleteCupCake> result = DataAccessor.getAllCupCakes();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getAllMaterials method, of class DataAccessor.
      */
     @Test
