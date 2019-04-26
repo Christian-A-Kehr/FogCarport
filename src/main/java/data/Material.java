@@ -9,6 +9,6 @@ package data;
  *
  * @author Mkhansen
  */
-public class ListOfMaterials {
+public class Material {
     
 }
