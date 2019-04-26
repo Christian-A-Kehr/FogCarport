@@ -5,25 +5,23 @@
  */
 package logic;
 
-import data.CompleteCupCake;
 import data.DataAccessor;
-import java.util.ArrayList;
+import data.Material;
 
 /**
  *
  * @author Christian Ambjørn Kehr
  */
 public class LogicFacade {
-private DataAccessor data = new DataAccessor();
-    
     public static void main(String[] args) {
-        System.err.println(allCupCakes());
-    }
-public LogicFacade() {
+        LogicFacade logic = new LogicFacade();
+        logic.getMaterialLogic();
     }
     
-    public static ArrayList<CompleteCupCake> allCupCakes() {
-        ArrayList<CompleteCupCake> list = DataAccessor.getAllCupCakes();
-        return list;
-}
+    public String getMaterialLogic(){
+        DataAccessor data = new DataAccessor();
+        String Material = "stuff";
+        System.out.println(data.getMaterial("test"));
+        return Material;
+    }
 }
