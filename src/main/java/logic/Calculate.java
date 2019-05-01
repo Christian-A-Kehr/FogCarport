@@ -36,8 +36,8 @@ public class Calculate {
     
     public double calculateNewBalance(){
         
-        int længdepris = material.getPriceM2() * ((material.getHeight() * material.getLength()) % 1000);
-        int 
+        int CarportPrice = material.getPriceM2() * ((material.getHeight() * material.getLength()) % 1000);
+        int SlopeRoof = roof.
     }
             
             
