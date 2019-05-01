@@ -56,8 +56,37 @@ public class DataAccessor implements DataAcessorInterface {
 
     @Override
     public ArrayList<Material> getAllMaterials() {
-        throw new UnsupportedOperationException("Not supported yet.");
+          ArrayList<Material> list = new ArrayList<>();
+
+        try {
+            DBConnector c = new DBConnector();
+
+            String query = "SELECT * FROM Materials;";
+
+            Connection connection = c.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("MaterialName");
+                String desc = rs.getString("Help_Description");
+                String material = rs.getString("Material");
+                String type = rs.getString("Type");
+                int matNum = rs.getInt("Vare_nummer");
+                int length = rs.getInt("Length");
+                int height = rs.getInt("Height");
+                int width = rs.getInt("Width");
+                int priceM = rs.getInt("PriceM");
+                int priceM2 = rs.getInt("PriceM2");
+
+                list.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
+        
+    
 
     @Override
     public ArrayList<Material> GetListSpecificMaterials(String name) {
@@ -69,6 +98,8 @@ public class DataAccessor implements DataAcessorInterface {
      * @param name
      * @return
      */
+    
+    
     @Override
     public Material getMaterial(String name) {
         Material Mat = null;
@@ -83,13 +114,17 @@ public class DataAccessor implements DataAcessorInterface {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String desc = rs.getString("Help_Description");
+                String material = rs.getString("Material");
+                String type = rs.getString("Type");
+                int matNum = rs.getInt("Vare_nummer");
                 int length = rs.getInt("Length");
                 int height = rs.getInt("Height");
                 int width = rs.getInt("Width");
                 int priceM = rs.getInt("PriceM");
                 int priceM2 = rs.getInt("PriceM2");
                 
-                Mat = new Material(name, desc, length, height, width, priceM, priceM2);
+                
+                Mat = new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2);
             }
             return Mat;
         } catch (Exception e) {
