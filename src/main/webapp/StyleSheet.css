@@ -1,0 +1,21 @@
+table, th, td {
+    margin: 5px;
+    width: 50%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+th{
+    /*background-color: #4CAF50;*/
+}
+
+.centerCell {
+    text-align: center;
+}
+caption{
+    line-height: 1.8;
+    font-size: 14pt;
+}
