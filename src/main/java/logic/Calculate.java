@@ -32,15 +32,36 @@ public class Calculate {
     private Beam beam = new Beam();
     private DataAccessor dataaccessor = new DataAccessor();
     
+    // roof. length 0,8 + 0,3 
     
     
-    public double calculateNewBalance(){
+    
+    public double CarportTotalPrice(Carport carport) {
+        
+        int RoofPrice = 
+       
+        
+        
         
         int CarportPrice = material.getPriceM2() * ((material.getHeight() * material.getLength()) % 1000);
         int SlopeRoof = roof.
     }
-            
-            
+          
+    public double WoodPostNeeded(Carport carport) {
+        // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
+        double l = carport.
+        
+        double l1 = 3000;
+        double l2 =  800;
+        double l3 = 300;
+        
+        
+        
+        
+        // 
+        
+    }
+           
             
             
             
