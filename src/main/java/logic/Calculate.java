@@ -50,22 +50,15 @@ public class Calculate {
           
     public double WoodPostNeeded(Carport carport) {
         // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
-        int l = carport.getLength();
-        int l1 = 3000;
-        int l2 =  800;
-        int l3 = 300;
-        int TotalPosts = (l - (l2 +l3))/ l1; 
         
-        
-        WoodPost woodpost = new Woodpost();
-        
-        int TotalPricePosts = TotalPrice * woodpost.getMprice();
-        
-        
-        
-        
-        // 
-        
+    private WoodPost woodpost = new WoodPost();
+    int l = carport.getLength();
+    int l1 = 3000;
+    int l2 = 800;
+    int l3 = 300;
+    int TotalPosts = (l - (l2 + l3)) / l1;
+
+    double TotalPricePosts = TotalPosts * woodpost.getMprice();
     }
            
             
