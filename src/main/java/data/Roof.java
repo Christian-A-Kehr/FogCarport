@@ -15,8 +15,9 @@ public class Roof {
     private int angle, height, length, width;
     private Beam beam;
     private Rafter rafter;
+    private WoodPost woodpost;
 
-    public Roof(String type, String matrial, int angle, int height, int length, int width, Beam beam, Rafter rafter) {
+    public Roof(String type, String matrial, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
         this.type = type;
         this.matrial = matrial;
         this.angle = angle;
@@ -25,6 +26,7 @@ public class Roof {
         this.width = width;
         this.beam = beam;
         this.rafter = rafter;
+        this.woodpost = woodpost;
     }
 
     public String getType() {
@@ -58,6 +60,11 @@ public class Roof {
     public Rafter getRafter() {
         return rafter;
     }
+
+    public WoodPost getWoodpost() {
+        return woodpost;
+    }
+    
          // setters used when calculating missing parameters or getteing them from carport class. 
 
     public void setAngle(int angle) {
