@@ -7,8 +7,39 @@ package data;
 
 /**
  *
- * @author Mkhansen
+ * @author Christian
  */
 public class Beam {
-    
+ private String material;
+ private double lenght, height, width, Mprice;
+
+    public Beam(String material, double lenght, double height, double width, double Mprice) {
+        this.material = material;
+        this.lenght = lenght;
+        this.height = height;
+        this.width = width;
+        this.Mprice = Mprice;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public double getLenght() {
+        return lenght;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getMprice() {
+        return Mprice;
+    }
+ 
+ 
 }

@@ -7,8 +7,27 @@ package data;
 
 /**
  *
- * @author Mkhansen
+ * @author Christan Ambjørn Kehr
  */
 public class Carport {
+    double height, length, width;
+    Roof roof;
+    Shed shed;
+
+    public Carport(double height, double length, double width, Roof roof, Shed shed) {
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+        this.shed = shed;
+    }
+
+    public Carport(double height, double length, double width, Roof roof) {
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+    }
+    
     
 }
