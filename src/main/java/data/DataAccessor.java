@@ -87,10 +87,37 @@ public class DataAccessor implements DataAcessorInterface {
     }
         
     
-
+    // @author Christian Ambjørn Kehr
     @Override
-    public ArrayList<Material> GetListSpecificMaterials(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Material> GetListSpecificMaterials(String type) {
+        ArrayList<Material> Mats = new ArrayList<>();
+
+        try {
+            DBConnector c = new DBConnector();
+
+            String query = "SELECT * FROM Materials WHERE Type ='" + type + "';";
+
+            Connection connection = c.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("MaterialName");
+                String desc = rs.getString("Help_Description");
+                String material = rs.getString("Material");
+                int matNum = rs.getInt("Vare_nummer");
+                int length = rs.getInt("Length");
+                int height = rs.getInt("Height");
+                int width = rs.getInt("Width");
+                int priceM = rs.getInt("PriceM");
+                int priceM2 = rs.getInt("PriceM2");
+                
+                 Mats.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
+            }
+            return Mats;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Mats;
     }
 
     /**
