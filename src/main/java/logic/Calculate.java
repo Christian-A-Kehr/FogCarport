@@ -35,43 +35,17 @@ public class Calculate {
     
     // roof. length 0,8 + 0,3 
     
-    
-    
-    public double CarportTotalPrice(Carport carport) {
-        
-        int RoofPrice = 
-       
-        
-        
-        
-        int CarportPrice = material.getPriceM2() * ((material.getHeight() * material.getLength()) % 1000);
-        int SlopeRoof = roof.
-    }
           
     public double WoodPostNeeded(Carport carport) {
         // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
         
-    private WoodPost woodpost = new WoodPost();
+    private WoodPost woodpost = new WoodPost(carport.getRoof().);
     int l = carport.getLength();
     int l1 = 3000;
     int l2 = 800;
     int l3 = 300;
     int TotalPosts = (l - (l2 + l3)) / l1;
 
-    double TotalPricePosts = TotalPosts * woodpost.getMprice();
-    }
-           
-            
-            
-            
-            
-            
+
+    } 
     
-    
- 
-    
-    
-    
-    
-    
-}
