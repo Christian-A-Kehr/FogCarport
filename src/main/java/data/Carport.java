@@ -10,11 +10,11 @@ package data;
  * @author Christan Ambjørn Kehr
  */
 public class Carport {
-    double height, length, width;
-    Roof roof;
-    Shed shed;
+    private int height, length, width;
+    private Roof roof;
+    private Shed shed;
 
-    public Carport(double height, double length, double width, Roof roof, Shed shed) {
+    public Carport(int height, int length, int width, Roof roof, Shed shed) {
         this.height = height;
         this.length = length;
         this.width = width;
@@ -22,22 +22,15 @@ public class Carport {
         this.shed = shed;
     }
 
-    public Carport(double height, double length, double width, Roof roof) {
-        this.height = height;
-        this.length = length;
-        this.width = width;
-        this.roof = roof;
-    }
-
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -48,5 +41,5 @@ public class Carport {
     public Shed getShed() {
         return shed;
     }
-      
+
 }
