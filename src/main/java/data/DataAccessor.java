@@ -28,31 +28,9 @@ public class DataAccessor implements DataAcessorInterface {
 ////        String Jordbær = "Jordbær";
 ////        CompleteCupCake j = getCupCake(Jordbær);
 ////        System.out.println("CupCake found: " + j.getName());
-//        System.out.println(getAllCupCakes().toString());
+//        System.out.println(GetListSpecificMaterials("Tagsten"));
 //    }
 
-//    public static ArrayList<CompleteCupCake> getAllCupCakes() {
-//        ArrayList<CompleteCupCake> list = new ArrayList<>();
-//
-//        try {
-//            DBConnector c = new DBConnector();
-//
-//            String query = "SELECT * FROM CupCakes_list;";
-//
-//            Connection connection = c.getConnection();
-//            Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(query);
-//            while (rs.next()) {
-//                String name = rs.getString("c_name");
-//                double price = rs.getDouble("c_price");
-//
-//                list.add(new CompleteCupCake(name, price));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
 
     @Override
     public ArrayList<Material> getAllMaterials() {
@@ -164,13 +142,13 @@ public class DataAccessor implements DataAcessorInterface {
     public Carport getCarport(int Id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
+//
+//    @Override
     public Roof getRoof(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+//    @Override
     public Customer getCustomer(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -28,6 +28,25 @@ public class Carport {
         this.width = width;
         this.roof = roof;
     }
-    
-    
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public Shed getShed() {
+        return shed;
+    }
+      
 }
