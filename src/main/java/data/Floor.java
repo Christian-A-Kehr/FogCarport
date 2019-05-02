@@ -7,13 +7,14 @@ package data;
 
 /**
  *
- * @author Christian
+ * @author Christian Ambjørn Kehr
  */
 public class Floor {
     private String name;
-    private double height, length, width, M2price;
+    private int height, length, width;
+    private double M2price;
 
-    public Floor(String name, double height, double length, double width, double M2price) {
+    public Floor(String name, int height, int length, int width, double M2price) {
         this.name = name;
         this.height = height;
         this.length = length;
@@ -25,21 +26,20 @@ public class Floor {
         return name;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
     public double getM2price() {
         return M2price;
     }
-    
-    
+
 }

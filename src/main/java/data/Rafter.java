@@ -7,8 +7,41 @@ package data;
 
 /**
  *
- * @author Mkhansen
+ * @author Christian Ambjørn Kehr
  */
 public class Rafter {
     
+ private String material;
+ private int lenght, height, width; 
+ private double Mprice;
+
+    public Rafter(String material, int lenght, int height, int width, double Mprice) {
+        this.material = material;
+        this.lenght = lenght;
+        this.height = height;
+        this.width = width;
+        this.Mprice = Mprice;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public int getLenght() {
+        return lenght;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public double getMprice() {
+        return Mprice;
+    }
+
+ 
 }

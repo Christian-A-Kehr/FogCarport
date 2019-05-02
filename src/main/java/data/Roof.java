@@ -12,10 +12,20 @@ package data;
 public class Roof {
    
     private String type, matrial;     
-    private int angle;
-    private double height, length, width; 
+    private int angle, height, length, width;
     private Beam beam;
     private Rafter rafter;
+
+    public Roof(String type, String matrial, int angle, int height, int length, int width, Beam beam, Rafter rafter) {
+        this.type = type;
+        this.matrial = matrial;
+        this.angle = angle;
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.beam = beam;
+        this.rafter = rafter;
+    }
 
     public String getType() {
         return type;
@@ -29,15 +39,15 @@ public class Roof {
         return angle;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -48,26 +58,25 @@ public class Roof {
     public Rafter getRafter() {
         return rafter;
     }
+         // setters used when calculating missing parameters or getteing them from carport class. 
 
     public void setAngle(int angle) {
         this.angle = angle;
     }
-        // setters used when calculating missing parameters or getteing them from carport class. 
-    
-    public void setHeight(double height) {
+
+    public void setHeight(int height) {
         this.height = height;
     }
-        // set frem carport class
-    public void setLength(double length) {
+
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
-    
-    
-    
+   
 
-
-}
+    }
+       
+    
