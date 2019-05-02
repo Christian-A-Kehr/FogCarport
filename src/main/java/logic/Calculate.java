@@ -14,6 +14,7 @@ import data.OfferLine;
 import data.Rafter;
 import data.Roof;
 import data.Shed;
+import data.WoodPost;
 
 public class Calculate {
     
@@ -49,11 +50,16 @@ public class Calculate {
           
     public double WoodPostNeeded(Carport carport) {
         // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
-        double l = carport.
+        int l = carport.getLength();
+        int l1 = 3000;
+        int l2 =  800;
+        int l3 = 300;
+        int TotalPosts = (l - (l2 +l3))/ l1; 
         
-        double l1 = 3000;
-        double l2 =  800;
-        double l3 = 300;
+        
+        WoodPost woodpost = new Woodpost();
+        
+        int TotalPricePosts = TotalPrice * woodpost.getMprice();
         
         
         
