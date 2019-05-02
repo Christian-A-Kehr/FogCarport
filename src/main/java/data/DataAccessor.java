@@ -120,11 +120,6 @@ public class DataAccessor implements DataAcessorInterface {
         return Mats;
     }
 
-    /**
-     *
-     * @param name
-     * @return
-     */
     
       //  @author MkHansen og Christian Ambjørn Kehr
     @Override
