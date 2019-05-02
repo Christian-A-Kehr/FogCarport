@@ -11,9 +11,9 @@ package data;
  */
 public class WoodPost {
     private String material;
-    private double lenght, width, Mprice;
+    private int lenght, width, Mprice;
 
-    public WoodPost(String material, double lenght, double width, double Mprice) {
+    public WoodPost(String material, int lenght, int width, int Mprice) {
         this.material = material;
         this.lenght = lenght;
         this.width = width;
@@ -24,16 +24,16 @@ public class WoodPost {
         return material;
     }
 
-    public double getLenght() {
+    public int getLenght() {
         return lenght;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public double getMprice() {
+    public int getMprice() {
         return Mprice;
     }
-    
+
 }
