@@ -12,9 +12,9 @@ package data;
 public class WoodPost {
     private String material;
     private int lenght, width; 
-    private int Mprice;
+    private double Mprice;
 
-    public WoodPost(String material, int lenght, int width, int Mprice) {
+    public WoodPost(String material, int lenght, int width, double Mprice) {
         this.material = material;
         this.lenght = lenght;
         this.width = width;
