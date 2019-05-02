@@ -11,7 +11,8 @@ package data;
  */
 public class WoodPost {
     private String material;
-    private int lenght, width, Mprice;
+    private int lenght, width; 
+    private int Mprice;
 
     public WoodPost(String material, int lenght, int width, int Mprice) {
         this.material = material;
