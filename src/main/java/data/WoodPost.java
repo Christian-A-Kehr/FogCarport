@@ -33,7 +33,7 @@ public class WoodPost {
         return width;
     }
 
-    public int getMprice() {
+    public double getMprice() {
         return Mprice;
     }
 
