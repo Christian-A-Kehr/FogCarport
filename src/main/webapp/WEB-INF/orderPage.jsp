@@ -1,10 +1,9 @@
 <%-- 
     Document   : orderPage
-    Created on : 01-05-2019, 09:57:21
+    Created on : 03-05-2019, 12:41:35
     Author     : Mkhansen
 --%>
 
-<%@page import="data.DataAccessor"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.Material"%>
 <%@page import="data.Material"%>
