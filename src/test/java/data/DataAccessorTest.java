@@ -38,108 +38,108 @@ public class DataAccessorTest /*extends junit.extensions.Dbunit*/{
     public void tearDown() {
     }
 
-    /**
-     * Test of getAllMaterials method, of class DataAccessor.
-     */
-    @Test
-    public void testGetAllMaterials() {
-        System.out.println("getAllMaterials");
-        DataAccessor instance = new DataAccessor();
-        ArrayList<Material> expResult = null;
-        ArrayList<Material> result = instance.getAllMaterials();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of GetListSpecificMaterials method, of class DataAccessor.
-     */
-    @Test
-    public void testGetListSpecificMaterials() {
-        System.out.println("GetListSpecificMaterials");
-        String name = "";
-        DataAccessor instance = new DataAccessor();
-        ArrayList<Material> expResult = null;
-        ArrayList<Material> result = instance.GetListSpecificMaterials(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getMaterial method, of class DataAccessor.
-     */
-    @Test
-    public void testGetMaterial() {
-        System.out.println("getMaterial");
-        String name = "";
-        DataAccessor instance = new DataAccessor();
-        Material expResult = null;
-        Material result = instance.getMaterial(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getOffer method, of class DataAccessor.
-     */
-    @Test
-    public void testGetOffer() {
-        System.out.println("getOffer");
-        int Id = 0;
-        DataAccessor instance = new DataAccessor();
-        Offer expResult = null;
-        Offer result = instance.getOffer(Id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCarport method, of class DataAccessor.
-     */
-    @Test
-    public void testGetCarport() {
-        System.out.println("getCarport");
-        int Id = 0;
-        DataAccessor instance = new DataAccessor();
-        Carport expResult = null;
-        Carport result = instance.getCarport(Id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getRoof method, of class DataAccessor.
-     */
-    @Test
-    public void testGetRoof() {
-        System.out.println("getRoof");
-        String name = "";
-        DataAccessor instance = new DataAccessor();
-        Roof expResult = null;
-        Roof result = instance.getRoof(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCustomer method, of class DataAccessor.
-     */
-    @Test
-    public void testGetCustomer() {
-        System.out.println("getCustomer");
-        String name = "";
-        DataAccessor instance = new DataAccessor();
-        Customer expResult = null;
-        Customer result = instance.getCustomer(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of getAllMaterials method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetAllMaterials() {
+//        System.out.println("getAllMaterials");
+//        DataAccessor instance = new DataAccessor();
+//        ArrayList<Material> expResult = null;
+//        ArrayList<Material> result = instance.getAllMaterials();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of GetListSpecificMaterials method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetListSpecificMaterials() {
+//        System.out.println("GetListSpecificMaterials");
+//        String name = "";
+//        DataAccessor instance = new DataAccessor();
+//        ArrayList<Material> expResult = null;
+//        ArrayList<Material> result = instance.GetListSpecificMaterials(name);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getMaterial method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetMaterial() {
+//        System.out.println("getMaterial");
+//        String name = "";
+//        DataAccessor instance = new DataAccessor();
+//        Material expResult = null;
+//        Material result = instance.getMaterial(name);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getOffer method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetOffer() {
+//        System.out.println("getOffer");
+//        int Id = 0;
+//        DataAccessor instance = new DataAccessor();
+//        Offer expResult = null;
+//        Offer result = instance.getOffer(Id);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getCarport method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetCarport() {
+//        System.out.println("getCarport");
+//        int Id = 0;
+//        DataAccessor instance = new DataAccessor();
+//        Carport expResult = null;
+//        Carport result = instance.getCarport(Id);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getRoof method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetRoof() {
+//        System.out.println("getRoof");
+//        String name = "";
+//        DataAccessor instance = new DataAccessor();
+//        Roof expResult = null;
+//        Roof result = instance.getRoof(name);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getCustomer method, of class DataAccessor.
+//     */
+//    @Test
+//    public void testGetCustomer() {
+//        System.out.println("getCustomer");
+//        String name = "";
+//        DataAccessor instance = new DataAccessor();
+//        Customer expResult = null;
+//        Customer result = instance.getCustomer(name);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
 }
