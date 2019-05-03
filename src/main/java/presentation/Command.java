@@ -17,9 +17,11 @@ import logic.FogException;
 abstract class Command {
     
     private static HashMap<String, Command> commands;
+    private final static Command UNKNOWNCOMMAND = new UnknownCommand(); 
 
     private static void initCommands() {
         commands = new HashMap<>();
+        commands.put( "GoToOrderPage", new GoToOrderPage() );
 //        commands.put( "login", new Login() );
     }
 
@@ -28,10 +30,10 @@ abstract class Command {
         if ( commands == null ) {
             initCommands();
         }
-        return commands.getOrDefault(commandName, new UnknownCommand() );
+        return commands.getOrDefault(commandName, UNKNOWNCOMMAND );
     }
 
-    abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
+   abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
             throws FogException;
 
 }
