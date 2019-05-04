@@ -18,7 +18,7 @@
     </head>
     <body>
         <h2>Opret nyt tilbud</h2>
-        <form action="FrontController" method="POST">
+        <form action="Frontcontroller" method="POST">
             <input type="hidden" name="command" value="GoToOrderPage">
             <input type="submit" value="Start ny bestilling">
         </form>
