@@ -55,10 +55,11 @@
                     <td>
                         <form action="">
                             <select>
-                                <% ArrayList<Material> mats = (ArrayList<Material>) request.getAttribute("allRoofMats");
+                                <% ArrayList<Material> mats = (ArrayList<Material>) session.getAttribute("allRoofMats");
                                     for (int i = 0; i < mats.size(); i++) {
+                                        String name = mats.get(i).getName();
                                 %>
-                                <option value="<% mats.get(i);%>"><%mats.get(i).getName().toString();%></option>
+                                <option value="<% mats.get(i);%>"><%out.print(name);%></option>
                                 <%
                                     }
                                 %>
