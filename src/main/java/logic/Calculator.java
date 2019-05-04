@@ -20,31 +20,26 @@ public class Calculator {
           
     public int WoodPostNeeded(Carport carport) {
         // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
-        
-//    WoodPost woodpost = new WoodPost(carport.getRoof().getWoodpost().getMaterial(),
-//                                     carport.getRoof().getWoodpost().getLenght(),
-//                                     carport.getRoof().getWoodpost().getWidth(),
-//                                     carport.getRoof().getWoodpost().getMprice());
+      
     // L1, L2 og L3's værdier skal laves om til variabler, som kan rettes af bruger.
+    // max = maxsimum lenght between woodposts before a new post is needed.  
     int L = carport.getLength();
-    int L1 = 4000;
-    int L2 = 800;
-    int L3 = 300;
-    int max = (L - (L2 + L3)); 
-    int PostsPrBeams = max/L1;
+    int Max = 4000;
+    int L1 = 150; // L2 = data.getDemand(1) // L1 = 1. Lenght that need to eaves.
+    int L2 = 150; // L2 = data.getDemand(1) // L2 = 2. Lenght that need to eaves.
+    int Ltotal = (L - (L1 + L2)); 
+    int PostsPrBeams = Ltotal/Max;
     
-    // 1000 = nearest meter 
-    PostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
-    int TotalPosts = PostsPrBeams * BeamsNeeded(carport);
+    // 1000 = nearest meter, because if it excite nearest thousand  it must be the next thousand.
+    int totalPostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
+    int TotalPosts = totalPostsPrBeams * BeamsNeeded(carport);
     
     return TotalPosts;
     }
 
-    public double WooPostTotalPrice(Carport carport) {
-        double totalPrice;
+    public double WoodPostTotalPrice(Carport carport) {
 
-        totalPrice = ((WoodPostNeeded(carport) * carport.getHeight()) * carport.getRoof().getWoodpost().getMprice());
-
+        double totalPrice = ((WoodPostNeeded(carport) * carport.getHeight()) * carport.getRoof().getWoodpost().getMprice());
         return totalPrice;
     }
 
@@ -52,12 +47,13 @@ public class Calculator {
     // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
     int B = carport.getLength();
     int B1 = 4000;
-    int B2 = 150;
-    int B3 = 150;
+    int B2 = 150; // B2 = data.getDemand(1) // L1 = 1. Lenght that need to eaves.
+    int B3 = 150; // B3 = data.getDemand(1) // L1 = 1. Lenght that need to eaves.
     int max = (B - (B2 + B3)); 
     int PostsPrBeams = max/B1;
-    PostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
-    int TotalPosts = PostsPrBeams * BeamsNeeded(carport);
+    // 1000 = nearest meter, because if it excite nearest thousand  it must be the next thousand.
+    int totalPostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
+    int TotalPosts = totalPostsPrBeams;
     
     return TotalPosts;
     }
