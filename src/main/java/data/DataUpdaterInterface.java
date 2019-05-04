@@ -12,4 +12,6 @@ package data;
 public interface DataUpdaterInterface {
     
     
+    public void updateDemandVariables(Demand demand);
+            
 }
