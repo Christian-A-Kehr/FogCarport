@@ -13,8 +13,7 @@
 <html>
     <head>
         <title>Start Page</title>
-        <link href="StyleSheet.css" rel="stylesheet" type="text/css">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="${pageContext.request.contextPath}/StyleSheet.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <h2>Opret nyt tilbud</h2>
