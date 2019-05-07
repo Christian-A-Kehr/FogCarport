@@ -5,9 +5,7 @@
  */
 package presentation;
 
-import data.DataAccessor;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +19,6 @@ import logic.FogException;
  */
 @WebServlet(name = "Frontcontroller", urlPatterns = {"/Frontcontroller"})
 public class Frontcontroller extends HttpServlet {
-    private DataAccessor dataAccess = new DataAccessor();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,8 +31,6 @@ public class Frontcontroller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.setAttribute("allMatsTable", dataAccess.getAllMaterials());
-        request.getSession().setAttribute("allRoofMats", dataAccess.GetListSpecificMaterials("Tagsten"));
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
