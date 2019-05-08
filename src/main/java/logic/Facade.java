@@ -29,5 +29,8 @@ public class Facade {
         
         return list;
     }
+    public ArrayList<Material> getListSpecificMaterials(String type){
+        return data.getListSpecificMaterials(type);
+    }
     
 }
