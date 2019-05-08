@@ -4,10 +4,12 @@ import data.Carport;
 import data.DBConnector;
 import data.DataAccessor;
 import data.Material;
+import data.Rafter;
 import data.WoodPost;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.lang.*;
 
 /**
  *
@@ -63,17 +65,46 @@ class Calculate implements LogicInterface {
         return TotalPosts;
     }
 
-    private int Rafter(Carport carport) {
+    public double AntalSpær(Carport carport) {
 
+        int spærbredde = 195;
+        int spærafstand = 600;
         double spændvidde = 4.02;
+
+        int antalspær = ((carport.getLength() + spærafstand) / (spærbredde + spærafstand)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
+        //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "mangler" en efterfølgende afstandmåling.
+
+        double længde_c = 0.5 * carport.getWidth(); // Længden ganges med en halv for at danne en retvinklet trekant 
+        double længde_a = længde_c * Math.sin(90); // a = c * sin(A)
+        double længdeEnkeltSpær = 2 * længde_a;
+
+        double totallængdespær = længdeEnkeltSpær * antalspær;
+       return totallængdespær;
+       
+       
+
+    public double TotalPrisSpær(Carport carport) {
+
+        double totalpris = (AntalSpær(carport) / 1000) * carport.getRoof().getRafter().getMprice();
+        return totalpris;
+      
+       }
+       
+       
+        
+        
+        
+        
+        
+       
         int spærbredde = 45;
         int spærhøjde = 195;
-        double spærafstand
+        
                 = int antalspær = carport.getLength()
                 
                 
     
-
+                    
 0,6
         
         
