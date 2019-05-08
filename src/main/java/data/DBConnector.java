@@ -37,7 +37,7 @@ public class DBConnector {
             props.put("useLegacyDatetimeCode", false);
             props.put("serverTimezone", "CET");
             this.connection = DriverManager.getConnection(url, props);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             ex.printStackTrace();
             throw new SQLException(ex.getMessage());
         }
