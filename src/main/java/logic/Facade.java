@@ -19,18 +19,18 @@ public class Facade {
     public static void main(String[] args) {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
-        logic.GetAllMatrials();
+        logic.getAllMatrials();
         
     }
     
-    public ArrayList<Material> GetAllMatrials(){
+    public ArrayList<Material> getAllMatrials(){
         ArrayList list = new ArrayList(data.getAllMaterials());
         System.err.println(list);
         
         return list;
     }
-    public ArrayList<Material> GetListSpecificMaterials(String type){
-        return data.GetListSpecificMaterials(type);
+    public ArrayList<Material> getListSpecificMaterials(String type){
+        return data.getListSpecificMaterials(type);
     }
     
 }
