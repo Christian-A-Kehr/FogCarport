@@ -17,18 +17,11 @@ import logic.FogException;
  * @author Mkhansen
  */
 public class GoToOrderPage extends Command {
-    private DataAccessor dataAccess = new DataAccessor();
     private Facade logic = new Facade();
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-//        session.setAttribute("allRoofMats", dataAccess.getListSpecificMaterials("Tagsten"));
-//        session.setAttribute("allRafterMats", dataAccess.getListSpecificMaterials("Spær"));
-//        session.setAttribute("allShedMats", dataAccess.getListSpecificMaterials("Beklædning"));
-//        session.setAttribute("allFloorMats", dataAccess.getListSpecificMaterials("Gulv"));
-//        session.setAttribute("allWoodpostMats", dataAccess.getListSpecificMaterials("Stolpe"));
-//        session.setAttribute("allBeamMats", dataAccess.getListSpecificMaterials("Rem"));
 
         session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagsten"));
         session.setAttribute("allRafterMats", logic.getListSpecificMaterials("Spær"));
