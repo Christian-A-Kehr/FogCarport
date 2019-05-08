@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public class DataAccessor implements DataAcessorInterface {
 
-    private final DBConnector CONNECTOR;
-    
-    public DataAccessor(DBConnector c){
-        this.CONNECTOR = c;
-    }
+//    private final DBConnector CONNECTOR;
+//    
+//    public DataAccessor(DBConnector c){
+//        this.CONNECTOR = c;
+//    }
             
 //    public static void main(String[] args) {
 //        System.out.println(GetListSpecificMaterials("Tagsten"));
@@ -31,11 +31,11 @@ public class DataAccessor implements DataAcessorInterface {
         ArrayList<Material> list = new ArrayList<>();
 
         try {
-            
+            DBConnector connect = new DBConnector();
 
             String query = "SELECT * FROM Materials;";
 
-            Connection connection = CONNECTOR.getConnection();
+            Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -64,10 +64,11 @@ public class DataAccessor implements DataAcessorInterface {
         ArrayList<Material> Mats = new ArrayList<>();
 
         try {
+            DBConnector connect = new DBConnector();
 
             String query = "SELECT * FROM Materials WHERE Type ='" + type + "';";
 
-            Connection connection = CONNECTOR.getConnection();
+            Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -96,10 +97,11 @@ public class DataAccessor implements DataAcessorInterface {
         Material Mat = null;
 
         try {
+            DBConnector connect = new DBConnector();
 
             String query = "SELECT * FROM Materials WHERE Material_Name ='" + name + "';";
 
-            Connection connection = CONNECTOR.getConnection();
+            Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
