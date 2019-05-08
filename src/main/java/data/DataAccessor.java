@@ -16,36 +16,30 @@ import java.util.ArrayList;
  */
 public class DataAccessor implements DataAcessorInterface {
 
+    private final DBConnector CONNECTOR;
+    
+    public DataAccessor(DBConnector c){
+        this.CONNECTOR = c;
+    }
+            
 //    public static void main(String[] args) {
-//
-////        System.out.println(getCupCakePrice("Jordbær"));
-////        System.out.println(getAllCupCakes().toString());
-////        System.out.println(getUser("John").toString());
-////        createUser("John", "1234", "Teeest@testmail.dk", 1000);
-////
-////        System.out.println("Start");
-////        getAllCupCakes();
-////        String Jordbær = "Jordbær";
-////        CompleteCupCake j = getCupCake(Jordbær);
-////        System.out.println("CupCake found: " + j.getName());
 //        System.out.println(GetListSpecificMaterials("Tagsten"));
 //    }
 
-
     @Override
     public ArrayList<Material> getAllMaterials() {
-          ArrayList<Material> list = new ArrayList<>();
+        ArrayList<Material> list = new ArrayList<>();
 
         try {
-            DBConnector c = new DBConnector();
+            
 
             String query = "SELECT * FROM Materials;";
 
-            Connection connection = c.getConnection();
+            Connection connection = CONNECTOR.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String name = rs.getString("MaterialName");
+                String name = rs.getString("Material_Name");
                 String desc = rs.getString("Help_Description");
                 String material = rs.getString("Material");
                 String type = rs.getString("Type");
@@ -63,23 +57,21 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return list;
     }
-        
-    
+
     // @author Christian Ambjørn Kehr
     @Override
     public ArrayList<Material> GetListSpecificMaterials(String type) {
         ArrayList<Material> Mats = new ArrayList<>();
 
         try {
-            DBConnector c = new DBConnector();
 
             String query = "SELECT * FROM Materials WHERE Type ='" + type + "';";
 
-            Connection connection = c.getConnection();
+            Connection connection = CONNECTOR.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String name = rs.getString("MaterialName");
+                String name = rs.getString("Material_Name");
                 String desc = rs.getString("Help_Description");
                 String material = rs.getString("Material");
                 int matNum = rs.getInt("Vare_nummer");
@@ -88,8 +80,8 @@ public class DataAccessor implements DataAcessorInterface {
                 int width = rs.getInt("Width");
                 int priceM = rs.getInt("PriceM");
                 int priceM2 = rs.getInt("PriceM2");
-                
-                 Mats.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
+
+                Mats.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
             }
             return Mats;
         } catch (Exception e) {
@@ -98,18 +90,16 @@ public class DataAccessor implements DataAcessorInterface {
         return Mats;
     }
 
-    
-      //  @author MkHansen og Christian Ambjørn Kehr
+    //  @author MkHansen og Christian Ambjørn Kehr
     @Override
     public Material getMaterial(String name) {
         Material Mat = null;
 
         try {
-            DBConnector c = new DBConnector();
 
-            String query = "SELECT * FROM Materials WHERE MaterialName ='" + name + "';";
+            String query = "SELECT * FROM Materials WHERE Material_Name ='" + name + "';";
 
-            Connection connection = c.getConnection();
+            Connection connection = CONNECTOR.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -122,8 +112,7 @@ public class DataAccessor implements DataAcessorInterface {
                 int width = rs.getInt("Width");
                 int priceM = rs.getInt("PriceM");
                 int priceM2 = rs.getInt("PriceM2");
-                
-                
+
                 Mat = new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2);
             }
             return Mat;
@@ -144,6 +133,7 @@ public class DataAccessor implements DataAcessorInterface {
     }
 //
 //    @Override
+
     public Roof getRoof(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
