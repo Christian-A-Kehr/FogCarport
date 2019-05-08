@@ -23,19 +23,19 @@ public class GoToOrderPage extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-        session.setAttribute("allRoofMats", dataAccess.GetListSpecificMaterials("Tagsten"));
-        session.setAttribute("allRafterMats", dataAccess.GetListSpecificMaterials("Spær"));
-        session.setAttribute("allShedMats", dataAccess.GetListSpecificMaterials("Beklædning"));
-        session.setAttribute("allFloorMats", dataAccess.GetListSpecificMaterials("Gulv"));
-        session.setAttribute("allWoodpostMats", dataAccess.GetListSpecificMaterials("Stolpe"));
-        session.setAttribute("allBeamMats", dataAccess.GetListSpecificMaterials("Rem"));
+//        session.setAttribute("allRoofMats", dataAccess.getListSpecificMaterials("Tagsten"));
+//        session.setAttribute("allRafterMats", dataAccess.getListSpecificMaterials("Spær"));
+//        session.setAttribute("allShedMats", dataAccess.getListSpecificMaterials("Beklædning"));
+//        session.setAttribute("allFloorMats", dataAccess.getListSpecificMaterials("Gulv"));
+//        session.setAttribute("allWoodpostMats", dataAccess.getListSpecificMaterials("Stolpe"));
+//        session.setAttribute("allBeamMats", dataAccess.getListSpecificMaterials("Rem"));
 
-//        session.setAttribute("allRoofMats", logic.GetListSpecificMaterials("Tagsten"));
-//        session.setAttribute("allRafterMats", logic.GetListSpecificMaterials("Spær"));
-//        session.setAttribute("allShedMats", logic.GetListSpecificMaterials("Beklædning"));
-//        session.setAttribute("allFloorMats", logic.GetListSpecificMaterials("Gulv"));
-//        session.setAttribute("allWoodpostMats", logic.GetListSpecificMaterials("Stolpe"));
-//        session.setAttribute("allBeams", logic.GetListSpecificMaterials("Rem"));
+        session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagsten"));
+        session.setAttribute("allRafterMats", logic.getListSpecificMaterials("Spær"));
+        session.setAttribute("allShedMats", logic.getListSpecificMaterials("Beklædning"));
+        session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
+        session.setAttribute("allWoodpostMats", logic.getListSpecificMaterials("Stolpe"));
+        session.setAttribute("allBeams", logic.getListSpecificMaterials("Rem"));
         return "orderPage";
     }
 }
