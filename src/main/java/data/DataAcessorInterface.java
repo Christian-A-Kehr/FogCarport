@@ -20,7 +20,7 @@ public interface DataAcessorInterface {
     public ArrayList<Material> getAllMaterials ();
     
     // Used to show in relevant dropDownBoxses and prices.
-    public ArrayList<Material> GetListSpecificMaterials(String name);
+    public ArrayList<Material> getListSpecificMaterials(String name);
     
     // Used to recover offers and get single objects from database
     public Material getMaterial (String name); 
