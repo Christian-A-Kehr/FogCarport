@@ -80,7 +80,7 @@ class Calculate implements LogicInterface {
 
         double totallængdespær = længdeEnkeltSpær * antalspær;
        return totallængdespær;
-       
+    }
        
 
     public double TotalPrisSpær(Carport carport) {
@@ -89,26 +89,6 @@ class Calculate implements LogicInterface {
         return totalpris;
       
        }
-       
-       
-        
-        
-        
-        
-        
-       
-        int spærbredde = 45;
-        int spærhøjde = 195;
-        
-                = int antalspær = carport.getLength()
-                
-                
-    
-                    
-0,6
-        
-        
-                }
 
     @Override
     public int WoodPostNeeded() {
@@ -124,7 +104,7 @@ class Calculate implements LogicInterface {
     public int BeamsNeeded() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}}
+}
 
    
-}
+
