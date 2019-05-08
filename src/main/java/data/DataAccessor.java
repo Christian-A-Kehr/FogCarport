@@ -60,7 +60,7 @@ public class DataAccessor implements DataAcessorInterface {
 
     // @author Christian Ambjørn Kehr
     @Override
-    public ArrayList<Material> GetListSpecificMaterials(String type) {
+    public ArrayList<Material> getListSpecificMaterials(String type) {
         ArrayList<Material> Mats = new ArrayList<>();
 
         try {
