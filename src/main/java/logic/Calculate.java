@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author Claus Mikkelsen Findinge
  */
  
-public class Calculate {
+class Calculate implements LogicInterface {
     
     private DataAccessor dataaccessor = new DataAccessor();
     
@@ -53,7 +53,7 @@ public class Calculate {
         return totalPrice;
     }
 
-    private int BeamsNeeded(Carport carport) {
+    public int BeamsNeeded(Carport carport) {
     // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
     int B = carport.getLength();
     int B1 = 4000;
@@ -65,5 +65,23 @@ public class Calculate {
     int TotalPosts = PostsPrBeams * BeamsNeeded(carport);
     
     return TotalPosts;
-    }}
+    }
+
+    
+    private int Rafter(Carport carport) {
+        
+        double spændvidde = 4.02;
+        int spærbredde = 45;
+        int spærhøjde = 195;
+        double spærafstand = 
+        int antalspær = carport.getLength()
+                
+                
+                0,6
+        
+        
+                }}}
+
+   
+}
 
