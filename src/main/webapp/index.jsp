@@ -16,7 +16,7 @@
         <link href="${pageContext.request.contextPath}/StyleSheet.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h2>Opret nyt tilbud</h2>
+        <h2>Velkommen</h2>
         <form action="Frontcontroller" method="POST">
             <input type="hidden" name="command" value="GoToOrderPage">
             <input type="submit" value="Start ny bestilling">
