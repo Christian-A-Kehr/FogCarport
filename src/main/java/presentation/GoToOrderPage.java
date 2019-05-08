@@ -35,7 +35,7 @@ public class GoToOrderPage extends Command {
         session.setAttribute("allShedMats", logic.getListSpecificMaterials("Beklædning"));
         session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
         session.setAttribute("allWoodpostMats", logic.getListSpecificMaterials("Stolpe"));
-        session.setAttribute("allBeams", logic.getListSpecificMaterials("Rem"));
+        session.setAttribute("allBeamMats", logic.getListSpecificMaterials("Rem"));
         return "orderPage";
     }
 }
