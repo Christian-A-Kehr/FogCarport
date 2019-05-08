@@ -1,26 +1,26 @@
-        body{
-            font-family: Arial;
-        }
-        table, th, td {
-            margin: 5px;
-            width: 50%;
-            border:1.5px solid black;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        th{
-            background-color: #4CAF50;
-            color: black;
-        }
-        th, td {
-            padding: 4px;
-            width: 33%;
-        }
+body{
+    font-family: Arial;
+}
+table, th, td {
+    margin: 5px;
+    width: 50%;
+    border:1.5px solid black;
+    border-collapse: collapse;
+    text-align: left;
+}
+th{
+    background-color: #4CAF50;
+    color: black;
+}
+th, td {
+    padding: 4px;
+    width: 33%;
+}
 
-        caption{
-            line-height: 1.8;
-            font-size: 14pt;
-        }
-        #shed th, td {
-            width: 25%
-        }
+caption{
+    line-height: 1.8;
+    font-size: 14pt;
+}
+#shed th, td {
+    width: 25%
+}
