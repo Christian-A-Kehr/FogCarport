@@ -27,7 +27,7 @@ public class DBConnector {
     public DBConnector() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            String url = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE;
+            String url = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?UseSSL=false";
             Properties props = new Properties();
             props.put("user", USERNAME);
             props.put("password", PASSWORD);
