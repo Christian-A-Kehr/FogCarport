@@ -38,25 +38,31 @@ class Calculate implements LogicInterface {
 
     public double AntalSpær(Carport carport) {
 
-        int spærbredde = 195;
+        int spærbredde = 195; 
         int spærafstand = 600;
-        double spændvidde = 4.02;
+        // følgende spærdimensioner = variabler fra database
+     //   double spændvidde = 4.02;
 
         int antalspær = ((carport.getLength() + spærafstand) / (spærbredde + spærafstand)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
         //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "mangler" en efterfølgende afstandmåling.
+        int heleantalspær = antalspær + 1;
+        
 
         double længde_c = 0.5 * carport.getWidth(); // Længden ganges med en halv for at danne en retvinklet trekant 
         double længde_a = længde_c * Math.sin(90); // a = c * sin(A)
         double længdeEnkeltSpær = 2 * længde_a;
 
         double totallængdespær = længdeEnkeltSpær * antalspær;
-        return totallængdespær;
+       // return totallængdespær;
+        return heleantalspær;
     }
+    
 
     public double TotalPrisSpær(Carport carport) {
 
-        double totalpris = (AntalSpær(carport) / 1000) * carport.getRoof().getRafter().getMprice();
-        return totalpris;
+        double totalspærlængde = (AntalSpær(carport) * carport.getWidth());       
+        double totalspærpris = (totalspærlængde / 1000) * carport.getRoof().getRafter().getMprice();
+        return totalspærpris;
 
     }
      // roof. length 0,8 + 0,3 
