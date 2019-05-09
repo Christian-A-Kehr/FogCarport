@@ -23,7 +23,10 @@ public interface LogicInterface {
     public double calculateWallCoveringPrice(int area, Carport carport);
     public int WallCoveringsNeededDepth(Shed shed);
     public int WallCoveringsNeededwidth(Shed shed);
-    public int roofArea(Carport carport);
+    public int roofArea(Carport carport); 
+   // public carport GetPrices(Carport carport);
+        
+    
    
 }
 
