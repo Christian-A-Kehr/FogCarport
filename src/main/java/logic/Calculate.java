@@ -3,8 +3,11 @@ package logic;
 import data.Carport;
 import data.DBConnector;
 import data.DataAccessor;
+import data.Floor;
 import data.Material;
 import data.Rafter;
+import data.Roof;
+import data.Shed;
 import data.WoodPost;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -43,6 +46,7 @@ class Calculate implements LogicInterface {
         return TotalPosts;
     }
 
+    @Override
     public double WooPostTotalPrice(Carport carport) {
         double totalPrice;
 
@@ -59,10 +63,10 @@ class Calculate implements LogicInterface {
         int B3 = 150;
         int max = (B - (B2 + B3));
         int PostsPrBeams = max / B1;
-        PostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
-        int TotalPosts = PostsPrBeams * BeamsNeeded(carport);
+        int PostsPrBeamsRoundUp = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
+        
 
-        return TotalPosts;
+        return PostsPrBeamsRoundUp;
     }
 
     public double AntalSpær(Carport carport) {
@@ -79,16 +83,15 @@ class Calculate implements LogicInterface {
         double længdeEnkeltSpær = 2 * længde_a;
 
         double totallængdespær = længdeEnkeltSpær * antalspær;
-       return totallængdespær;
+        return totallængdespær;
     }
-       
 
     public double TotalPrisSpær(Carport carport) {
 
         double totalpris = (AntalSpær(carport) / 1000) * carport.getRoof().getRafter().getMprice();
         return totalpris;
-      
-       }
+
+    }
 
     @Override
     public int WoodPostNeeded() {
@@ -96,15 +99,85 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public double WooPostTotalPrice() {
+    public int BeamsNeeded() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int BeamsNeeded() {
+    public double beamsPrice(int beams) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int floorArea(Shed shed) {
+       int area = shed.getDepth() * shed.getWidth();
+       return area;
+    }
+
+    @Override
+    public double floorPrice(Floor floor) {
+        double price = floor.getHeight() * floor.getWidth() * floor.getM2price();
+        return price;
+    }
+
+    @Override
+    public int calulateGabledHeight(Carport carport) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int calculateGabledArea(Carport carport, int gabledHeight) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int calculateGabledWallCovering(Roof roof) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int WallCoveringsNeededDepth(Shed shed) {
+        //overlay used for 100 mm width
+        int overlay = 150;
+        int shedCoverDepth = shed.getDepth();
+        int wallCoverWidth = shed.getWallCovering().getWidth();
+        int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
+        int distenceToCover = shedCoverDepth - wallCoverWidth;
+        int wallCOverFits = distenceToCover / MaxCover;
+        int nearst = (int) (Math.ceil(wallCOverFits / 1000.0) * 1000);
+        int finalCoverNeeded = distenceToCover / nearst;
+        int finalCoverNeededtotal = (int) (Math.ceil(finalCoverNeeded / 100.0) * 100.0);
+        int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
+
+        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
+        // regn nu hvor mange der skal være på indersiden
+      
+        //return totalAmount;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double calculateWallCoveringPrice(int area, Carport carport) {
+        double Mprice = carport.getShed().getWallCovering().getMprice();
+       // int lenght
+            //    = int totalAmount = lenght * Mprice;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int totalWallCoveringsNeeded(Shed shed) {
+        int sideOne = WallCoveringsNeededDepth(shed);
+        int sideTwo = WallCoveringsNeededDepth(shed);
+        int sideThree = WallCoveringsNeededwidth(shed);
+        int sideFour = WallCoveringsNeededwidth(shed);
+        int allSides = sideOne + sideTwo + sideThree + sideFour;
+        return allSides;
+    }
+
+    @Override
+    public int WallCoveringsNeededwidth(Shed shed) {
+          int shedCoverWidth = shed.getWidth();
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
-
-   
-
