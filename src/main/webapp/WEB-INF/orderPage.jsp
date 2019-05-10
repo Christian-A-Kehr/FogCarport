@@ -42,8 +42,8 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="radio" name="flatOrNotChoice" value="Med rejsning"> Ja
-                            <input type="radio" name="flatOrNotChoice" value="Uden rejsning"> Nej
+                            <input type="radio" name="flatOrNotChoice" value="Sloped"> Ja
+                            <input type="radio" name="flatOrNotChoice" value="Flat"> Nej
                         </td>
 
                         <td>
@@ -118,7 +118,7 @@
                 <tr>
                     <td>                        
                         <select name="shedChoice">
-                            <option value="Intet skur">Intet skur</option>
+                            <option value="No shed">Intet skur</option>
                             <% ArrayList<Material> shedMats = (ArrayList<Material>) session.getAttribute("allShedMats");
                                 for (int i = 0; i < shedMats.size(); i++) {
                             %>
