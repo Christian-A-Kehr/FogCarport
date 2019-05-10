@@ -52,7 +52,7 @@ class Calculate implements LogicInterface {
 
         return totalPrice;
     }
-
+    @Override
     public int NumbersOfRaftersFlatRoof(Carport carport) {
         int rafter_width = 195;
         int rafter_distance = 600;
@@ -63,18 +63,18 @@ class Calculate implements LogicInterface {
         int integer_numbers_rafters = numbers_rafters + 1; //Vi plusser med én, da int altid runder ned.
         return integer_numbers_rafters;
     }
-
+    @Override
     public double TotalLengthRaftersFlatRoof(Carport carport) {
         double total_length = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
         return total_length;
     }
-
+    @Override
     public double TotalPriceRaftersFlatRoof(Carport carport) {
         double total_rafter_price = (TotalLengthRaftersFlatRoof(carport) / 1000) * carport.getRoof().getRafter().getMprice(); // Der divideres med 1000 for at kunne gange med meterprisen.
         return total_rafter_price;
 
     }
-
+    @Override
     public double TotalLengthRaftersWithSlope(Carport carport) {
         double length_single_rafter_with_slope = ((0.5 * carport.getWidth()) / Math.cos(carport.getRoof().getAngle())); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
         // Derefter findes længden af c via formlen c = b * cos(A).
@@ -85,6 +85,7 @@ class Calculate implements LogicInterface {
         return total_length_all_three_sides;
     }
 
+    @Override
     public double TotalPriceRaftersWithSlope(Carport carport) {
         double totalprice = (TotalLengthRaftersWithSlope(carport) / 100) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
         return totalprice;
