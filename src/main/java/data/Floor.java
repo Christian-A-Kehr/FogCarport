@@ -10,8 +10,9 @@ package data;
  * @author Christian Ambjørn Kehr
  */
 public class Floor {
+
     private String name;
-    private int  length, width;
+    private int length, width;
     private double M2price;
 
     public Floor(String name, int length, int width, double M2price) {
@@ -24,7 +25,6 @@ public class Floor {
     public String getName() {
         return name;
     }
-
 
     public int getLength() {
         return length;
