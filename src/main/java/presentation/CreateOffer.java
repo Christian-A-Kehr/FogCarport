@@ -33,14 +33,14 @@ public class CreateOffer extends Command {
 //        session.setAttribute("chosenMats", ArrayList<>());
 //        request.getParameter("chosenMats");
 
-//        WallCoverings wallCoverings = new WallCoverings(request.getParameter() );
-//        Floor floor = new Floor();
-//        Shed shed = new Shed(request.getParameter("shedDepth"),request.getParameter("shedWidth"),wallCoverings ,floor);
-//        Beam beam = new Beam(request.getParameter("beam"));
-//        Rafter rafter = new Rafter();
-//        WoodPost woodPost = new WoodPost();
-//        Roof roof = new Roof();
-//        Carport carport = new Carport();
+        WallCoverings wallCoverings = new WallCoverings(request.getParameter("shedChoice"), Integer.parseInt(request.getParameter("height")), Integer.parseInt(request.getParameter("shedDepth")), Integer.parseInt(request.getParameter("shedWidth")), );
+        Floor floor = new Floor(request.getParameter("floorChoice"), Integer.parseInt(request.getParameter("shedDepth")), Integer.parseInt(request.getParameter("shedLength")));
+        Shed shed = new Shed(request.getParameter("shedDepth"),request.getParameter("shedWidth"),wallCoverings ,floor);
+        Beam beam = new Beam(request.getParameter("beamChoice"), Integer.parseInt(request.getParameter("length")));
+        Rafter rafter = new Rafter(request.getParameter("rafterChoice"), Integer.parseInt(request.getParameter("width")) );
+        WoodPost woodpost = new WoodPost(request.getParameter("woodpostChoice"));
+        Roof roof = new Roof(request.getParameter("roofChoice"), Integer.parseInt(request.getParameter("angleChoice")), Integer.parseInt(request.getParameter("length")), Integer.parseInt(request.getParameter("width")), beam, rafter, woodpost);
+        Carport carport = new Carport( Integer.parseInt(request.getParameter("height")), Integer.parseInt(request.getParameter("length")), Integer.parseInt(request.getParameter("width")), roof, shed);
         
         System.out.println(request.getParameter("flatOrNotChoice"));
         System.out.println(request.getParameter("chosenMats"));
