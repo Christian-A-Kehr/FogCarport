@@ -12,22 +12,26 @@ package data;
 public class Rafter {
     
  private String material;
- private int lenght, height, width; 
+ private int lenght, height, width, id; 
  private double Mprice;
 
-    public Rafter(String material, int lenght, int height, int width, double Mprice) {
+    public Rafter(String material, int lenght, int height, int width, int id, double Mprice) {
         this.material = material;
         this.lenght = lenght;
         this.height = height;
         this.width = width;
+        this.id = id;
         this.Mprice = Mprice;
     }
 
-    public Rafter(String material, int length) {
+    public Rafter(String material, int lenght, int height, int width, int id) {
         this.material = material;
-        this.lenght = length;
+        this.lenght = lenght;
+        this.height = height;
+        this.width = width;
+        this.id = id;
     }
-
+    
     public String getMaterial() {
         return material;
     }
@@ -44,9 +48,17 @@ public class Rafter {
         return width;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public double getMprice() {
         return Mprice;
     }
 
- 
+    @Override
+    public String toString() {
+        return "Rafter{" + "material=" + material + ", lenght=" + lenght + ", height=" + height + ", width=" + width + ", id=" + id + ", Mprice=" + Mprice + '}';
+    }
+
 }

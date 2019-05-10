@@ -11,17 +11,26 @@ package data;
  */
 public class Beam {
  private String material;
- private int length, height, width; 
+ private int length, height, width, id; 
  private double Mprice;
 
-    public Beam(String material, int length, int height, int width, double Mprice) {
+    public Beam(String material, int length, int height, int width, int id, double Mprice) {
         this.material = material;
         this.length = length;
         this.height = height;
         this.width = width;
         this.Mprice = Mprice;
+        this.id = id;
     }
 
+    public Beam(String material, int length, int height, int width, int id) {
+        this.material = material;
+        this.length = length;
+        this.height = height;
+        this.width = width;
+        this.id = id;
+    }
+    
     public Beam(String material, int length) {
         this.material = material;
         this.length = length;
@@ -43,6 +52,10 @@ public class Beam {
         return width;
     }
 
+    public int getId() {
+        return id;
+    }
+    
     public double getMprice() {
         return Mprice;
     }
