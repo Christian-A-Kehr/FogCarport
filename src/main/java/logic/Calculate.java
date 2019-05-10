@@ -24,48 +24,7 @@ class Calculate implements LogicInterface {
     private DataAccessor dataaccessor = new DataAccessor();
 
    
-    
-
-    @Override
-    public double WooPostTotalPrice(Carport carport) {
-        double totalPrice;
-
-        totalPrice = ((WoodPostNeeded(carport) * carport.getHeight()) * carport.getRoof().getWoodpost().getMprice());
-
-        return totalPrice;
-    }
-
-
-    public double AntalSpær(Carport carport) {
-
-        int spærbredde = 195; 
-        int spærafstand = 600;
-        // følgende spærdimensioner = variabler fra database
-     //   double spændvidde = 4.02;
-
-        int antalspær = ((carport.getLength() + spærafstand) / (spærbredde + spærafstand)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
-        //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "mangler" en efterfølgende afstandmåling.
-        int heleantalspær = antalspær + 1;
-        
-
-        double længde_c = 0.5 * carport.getWidth(); // Længden ganges med en halv for at danne en retvinklet trekant 
-        double længde_a = længde_c * Math.sin(90); // a = c * sin(A)
-        double længdeEnkeltSpær = 2 * længde_a;
-
-        double totallængdespær = længdeEnkeltSpær * antalspær;
-       // return totallængdespær;
-        return heleantalspær;
-    }
-    
-
-    public double TotalPrisSpær(Carport carport) {
-
-        double totalspærlængde = (AntalSpær(carport) * carport.getWidth());       
-        double totalspærpris = (totalspærlængde / 1000) * carport.getRoof().getRafter().getMprice();
-        return totalspærpris;
-
-    }
-     // roof. length 0,8 + 0,3 
+        // roof. length 0,8 + 0,3 
     @Override
     public int WoodPostNeeded(Carport carport) {
            // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
@@ -84,6 +43,54 @@ class Calculate implements LogicInterface {
 
         return TotalPosts;
     }
+    
+    @Override
+    public double WooPostTotalPrice(Carport carport) {
+        double totalPrice;
+
+        totalPrice = ((WoodPostNeeded(carport) * carport.getHeight()) * carport.getRoof().getWoodpost().getMprice());
+
+        return totalPrice;
+    }
+    @Override
+    public int NumbersOfRaftersFlatRoof(Carport carport) {
+        int rafter_width = 195;
+        int rafter_distance = 600;
+        // følgende spærdimensioner = variabler fra database
+        //   double spændvidde = 4.02;
+        int numbers_rafters = ((carport.getLength() + rafter_distance) / (rafter_width + rafter_distance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
+        //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "mangler" en efterfølgende afstandmåling.
+        int integer_numbers_rafters = numbers_rafters + 1; //Vi plusser med én, da int altid runder ned.
+        return integer_numbers_rafters;
+    }
+    @Override
+    public double TotalLengthRaftersFlatRoof(Carport carport) {
+        double total_length = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
+        return total_length;
+    }
+    @Override
+    public double TotalPriceRaftersFlatRoof(Carport carport) {
+        double total_rafter_price = (TotalLengthRaftersFlatRoof(carport) / 1000) * carport.getRoof().getRafter().getMprice(); // Der divideres med 1000 for at kunne gange med meterprisen.
+        return total_rafter_price;
+
+    }
+    @Override
+    public double TotalLengthRaftersWithSlope(Carport carport) {
+        double length_single_rafter_with_slope = ((0.5 * carport.getWidth()) / Math.cos(carport.getRoof().getAngle())); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
+        // Derefter findes længden af c via formlen c = b * cos(A).
+        double length_both_sides_with_slope = 2 * length_single_rafter_with_slope;                                      // Der ganges med to for at få længden af begge hældningssider.
+        double total_length_all_three_sides = (NumbersOfRaftersFlatRoof(carport) * length_both_sides_with_slope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
+        // af de to hældningssider. Resultatet plusses
+        // med den samlede længde af de flade spær.
+        return total_length_all_three_sides;
+    }
+
+    @Override
+    public double TotalPriceRaftersWithSlope(Carport carport) {
+        double totalprice = (TotalLengthRaftersWithSlope(carport) / 100) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
+        return totalprice;
+
+    }
 
     @Override
     public int BeamsNeeded(Carport carport) {
@@ -96,7 +103,6 @@ class Calculate implements LogicInterface {
         int PostsPrBeams = max / B1;
         int PostsPrBeamsRoundUp = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
         
-
         return PostsPrBeamsRoundUp;
     }
         // beams are cut to custom measures 
