@@ -35,7 +35,7 @@ public interface DataAcessorInterface {
     
     public Customer getCustomer (String name);
     
-    
+    public int getVariabel(int id);
     
     
 }
