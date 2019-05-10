@@ -23,6 +23,11 @@ public class Rafter {
         this.Mprice = Mprice;
     }
 
+    public Rafter(String material, int length) {
+        this.material = material;
+        this.lenght = length;
+    }
+
     public String getMaterial() {
         return material;
     }
