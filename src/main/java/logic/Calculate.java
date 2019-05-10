@@ -30,12 +30,12 @@ class Calculate implements LogicInterface {
            // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
 
         // L1, L2 og L3's værdier skal laves om til variabler, som kan rettes af bruger.
-        int L = carport.getLength();
-        int L1 = 4000;
-        int L2 = 800;
-        int L3 = 300;
-        int max = (L - (L2 + L3));
-        int PostsPrBeams = max / L1;
+        int carportlength = carport.getLength();
+        int woodpostsdistance = 4000;
+        int overhang1 = 800;
+        int overhang2 = dataaccessor.g;
+        int stretchwoodposts = (carportlength - (overhang1 + overhang2));
+        int PostsPrBeams = stretchwoodposts / woodpostsdistance;
 
         // 1000 = nearest meter 
         PostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
@@ -122,7 +122,7 @@ class Calculate implements LogicInterface {
      
     @Override
     public double floorPrice(Floor floor) {
-        double price = floor.getHeight() * floor.getWidth() * floor.getM2price();
+        double price = floor.getLength() * floor.getWidth() * floor.getM2price();
         return price;
     }
 
