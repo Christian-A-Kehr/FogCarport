@@ -17,9 +17,9 @@ public class Roof {
     private Rafter rafter;
     private WoodPost woodpost;
 
-    public Roof(String type, String matrial, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
+    public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
         this.type = type;
-        this.material = matrial;
+        this.material = material;
         this.angle = angle;
         this.height = height;
         this.length = length;
