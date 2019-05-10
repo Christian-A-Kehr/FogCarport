@@ -42,8 +42,8 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="radio" name="flatOrNotChoice" value="Ja"> Ja
-                            <input type="radio" name="flatOrNotChoice" value="Nej"> Nej
+                            <input type="radio" name="flatOrNotChoice" value="Med rejsning"> Ja
+                            <input type="radio" name="flatOrNotChoice" value="Uden rejsning"> Nej
                         </td>
 
                         <td>
