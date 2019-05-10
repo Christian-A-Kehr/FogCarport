@@ -10,8 +10,8 @@ package data;
  * @author Christian Ambjørn Kehr
  */
 public class Roof {
-   
-    private String type, material;     
+
+    private String type, material;
     private int angle, height, length, width;
     private Beam beam;
     private Rafter rafter;
@@ -22,6 +22,17 @@ public class Roof {
         this.material = material;
         this.angle = angle;
         this.height = height;
+        this.length = length;
+        this.width = width;
+        this.beam = beam;
+        this.rafter = rafter;
+        this.woodpost = woodpost;
+    }
+
+    public Roof(String type, String material, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
+        this.type = type;
+        this.material = material;
+        this.angle = angle;
         this.length = length;
         this.width = width;
         this.beam = beam;
@@ -64,9 +75,8 @@ public class Roof {
     public WoodPost getWoodpost() {
         return woodpost;
     }
-    
-         // setters used when calculating missing parameters or getteing them from carport class. 
 
+    // setters used when calculating missing parameters or getteing them from carport class. 
     public void setAngle(int angle) {
         this.angle = angle;
     }
@@ -82,8 +92,5 @@ public class Roof {
     public void setWidth(int width) {
         this.width = width;
     }
-   
 
-    }
-       
-    
+}
