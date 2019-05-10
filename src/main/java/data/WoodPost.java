@@ -10,23 +10,29 @@ package data;
  * @author Mkhansen
  */
 public class WoodPost {
+
     private String material;
-    private int lenght, width; 
+    private int length, width;
     private double Mprice;
 
-    public WoodPost(String material, int lenght, int width, double Mprice) {
+    public WoodPost(String material, int length, int width, double Mprice) {
         this.material = material;
-        this.lenght = lenght;
+        this.length = length;
         this.width = width;
         this.Mprice = Mprice;
+    }
+
+    public WoodPost(String material, int length) {
+        this.material = material;
+        this.length = length;
     }
 
     public String getMaterial() {
         return material;
     }
 
-    public int getLenght() {
-        return lenght;
+    public int getLength() {
+        return length;
     }
 
     public int getWidth() {
