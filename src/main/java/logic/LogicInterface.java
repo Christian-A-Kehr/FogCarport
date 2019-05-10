@@ -12,6 +12,11 @@ public interface LogicInterface {
    // all calculations i made in M therefor int is used isted of double
     public int WoodPostNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double WooPostTotalPrice(Carport carport);
+    public int NumbersOfRaftersFlatRoof(Carport carport);
+    public double TotalLengthRaftersFlatRoof(Carport carport);
+    public double TotalPriceRaftersFlatRoof(Carport carport);
+    public double TotalLengthRaftersWithSlope(Carport carport);
+    public double TotalPriceRaftersWithSlope(Carport carport);
     public int BeamsNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double beamsPrice(Carport carport); 
     public int floorArea(Shed shed);
