@@ -7,18 +7,19 @@ package data;
 
 /**
  *
- * @author Mkhansen
+ * @author Christian Ambjørn Kehr
  */
 public class WoodPost {
 
     private String material;
-    private int length, width;
+    private int length, width, id;
     private double Mprice;
 
-    public WoodPost(String material, int length, int width, double Mprice) {
+    public WoodPost(String material, int length, int width, int id, double Mprice) {
         this.material = material;
         this.length = length;
         this.width = width;
+        this.id = id;
         this.Mprice = Mprice;
     }
 
@@ -43,4 +44,7 @@ public class WoodPost {
         return Mprice;
     }
 
+    public int getId() {
+        return id;
+    }
 }

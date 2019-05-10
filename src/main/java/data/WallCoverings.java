@@ -11,14 +11,15 @@ package data;
  */
 public class WallCoverings {
     private String material;
-    private int height, length, width;
+    private int height, length, width, id;
     private double Mprice;
 
-    public WallCoverings(String material, int height, int length, int width, double Mprice) {
+    public WallCoverings(String material, int height, int length, int width, int id, double Mprice) {
         this.material = material;
         this.height = height;
         this.length = length;
         this.width = width;
+        this.id = id;
         this.Mprice = Mprice;
     }
 
@@ -47,6 +48,10 @@ public class WallCoverings {
 
     public double getMprice() {
         return Mprice;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }
