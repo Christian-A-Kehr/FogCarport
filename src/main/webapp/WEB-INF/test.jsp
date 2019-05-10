@@ -10,28 +10,69 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>The Test</title>
+        <title>Tilbud</title>
+        <link href="${pageContext.request.contextPath}/StyleSheet.css" rel="stylesheet" type="text/css"/>
+        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script>
     </head>
     <body>
-        <h1>This is a test</h1>
-        
-        <p>Højde = <% out.print(request.getParameter("height") ); %> </p>
-        <p>Længde = <% out.print(request.getParameter("length") ); %> </p>
-        <p>Bredde = <% out.print(request.getParameter("width") ); %> </p>
-        <p>Med/Uden rejsning = <% out.print(request.getParameter("flatOrNotChoice") ); %> </p>
-        <p>Tag materiale = <% out.print(request.getParameter("roofChoice") ); %> </p>
-        <p>Stolpe materiale = <% out.print(request.getParameter("woodpostChoice") ); %> </p>
-        <p>Valg af grader = <% out.print(request.getParameter("angleChoice") ); %> </p>
-        <p>Rem materiale = <% out.print(request.getParameter("beamChoice") ); %> </p>
-        <p>Spær materiale = <% out.print(request.getParameter("rafterChoice") ); %> </p>
-        <p>Spær afstand = <% out.print(request.getParameter("rafterDistChoice") ); %> </p>
-        <p>Skur materiale = <% out.print(request.getParameter("shedChoice") ); %> </p>
-        <p>Skur dybde = <% out.print(request.getParameter("shedDepth") ); %> </p>
-        <p>Skur bredde = <% out.print(request.getParameter("shedWidth") ); %> </p>
-        <p>Valg af gulv = <% out.print(request.getParameter("floorChoice") ); %> </p>
-        <p>Kunde navn = <% out.print(request.getParameter("customerName") ); %> </p>
-        <p>Kunde email = <% out.print(request.getParameter("customerEmail") ); %> </p>
-        <p>Kunde Addresse = <% out.print(request.getParameter("customerAddress") ); %> </p>
+        <div id="pdfprint">
+            <h1>Tilbud</h1>
+            <h2 id="fog">FOG</h2>
+            <h2>Alle mål er i mm</h2>
+
+            <p>Højde = <%= request.getParameter("height")%> </p>
+            <p>Længde = <%= request.getParameter("length")%> </p>
+            <p>Bredde = <%= request.getParameter("width")%> </p>
+            <p>Med/Uden rejsning = <%= request.getParameter("flatOrNotChoice")%> </p>
+            <p>Tag materiale = <%= request.getParameter("roofChoice")%> </p>
+            <p>Stolpe materiale = <%= request.getParameter("woodpostChoice")%> </p>
+            <p>Valg af grader = <%= request.getParameter("angleChoice")%> </p>
+            <p>Rem materiale = <%= request.getParameter("beamChoice")%> </p>
+            <p>Spær materiale = <%= request.getParameter("rafterChoice")%> </p>
+            <p>Spær afstand = <%= request.getParameter("rafterDistChoice")%> </p>
+            <p>Skur materiale = <%= request.getParameter("shedChoice")%> </p>
+            <p>Skur dybde = <%= request.getParameter("shedDepth")%> </p>
+            <p>Skur bredde = <%= request.getParameter("shedWidth")%> </p>
+            <p>Valg af gulv = <%= request.getParameter("floorChoice")%> </p>
+            <p>Kunde navn = <%= request.getParameter("customerName")%> </p>
+            <p>Kunde email = <%= request.getParameter("customerEmail")%> </p>
+            <p>Kunde Addresse = <%= request.getParameter("customerAddress")%> </p>
+        </div>
+
+        <input type="button" id="printbutton" value="Gem tilbud">   
+
+        <script>
+            //CREATE PDF DOCUMENT
+            var doc = new jsPDF('p', 'pt', 'a4');
+
+            //ADD HTML CONTENT
+            doc.fromHTML(document.getElementById('pdfprint').innerHTML, 15, 15, {'width': 500});
+
+            //ADD SVG / IMAGE CONTENT
+            <%--        var svg = document.getElementById('svgdrawing').outerHTML;
+            var canvas = document.createElement('canvas');
+            canvas.width = 100;
+            canvas.height = 100;
+            var ctx = canvas.getContext('2d');
+            ctx.drawSvg(svg, 0, 0, 100, 100);
+            var imageData = canvas.toDataURL('image/png');
+            doc.addImage(imageData, 'PNG', 15, 100, 500, 500); --%>
+
+            //ADD NEW PAGE
+            doc.addPage();
+
+            //ADD TEXT
+            doc.text(20, 20, 'Hello world AGAIN!!!');
+
+            //ADD IMAGE AGAIN
+            doc.addImage(imageData, 'PNG', 15, 100, 500, 500);
+
+            //SAVE DOCUMENT
+            document.getElementById("printbutton").addEventListener("click", function () {
+                doc.save('pdffile.pdf');
+            });
+        </script>
     </body>
 </html>
+
