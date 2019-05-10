@@ -30,37 +30,35 @@ class Calculate implements LogicInterface {
            // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
 
         // L1, L2 og L3's værdier skal laves om til variabler, som kan rettes af bruger.
-        int carportlength = carport.getLength();
-        int woodpostsdistance = 4000;
-        int overhang1 = 800;
-        int overhang2 = dataaccessor.g;
-        int stretchwoodposts = (carportlength - (overhang1 + overhang2));
-        int PostsPrBeams = stretchwoodposts / woodpostsdistance;
+        int carport_length = carport.getLength();
+        int woodposts_distance = dataaccessor.getVariabel(1); // 4000 mm
+        int overhang1 = dataaccessor.getVariabel(2); // 1500 mm
+        int overhang2 = dataaccessor.getVariabel(3); // 1500 mm
+        int stretch_for_woodposts = (carport_length - (overhang1 + overhang2));
+        double total_numbers_woodposts_double = (stretch_for_woodposts + woodposts_distance)/ (carport.getRoof().getWoodpost().getWidth() + woodposts_distance)*2;
 
         // 1000 = nearest meter 
-        PostsPrBeams = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
-        int TotalPosts = PostsPrBeams * BeamsNeeded(carport);
+        int total_numbers_woodposts_int = (int) (Math.ceil(total_numbers_woodposts_double / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal.
+        // int TotalPosts = woodposts_pr_beams * BeamsNeeded(carport);
 
-        return TotalPosts;
+        return total_numbers_woodposts_int;
     }
     
     @Override
     public double WooPostTotalPrice(Carport carport) {
-        double totalPrice;
+        double total_price = (((WoodPostNeeded(carport) * carport.getHeight())/1000) * carport.getRoof().getWoodpost().getMprice());
 
-        totalPrice = ((WoodPostNeeded(carport) * carport.getHeight()) * carport.getRoof().getWoodpost().getMprice());
-
-        return totalPrice;
+        return total_price;
     }
     @Override
     public int NumbersOfRaftersFlatRoof(Carport carport) {
-        int rafter_width = 195;
-        int rafter_distance = 600;
+        int rafter_width = dataaccessor.getVariabel(4);  // 195;
+        int rafter_distance = dataaccessor.getVariabel(5); // 600;
         // følgende spærdimensioner = variabler fra database
         //   double spændvidde = 4.02;
-        int numbers_rafters = ((carport.getLength() + rafter_distance) / (rafter_width + rafter_distance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
-        //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "mangler" en efterfølgende afstandmåling.
-        int integer_numbers_rafters = numbers_rafters + 1; //Vi plusser med én, da int altid runder ned.
+        double total_numbers_rafters_double = ((carport.getLength() + rafter_distance) / (rafter_width + rafter_distance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
+        //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "manglerr med én, da int altid runder ned." en efterfølgende afstandmåling.
+        int integer_numbers_rafters = (int) (Math.ceil(total_numbers_rafters_double / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal. 
         return integer_numbers_rafters;
     }
     @Override
@@ -95,21 +93,20 @@ class Calculate implements LogicInterface {
     @Override
     public int BeamsNeeded(Carport carport) {
        // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
-        int B = carport.getLength();
-        int B1 = 4000;
-        int B2 = 150;
-        int B3 = 150;
-        int max = (B - (B2 + B3));
-        int PostsPrBeams = max / B1;
-        int PostsPrBeamsRoundUp = (int) (Math.ceil(PostsPrBeams / 1000.0) * 1000);
-        
-        return PostsPrBeamsRoundUp;
+        int carport_width = carport.getWidth();
+        int beams_distance = dataaccessor.getVariabel(6); //4000;
+        int overhang3 = dataaccessor.getVariabel(7); //150;
+        int overhang4 = dataaccessor.getVariabel(8); // 150;
+        int stretch_for_beams = (carport_width - (overhang3 + overhang4));
+        double total_numbers_woodposts_double = (carport_width + beams_distance)/((carport.getRoof().getBeam().getWidth() + beams_distance));
+        int total_numbers_woodposts_int = (int) (Math.ceil(total_numbers_woodposts_double / 1000.0) * 1000);;
+        return total_numbers_woodposts_int;
     }
         // beams are cut to custom measures 
     @Override
     public double beamsPrice(Carport carport) {
-        int lenghtprBeam = carport.getHeight();
-        double totalPrice = lenghtprBeam * carport.getRoof().getBeam().getMprice() * BeamsNeeded(carport);
+        int lenght_pr_beam = carport.getHeight();
+        double totalPrice = (lenght_pr_beam * BeamsNeeded(carport)) * carport.getRoof().getBeam().getMprice();
         
         return totalPrice; 
     }
