@@ -51,19 +51,18 @@
                                 <% ArrayList<Material> roofMats = (ArrayList<Material>) session.getAttribute("allRoofMats");
                                     for (int i = 0; i < roofMats.size(); i++) {
                                 %>
-                                <option id="i" value="<% roofMats.get(i);%>"><%out.print(roofMats.get(i).getName());%></option>
+                                <option value="<%= roofMats.get(i) %>"><%out.print(roofMats.get(i).getName());%></option>
                                 <%
                                     }
                                 %>
                             </select>
                         </td>
                         <td>
-                            <input name="woodpostChoice" id="1">
-                            <select id="1">
+                            <select name="woodpostChoice">
                                 <% ArrayList<Material> woodpostMats = (ArrayList<Material>) session.getAttribute("allWoodpostMats");
                                     for (int i = 0; i < woodpostMats.size(); i++) {
                                 %>
-                                <option id="i" value="<% woodpostMats.get(i);%>"><%out.print(woodpostMats.get(i).getName());%></option>
+                                <option value="<%= woodpostMats.get(i) %>"><%out.print(woodpostMats.get(i).getName());%></option>
                                 <%
                                     }
                                 %>
@@ -83,11 +82,11 @@
                 <tr>
                 <tbody>
                 <td>
-                    <select>
+                    <select name="beamChoice">
                         <% ArrayList<Material> beamMats = (ArrayList<Material>) session.getAttribute("allBeamMats");
                             for (int i = 0; i < beamMats.size(); i++) {
                         %>
-                        <option name="????????????????" value="<% beamMats.get(i);%>"><%out.print(beamMats.get(i).getName());%></option>
+                        <option value="<%= beamMats.get(i) %>"><%out.print(beamMats.get(i).getName());%></option>
                         <%
                             }
                         %>
@@ -98,7 +97,7 @@
                         <% ArrayList<Material> rafterMats = (ArrayList<Material>) session.getAttribute("allRafterMats");
                             for (int i = 0; i < rafterMats.size(); i++) {
                         %>
-                        <option value="<% rafterMats.get(i);%>"><%out.print(rafterMats.get(i).getName());%></option>
+                        <option value="<%= rafterMats.get(i)%>"><%out.print(rafterMats.get(i).getName());%></option>
                         <%
                             }
                         %>
@@ -119,11 +118,11 @@
                 <tr>
                     <td>                        
                         <select name="shedChoice">
-                            <option value="none">Intet skur</option>
+                            <option value="Intet skur">Intet skur</option>
                             <% ArrayList<Material> shedMats = (ArrayList<Material>) session.getAttribute("allShedMats");
                                 for (int i = 0; i < shedMats.size(); i++) {
                             %>
-                            <option id="i" value="<% shedMats.get(i);%>"><%out.print(shedMats.get(i).getName());%></option>
+                            <option value="<%= shedMats.get(i)%>"><%out.print(shedMats.get(i).getName());%></option>
                             <%
                                 }
                             %>
@@ -135,7 +134,7 @@
                                 for (int i = 0; i < floorMats.size(); i++) {
                                     String name = floorMats.get(i).getName();
                             %>
-                            <option id="i" value="<% floorMats.get(i);%>"><%out.print(floorMats.get(i).getName());%></option>
+                            <option value="<%= floorMats.get(i)%>"><%out.print(floorMats.get(i).getName());%></option>
                             <%
                                 }
                             %>
