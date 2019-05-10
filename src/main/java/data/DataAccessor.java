@@ -15,16 +15,17 @@ import java.util.ArrayList;
  * @author Mkhansen
  */
 public class DataAccessor implements DataAcessorInterface {
-
+        //int Variabel; // used to get variables in getVariable
 //    private final DBConnector CONNECTOR;
 //    
 //    public DataAccessor(DBConnector c){
 //        this.CONNECTOR = c;
 //    }
             
-//    public static void main(String[] args) {
+    //public static void main(String[] args) {
 //        System.out.println(GetListSpecificMaterials("Tagsten"));
-//    }
+           //System.err.println(getVariabel(1));
+   // }
 
     @Override
     public ArrayList<Material> getAllMaterials() {
@@ -144,4 +145,30 @@ public class DataAccessor implements DataAcessorInterface {
     public Customer getCustomer(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int getVariabel(int id) {
+        int Variabel = 0;
+        try {
+            DBConnector connect = new DBConnector();
+             
+            String query = "SELECT * FROM Fog.Variabler where idVariabler ='" + id + "';";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int matNum = rs.getInt("Measurements");
+                
+
+                Variabel = matNum;
+            }
+            return Variabel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Variabel;
+    }
+
+ 
 }
