@@ -11,12 +11,11 @@ package data;
  */
 public class Floor {
     private String name;
-    private int height, length, width;
+    private int  length, width;
     private double M2price;
 
-    public Floor(String name, int height, int length, int width, double M2price) {
+    public Floor(String name, int length, int width, double M2price) {
         this.name = name;
-        this.height = height;
         this.length = length;
         this.width = width;
         this.M2price = M2price;
@@ -26,9 +25,6 @@ public class Floor {
         return name;
     }
 
-    public int getHeight() {
-        return height;
-    }
 
     public int getLength() {
         return length;
