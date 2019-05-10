@@ -10,20 +10,27 @@ package data;
  * @author Christian Ambjørn Kehr
  */
 public class WallCoverings {
-    private String name;
+    private String material;
     private int height, length, width;
     private double Mprice;
 
-    public WallCoverings(String name, int height, int length, int width, double Mprice) {
-        this.name = name;
+    public WallCoverings(String material, int height, int length, int width, double Mprice) {
+        this.material = material;
         this.height = height;
         this.length = length;
         this.width = width;
         this.Mprice = Mprice;
     }
 
-    public String getName() {
-        return name;
+    public WallCoverings(String material, int height, int length, int width) {
+        this.material = material;
+        this.height = height;
+        this.length = length;
+        this.width = width;
+    }
+
+    public String getMaterial() {
+        return material;
     }
 
     public int getHeight() {
