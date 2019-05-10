@@ -22,6 +22,12 @@ public class Floor {
         this.M2price = M2price;
     }
 
+    public Floor(String name, int length, int width) {
+        this.name = name;
+        this.length = length;
+        this.width = width;
+    }
+
     public String getName() {
         return name;
     }
