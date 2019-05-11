@@ -16,8 +16,9 @@ public class Roof {
     private Beam beam;
     private Rafter rafter;
     private WoodPost woodpost;
+    private Rooftiles rooftiles;        
 
-    public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
+    public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost,Rooftiles rooftiles) {
         this.type = type;
         this.material = material;
         this.angle = angle;
@@ -27,9 +28,10 @@ public class Roof {
         this.beam = beam;
         this.rafter = rafter;
         this.woodpost = woodpost;
+        this.rooftiles = rooftiles;
     }
 
-    public Roof(String type, String material, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost) {
+    public Roof(String type, String material, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftiles rooftiles) {
         this.type = type;
         this.material = material;
         this.angle = angle;
@@ -38,6 +40,7 @@ public class Roof {
         this.beam = beam;
         this.rafter = rafter;
         this.woodpost = woodpost;
+        this.rooftiles = rooftiles;
     }
 
     public String getType() {

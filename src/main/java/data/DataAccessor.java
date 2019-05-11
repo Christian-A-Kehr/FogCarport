@@ -48,10 +48,9 @@ public class DataAccessor implements DataAcessorInterface {
                 int length = rs.getInt("Length");
                 int height = rs.getInt("Height");
                 int width = rs.getInt("Width");
-                int priceM = rs.getInt("PriceM");
-                int priceM2 = rs.getInt("PriceM2");
+                int price = rs.getInt("Price");
 
-                list.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
+                list.add(new Material(name, desc, material, type, matNum, length, height, width, price));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,10 +79,9 @@ public class DataAccessor implements DataAcessorInterface {
                 int length = rs.getInt("Length");
                 int height = rs.getInt("Height");
                 int width = rs.getInt("Width");
-                int priceM = rs.getInt("PriceM");
-                int priceM2 = rs.getInt("PriceM2");
+                int priceM = rs.getInt("Price");
 
-                Mats.add(new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2));
+                Mats.add(new Material(name, desc, material, type, matNum, length, height, width, priceM));
             }
             return Mats;
         } catch (Exception e) {
@@ -100,7 +98,7 @@ public class DataAccessor implements DataAcessorInterface {
         try {
             DBConnector connect = new DBConnector();
 
-            String query = "SELECT * FROM Materials WHERE Material_Name ='" + name + "';";
+            String query = "SELECT * FROM Materials WHERE Vare_nummer ='" + name + "';";
 
             Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
@@ -113,10 +111,9 @@ public class DataAccessor implements DataAcessorInterface {
                 int length = rs.getInt("Length");
                 int height = rs.getInt("Height");
                 int width = rs.getInt("Width");
-                int priceM = rs.getInt("PriceM");
-                int priceM2 = rs.getInt("PriceM2");
+                int price = rs.getInt("Price");
 
-                Mat = new Material(name, desc, material, type, matNum, length, height, width, priceM, priceM2);
+                Mat = new Material(name, desc, material, type, matNum, length, height, width, price);
             }
             return Mat;
         } catch (Exception e) {
@@ -169,6 +166,31 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return Variabel;
     }
+
+    @Override
+    public int getMaterialPrice(int id) {
+          int Variabel = 0;
+        try {
+            DBConnector connect = new DBConnector();
+             
+            String query = "SELECT * FROM Materials where Vare_nummer ='" + id + "';";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int matNum = rs.getInt("Measurements");
+                
+
+                Variabel = matNum;
+            }
+            return Variabel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Variabel;
+    }
+
 
  
 }

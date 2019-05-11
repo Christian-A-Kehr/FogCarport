@@ -9,34 +9,30 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-public class WallCoverings {
-    private String material;
-    private int height, length, width, id, amount;
-    private double Mprice;
+class Rooftiles {
+    private String name;
+    private int length, width, id, amount;
+    private double M2price;
 
-    public WallCoverings(String material, int height, int length, int width, int id, double Mprice, int amount) {
-        this.material = material;
-        this.height = height;
+    public Rooftiles(String name, int length, int width, int id, int amount, double M2price) {
+        this.name = name;
         this.length = length;
         this.width = width;
         this.id = id;
-        this.Mprice = Mprice;
         this.amount = amount;
+        this.M2price = M2price;
     }
 
-    public WallCoverings(String material, int height, int length, int width) {
-        this.material = material;
-        this.height = height;
+    
+    public Rooftiles(String name, int length, int width, int id) {
+        this.name = name;
         this.length = length;
         this.width = width;
+        this.id = id;
     }
 
-    public String getMaterial() {
-        return material;
-    }
-
-    public int getHeight() {
-        return height;
+    public String getName() {
+        return name;
     }
 
     public int getLength() {
@@ -47,10 +43,6 @@ public class WallCoverings {
         return width;
     }
 
-    public double getMprice() {
-        return Mprice;
-    }
-
     public int getId() {
         return id;
     }
@@ -58,4 +50,11 @@ public class WallCoverings {
     public int getAmount() {
         return amount;
     }
+
+    public double getM2price() {
+        return M2price;
+    }
+    
+    
+    
 }

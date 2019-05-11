@@ -11,9 +11,9 @@ package data;
  */
 public class Material {
     public String name, desc, matrial, type;
-    public int matNum, length, height, width, priceM, priceM2;
+    public int matNum, length, height, width, price;
 
-    public Material(String name, String desc, String matrial, String type, int matNum, int length, int height, int width, int priceM, int priceM2) {
+    public Material(String name, String desc, String matrial, String type, int matNum, int length, int height, int width, int price) {
         this.name = name;
         this.desc = desc;
         this.matrial = matrial;
@@ -22,8 +22,7 @@ public class Material {
         this.length = length;
         this.height = height;
         this.width = width;
-        this.priceM = priceM;
-        this.priceM2 = priceM2;
+        this.price = price;
     }
 
     public String getName() {
@@ -58,13 +57,10 @@ public class Material {
         return width;
     }
 
-    public int getPriceM() {
-        return priceM;
+    public int getPrice() {
+        return price;
     }
 
-    public int getPriceM2() {
-        return priceM2;
-    }
 
     @Override
     public String toString() {

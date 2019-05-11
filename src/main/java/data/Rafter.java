@@ -12,16 +12,17 @@ package data;
 public class Rafter {
     
  private String material;
- private int lenght, height, width, id; 
+ private int lenght, height, width, id, amount; 
  private double Mprice;
 
-    public Rafter(String material, int lenght, int height, int width, int id, double Mprice) {
+    public Rafter(String material, int lenght, int height, int width, int id, double Mprice, int amount) {
         this.material = material;
         this.lenght = lenght;
         this.height = height;
         this.width = width;
         this.id = id;
         this.Mprice = Mprice;
+        this.amount = amount;
     }
 
     public Rafter(String material, int lenght, int height, int width, int id) {
@@ -54,6 +55,10 @@ public class Rafter {
 
     public double getMprice() {
         return Mprice;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     @Override
