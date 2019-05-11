@@ -13,15 +13,15 @@ public class Rafter {
     
  private String material;
  private int lenght, height, width, id, amount; 
- private double Mprice;
+ private double price;
 
-    public Rafter(String material, int lenght, int height, int width, int id, double Mprice, int amount) {
+    public Rafter(String material, int lenght, int height, int width, int id, double price, int amount) {
         this.material = material;
         this.lenght = lenght;
         this.height = height;
         this.width = width;
         this.id = id;
-        this.Mprice = Mprice;
+        this.price = price;
         this.amount = amount;
     }
 
@@ -54,7 +54,7 @@ public class Rafter {
     }
 
     public double getMprice() {
-        return Mprice;
+        return price;
     }
 
     public int getAmount() {
@@ -63,7 +63,7 @@ public class Rafter {
 
     @Override
     public String toString() {
-        return "Rafter{" + "material=" + material + ", lenght=" + lenght + ", height=" + height + ", width=" + width + ", id=" + id + ", Mprice=" + Mprice + '}';
+        return "Rafter{" + "material=" + material + ", lenght=" + lenght + ", height=" + height + ", width=" + width + ", id=" + id + ", Mprice=" + price + '}';
     }
 
 }

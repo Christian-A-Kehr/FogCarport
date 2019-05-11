@@ -11,7 +11,7 @@ import data.DataAccessor;
 import data.Material;
 import data.Rafter;
 import data.Roof;
-import data.Rooftiles;
+//import data.Rooftiles;
 import data.Shed;
 import data.WoodPost;
 
@@ -28,17 +28,19 @@ public class assemble {
     private Rafter rafter;
     private Beam beam;
     private WoodPost woodpost;
-    private int height, lenght, width;
+    private int height, lenght, width, id, amount;
+    private double price;
+    private String material;
     
     public Carport assembleCarport(Carport carport) {
         roof = createRoof(carport);
-        shed = createShed(carport)
-        rafter = createRafter(carport)
-        woodpost = createWoodpost(carport)
-
-        
+       // shed = createShed(carport)
         
         Carport newCarport = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
+        
+      
+        
+        return  newCarport;
     }
 
     public int getRoofHeight(Carport carport) {
@@ -52,12 +54,14 @@ public class assemble {
     }
 
     private Roof createRoof(Carport carport) {
-        
-        Roof roof = new Roof(carport.getRoof().getType(),carport.getRoof().getMaterial(),
-                            carport.getRoof().getAngle(),
-                            CAL.calulateGabledHeight(carport),
-                            carport.getLength(), carport.getWidth(),
-                            beam, rafter, woodpost, rafter)
+        //rafter = createRafter(carport)
+        //woodpost = createWoodpost(carport)
+                
+//        Roof roof = new Roof(carport.getRoof().getType(),carport.getRoof().getMaterial(),
+//                            carport.getRoof().getAngle(),
+//                            CAL.calulateGabledHeight(carport),
+//                            carport.getLength(), carport.getWidth(),
+//                            beam, rafter, woodpost, rafter)
        return  roof;
     }
 
@@ -66,7 +70,17 @@ public class assemble {
     }
 
     private Rafter createRafter(Carport carport) {
-        rafter = new Rafter(material, height, height, height, height, height, height)
+       Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
+       Rafter Quick = carport.getRoof().getRafter();
+       material = Quick.getMaterial(); 
+       lenght = Quick.getLenght();
+       height = Quick.getHeight() ;
+       width = Quick.getWidth(); 
+       id = Quick.getId();
+       amount = CAL.TotalLengthRaftersFlatRoof(carport); 
+       price = mat.getPrice();
+               
+        rafter = new Rafter(material, lenght, height, width, id, price, amount);
         
         return rafter;
     }
@@ -77,8 +91,8 @@ public class assemble {
                                 carport.getRoof().getWoodpost().getLength(),
                                 carport.getRoof().getWoodpost().getWidth(),
                                 carport.getRoof().getWoodpost().getId(),
-                                CAL.WoodPostNeeded(carport),
-                                mat.getPrice());
+                                mat.getPrice(),
+                                CAL.WoodPostNeeded(carport));
          return woodpost;
     }
 

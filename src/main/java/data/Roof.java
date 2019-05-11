@@ -16,7 +16,8 @@ public class Roof {
     private Beam beam;
     private Rafter rafter;
     private WoodPost woodpost;
-    private Rooftiles rooftiles;        
+    private Rooftiles rooftiles;   
+    //private Battens battens;
 
     public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost,Rooftiles rooftiles) {
         this.type = type;

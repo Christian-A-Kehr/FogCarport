@@ -13,9 +13,9 @@ public interface LogicInterface {
     public int WoodPostNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double WooPostTotalPrice(Carport carport);
     public int NumbersOfRaftersFlatRoof(Carport carport);
-    public double TotalLengthRaftersFlatRoof(Carport carport);
+    public int TotalLengthRaftersFlatRoof(Carport carport);
     public double TotalPriceRaftersFlatRoof(Carport carport);
-    public double TotalLengthRaftersWithSlope(Carport carport);
+    public int TotalLengthRaftersWithSlope(Carport carport);
     public double TotalPriceRaftersWithSlope(Carport carport);
     public int BeamsNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double beamsPrice(Carport carport); 
