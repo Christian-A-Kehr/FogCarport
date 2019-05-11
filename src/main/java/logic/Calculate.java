@@ -106,7 +106,7 @@ class Calculate implements LogicInterface {
     @Override
     public double beamsPrice(Carport carport) {
         int lenght_pr_beam = carport.getHeight();
-        double totalPrice = (lenght_pr_beam * BeamsNeeded(carport)) * carport.getRoof().getBeam().getMprice();
+        double totalPrice = (lenght_pr_beam * BeamsNeeded(carport)) * carport.getRoof().getBeam().getprice();
         
         return totalPrice; 
     }
