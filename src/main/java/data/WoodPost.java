@@ -13,14 +13,14 @@ public class WoodPost {
 
     private String material;
     private int length, width, id, amount;
-    private double Mprice;
+    private double price;
 
-    public WoodPost(String material, int length, int width, int id, double Mprice,int  amount) {
+    public WoodPost(String material, int length, int width, int id, double price,int  amount) {
         this.material = material;
         this.length = length;
         this.width = width;
         this.id = id;
-        this.Mprice = Mprice;
+        this.price = price;
         this.amount = amount;
     }
 

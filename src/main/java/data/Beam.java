@@ -12,16 +12,16 @@ package data;
 public class Beam {
  private String material;
  private int length, height, width, id, amount; 
- private double Mprice;
+ private double price;
 
-    public Beam(String material, int length, int height, int width, int id, int amount, double Mprice) {
+    public Beam(String material, int length, int height, int width, int id, int amount, double price) {
         this.material = material;
         this.length = length;
         this.height = height;
         this.width = width;
         this.id = id;
         this.amount = amount;
-        this.Mprice = Mprice;
+        this.price = price;
     }
 
     public Beam(String material, int length, int height, int width, int id) {
@@ -30,11 +30,6 @@ public class Beam {
         this.height = height;
         this.width = width;
         this.id = id;
-    }
-    
-    public Beam(String material, int length) {
-        this.material = material;
-        this.length = length;
     }
 
     public String getMaterial() {
@@ -57,8 +52,8 @@ public class Beam {
         return id;
     }
     
-    public double getMprice() {
-        return Mprice;
+    public double getprice() {
+        return price;
     }
 
     public int getAmount() {

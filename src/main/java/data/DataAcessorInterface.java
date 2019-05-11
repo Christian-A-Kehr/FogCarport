@@ -23,7 +23,9 @@ public interface DataAcessorInterface {
     public ArrayList<Material> getListSpecificMaterials(String type);
     
     // Used to recover offers and get single objects from database
-    public Material getMaterial (String name); 
+    public Material getMaterial (String name);
+    
+    public Material getMaterialFromId (int id);
     
     // used to get an offer from database
     public Offer getOffer (int Id);
