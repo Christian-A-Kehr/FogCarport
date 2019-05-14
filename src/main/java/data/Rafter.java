@@ -13,16 +13,17 @@ public class Rafter {
     
  private String material;
  private int lenght, height, width, id, amount; 
- private double price;
+ private double price, totalPrice;
 
-    public Rafter(String material, int lenght, int height, int width, int id, double price, int amount) {
+    public Rafter(String material, int lenght, int height, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.lenght = lenght;
         this.height = height;
         this.width = width;
         this.id = id;
-        this.price = price;
         this.amount = amount;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
     public Rafter(String material, int lenght, int height, int width, int id) {
@@ -59,6 +60,14 @@ public class Rafter {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     @Override

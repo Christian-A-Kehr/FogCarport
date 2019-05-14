@@ -22,6 +22,13 @@ public class Carport {
         this.shed = shed;
     }
 
+    public Carport(int height, int length, int width, Roof roof) {
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+    }
+
     public int getHeight() {
         return height;
     }

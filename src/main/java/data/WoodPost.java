@@ -13,20 +13,22 @@ public class WoodPost {
 
     private String material;
     private int length, width, id, amount;
-    private double price;
+    private double price, totalPrice;
 
-    public WoodPost(String material, int length, int width, int id, double price,int  amount) {
+    public WoodPost(String material, int length, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.length = length;
         this.width = width;
         this.id = id;
-        this.price = price;
         this.amount = amount;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
-    public WoodPost(String material, int length) {
+    public WoodPost(String material, int length, int id) {
         this.material = material;
         this.length = length;
+        this.id = id;
     }
 
     public String getMaterial() {
@@ -51,6 +53,14 @@ public class WoodPost {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
     
 }

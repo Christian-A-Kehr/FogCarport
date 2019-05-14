@@ -12,9 +12,9 @@ package data;
 public class Beam {
  private String material;
  private int length, height, width, id, amount; 
- private double price;
+ private double price, totalPrice;
 
-    public Beam(String material, int length, int height, int width, int id, int amount, double price) {
+    public Beam(String material, int length, int height, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.length = length;
         this.height = height;
@@ -22,6 +22,7 @@ public class Beam {
         this.id = id;
         this.amount = amount;
         this.price = price;
+        this.totalPrice = totalPrice;
     }
 
     public Beam(String material, int length, int height, int width, int id) {
@@ -58,6 +59,14 @@ public class Beam {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
  
 }

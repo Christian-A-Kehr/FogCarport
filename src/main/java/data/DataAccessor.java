@@ -99,7 +99,7 @@ public class DataAccessor implements DataAcessorInterface {
         try {
             DBConnector connect = new DBConnector();
 
-            String query = "SELECT * FROM Materials WHERE Vare_nummer ='" + name + "';";
+            String query = "SELECT * FROM Materials WHERE Material_Name ='" + name + "';";
 
             Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();

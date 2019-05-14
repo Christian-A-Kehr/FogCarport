@@ -11,27 +11,29 @@ package data;
  */
 public class Floor {
 
-    private String name;
-    private int length, width, id;
-    private double M2price;
+    private String material;
+    private int length, width, id, amount;
+    private double price, totalPrice;
 
-    public Floor(String name, int length, int width, int id, double M2price) {
-        this.name = name;
+    public Floor(String material, int length, int width, int id, int amount, double price, double totalPrice) {
+        this.material = material;
         this.length = length;
         this.width = width;
         this.id = id;
-        this.M2price = M2price;
+        this.amount = amount;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
     public Floor(String name, int length, int width, int id) {
-        this.name = name;
+        this.material = name;
         this.length = length;
         this.width = width;
         this.id = id;
     }
     
-    public String getName() {
-        return name;
+    public String getMaterial() {
+        return material;
     }
 
     public int getLength() {
@@ -46,12 +48,25 @@ public class Floor {
         return id;
     }
 
-    public double getM2price() {
-        return M2price;
+    public double getprice() {
+        return price;
     }
 
     @Override
     public String toString() {
-        return "Floor{" + "name=" + name + ", length=" + length + ", width=" + width + ", id=" + id + ", M2price=" + M2price + '}';
+        return "Floor{" + "name=" + material + ", length=" + length + ", width=" + width + ", id=" + id + ", M2price=" + price + '}';
     }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+    
 }

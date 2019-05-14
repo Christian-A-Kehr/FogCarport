@@ -11,32 +11,28 @@ package data;
  */
 public class WallCoverings {
     private String material;
-    private int height, length, width, id, amount;
-    private double Mprice;
+    private int length, width, id, amount;
+    private double price, totalPrice;
 
-    public WallCoverings(String material, int height, int length, int width, int id, double Mprice, int amount) {
+    public WallCoverings(String material, int length, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
-        this.height = height;
         this.length = length;
         this.width = width;
         this.id = id;
-        this.Mprice = Mprice;
         this.amount = amount;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
-    public WallCoverings(String material, int height, int length, int width) {
+    public WallCoverings(String material, int length, int width,int id) {
         this.material = material;
-        this.height = height;
         this.length = length;
         this.width = width;
+        this.id = id;
     }
 
     public String getMaterial() {
         return material;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public int getLength() {
@@ -47,8 +43,8 @@ public class WallCoverings {
         return width;
     }
 
-    public double getMprice() {
-        return Mprice;
+    public double getPrice() {
+        return price;
     }
 
     public int getId() {
@@ -57,5 +53,9 @@ public class WallCoverings {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 }

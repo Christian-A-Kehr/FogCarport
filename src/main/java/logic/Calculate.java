@@ -113,20 +113,20 @@ class Calculate implements LogicInterface {
      
     @Override
     public double floorPrice(Floor floor) {
-        double floorsPrice = floor.getLength() * floor.getWidth() * floor.getM2price();
+        double floorsPrice = floor.getLength() * floor.getWidth() * floor.getprice();
         return floorsPrice;
     }
 
     @Override
-    public int calulateGabledHeight(Carport carport) {
-       int roofSlope = carport.getRoof().getAngle();
-       int gabledHeight  = (int) ((int) carport.getWidth() * Math.tan(roofSlope));
+    public int calulateGabledHeight(Roof roof) {
+       int roofSlope = roof.getAngle();
+       int gabledHeight  = (int) ((int) roof.getWidth() * Math.tan(roofSlope));
        return gabledHeight;
     }
 
     @Override
     public int calculateGabledArea(Carport carport) {
-        double gableheight = calulateGabledHeight(carport);
+        double gableheight = calulateGabledHeight(carport.getRoof());
         double gablewidth = carport.getWidth();
         int gablehalfarea  = (int) (0.5 * (gableheight * gablewidth));
         int gablearea = gablehalfarea * 2;
@@ -135,9 +135,10 @@ class Calculate implements LogicInterface {
 
     @Override
     public int calculateGabledWallCovering(Roof roof) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    // WTF skete her... ryd op christian(mig selv) 
     @Override
     public int WallCoveringsNeededDepth(Shed shed) {
         //overlay used for 100 mm width
@@ -160,11 +161,10 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public double calculateWallCoveringPrice(int area, Carport carport) {
-        double Mprice = carport.getShed().getWallCovering().getMprice();
-       // int lenght
-            //    = int totalAmount = lenght * Mprice;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double calculateWallCoveringPrice(int totalWallCover, double price) {
+       
+        double total =  totalWallCover * price;
+        return total;
     }
 
     @Override
@@ -179,15 +179,37 @@ class Calculate implements LogicInterface {
 
     @Override
     public int WallCoveringsNeededwidth(Shed shed) {
-          int shedCoverWidth = shed.getWidth();
+        int length = shed.getDepth();
+        int width = shed.getWidth();
+        int area = length * width; 
+        return area;
+    }
 
+    @Override
+    public int roofArea(Roof roof) {
+        // first we find the roofs width on one side by finding miss c (Vedhæft evt regne regler) 
+        int b = roof.getWidth(); 
+        int A = roof.getAngle();
+        int c = (int) (b / Math.cos(A));     
+        // then using c = as a rectangles width, the area can be calulated  
+        int area = c * roof.getLength() * 2; // * 2 because there's two sides. 
+        return area; 
+    }
+
+    @Override
+    public Carport CalculateCarport(Carport carport) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int roofArea(Carport carport) {
-        int b = carport.getWidth(); 
-        int A = carport.getRoof().getAngle();
-        int area = (int) (b / Math.cos(A)) * 2; // * 2 because there is to sides.    
-        return area; 
-    }}
+    public Carport GetPrices(Carport carport) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double rooftilesTotalprice(Double price, int amount) {
+        double total = amount * price;
+        return total;
+    }
+
+}
