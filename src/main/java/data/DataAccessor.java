@@ -94,7 +94,6 @@ public class DataAccessor implements DataAcessorInterface {
     //  @author MkHansen og Christian Ambjørn Kehr
     @Override
     public Material getMaterial(String name) {
-        Material Mat = null;
 
         try {
             DBConnector connect = new DBConnector();
@@ -114,13 +113,12 @@ public class DataAccessor implements DataAcessorInterface {
                 int width = rs.getInt("Width");
                 double price = rs.getDouble("Price");
 
-                Mat = new Material(name, desc, material, type, matNum, length, height, width, price);
+                return new Material(name, desc, material, type, matNum, length, height, width, price);
             }
-            return Mat;
+            throw new RuntimeException("no such material " + name);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return Mat;
     }
     
      @Override
@@ -130,7 +128,7 @@ public class DataAccessor implements DataAcessorInterface {
         try {
             DBConnector connect = new DBConnector();
 
-            String query = "SELECT * FROM Materials WHERE Vare_nummer ='" + id + "';";
+            String query = "SELECT * FROM Materials WHERE Vare_nummer =" + id + ";";
 
             Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
