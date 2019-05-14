@@ -37,5 +37,8 @@ public class Facade {
     public Material getMaterial(String name){
         return data.getMaterial(name);
     }
+    public Material getMaterialFromId(int id){
+        return data.getMaterialFromId(id);
+    }
     
 }
