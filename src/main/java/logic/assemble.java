@@ -41,21 +41,32 @@ public class assemble implements AssembleInterface {
     private String material;
 
     // Makes a carport with a price that is the price of one ithem with can be used to calculate or list the prices  
+    @Override
     public Carport assembleCarport(Carport carport) {
         roof = createRoof(carport);
 
         if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
             shed = createShed(carport);
+            
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
         } else {
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
         }
+        height = carportComplte.getHeight();
+        lenght = carportComplte.getLength();
+        width = carportComplte.getWidth();
+        roof =
+        shed =
+        price = CAL.CalculateCarport(carportComplte);
+        
+        carportComplte = new  Carport(height, lenght, width, roof, shed, price);
 
         return carportComplte;
     }
 
-   
-
+   /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
+    
+    @Override
     public Roof createRoof(Carport carport) {
         Roof quick = carport.getRoof();
 
@@ -70,12 +81,12 @@ public class assemble implements AssembleInterface {
         woodpost = createWoodpost(carport);
         rooftiles = createRoofTile(quick);
         
-           /////////////////////////////////////////////////////////////////////////////////////////////////
-        //wallCoverings = createGabledWallcover(quick);
+        wallCoverings = createGabledWallcover(carport);
         roof = new Roof(type, material, angle, height, lenght, width, beam, rafter, woodpost, rooftiles, battens, wallCoverings);
         return roof;
     }
     
+    @Override
      public int getRoofHeight(Carport carport) {
         // How to find roof height
         if (carport.getRoof().getType().equals("Med rejsning")) {
@@ -198,7 +209,7 @@ public class assemble implements AssembleInterface {
         Shed Quick = carport.getShed();
         depth = Quick.getDepth();
         width = Quick.getWidth();
-        wallCoverings = createWallcover(Quick.getWallCovering());
+        wallCoverings = createWallcover(carport);
         floor = createFloor(Quick);
 
         shed = new Shed(depth, width, wallCoverings, floor);
@@ -206,20 +217,20 @@ public class assemble implements AssembleInterface {
     }
 
     @Override
-    public WallCoverings createWallcover(WallCoverings wallCovering) {
-//        Material mat = DATAACC.getMaterialFromId(wallCovering.getId());
-//        material = wallCovering.getMaterial();
-//        height = wallCovering.getHeight();
-//        lenght = wallCovering.getLength();
-//        width = wallCovering.getWidth();
-//        id = wallCovering.getId();
-//        price = mat.getPrice();
-//        amount = CAL.totalWallCoveringsNeeded(shed);
-//        totalPrice = CAL.rooftilesTotalprice(price, amount);
-//
-//        wallCoverings = new WallCoverings(material, height, lenght, width, id, amount, price, totalPrice);
-//        return wallCoverings;
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public WallCoverings createWallcover(Carport carport) {
+        WallCoverings quick = carport.getShed().getWallCovering();
+        Material mat = DATAACC.getMaterialFromId(quick.getId());
+        
+        material = quick.getMaterial();
+        width = quick.getWidth();
+        lenght = carport.getHeight();
+        id = quick.getId();
+        amount = CAL.totalWallCoveringsNeeded(carport.getShed());
+        price = mat.getPrice();
+        totalPrice = CAL.rooftilesTotalprice(price, amount);
+
+        wallCoverings = new WallCoverings(material, lenght, width, id, amount, price, totalPrice);
+        return wallCoverings;
     }
 
     @Override

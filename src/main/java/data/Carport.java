@@ -13,7 +13,18 @@ public class Carport {
     private int height, length, width;
     private Roof roof;
     private Shed shed;
+    double price; 
 
+    // complete carport
+    public Carport(int height, int length, int width, Roof roof, Shed shed, double price) {
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+        this.shed = shed;
+        this.price = price;
+    }
+    // logic 
     public Carport(int height, int length, int width, Roof roof, Shed shed) {
         this.height = height;
         this.length = length;
@@ -21,7 +32,9 @@ public class Carport {
         this.roof = roof;
         this.shed = shed;
     }
-
+    
+    
+    // presentation
     public Carport(int height, int length, int width, Roof roof) {
         this.height = height;
         this.length = length;
@@ -49,4 +62,13 @@ public class Carport {
         return shed;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    
 }

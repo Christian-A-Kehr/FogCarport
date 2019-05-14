@@ -41,4 +41,6 @@ public interface DataAcessorInterface {
     
     public int getMaterialPrice(int id);
     
+    public double getDeliveryPrice(String name);
+    
 }

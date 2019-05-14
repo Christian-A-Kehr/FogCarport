@@ -36,7 +36,7 @@ public interface AssembleInterface {
 
     public Beam createBeam(Carport carport);
 
-    public WallCoverings createWallcover(WallCoverings wallCovering);
+    public WallCoverings createWallcover(Carport carport);
 
     public WallCoverings createGabledWallcover(Carport carport);
 

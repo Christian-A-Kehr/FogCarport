@@ -27,7 +27,7 @@ public class DataAccessor implements DataAcessorInterface {
            //System.err.println(getVariabel(1));
    // }
     Beam beam;
-    
+    double price;
     @Override
     public ArrayList<Material> getAllMaterials() {
         ArrayList<Material> list = new ArrayList<>();
@@ -222,4 +222,27 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return Variabel;
     }
+
+    @Override
+    public double getDeliveryPrice(String location) {
+        
+        try {
+            DBConnector connect = new DBConnector();
+
+            String query = "SELECT Delivery_Price FROM Fog.Delivery where Delivery_Location = '" + location + "';";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                price = rs.getDouble("Price");
+            }
+            return price;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
+    
+    
 }
