@@ -6,6 +6,7 @@
 package presentation;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,12 @@ public class Frontcontroller extends HttpServlet {
         } catch (FogException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.setContentType("text/html,charset=UTF8");
+            PrintWriter out = response.getWriter();
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
         }
     }
 
