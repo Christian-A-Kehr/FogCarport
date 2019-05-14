@@ -19,11 +19,12 @@ public class Facade {
     public static void main(String[] args) {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
-        logic.getAllMatrials();
+//        logic.getAllMaterials();
+            System.out.println(logic.getMaterial("Spær C18"));
         
     }
     
-    public ArrayList<Material> getAllMatrials(){
+    public ArrayList<Material> getAllMaterials(){
         ArrayList list = new ArrayList(data.getAllMaterials());
         System.err.println(list);
         
@@ -31,6 +32,10 @@ public class Facade {
     }
     public ArrayList<Material> getListSpecificMaterials(String type){
         return data.getListSpecificMaterials(type);
+    }
+    
+    public Material getMaterial(String name){
+        return data.getMaterial(name);
     }
     
 }
