@@ -14,10 +14,10 @@ public class Material {
     public int matNum, length, height, width;
     private double price;
 
-    public Material(String name, String desc, String matrial, String type, int matNum, int length, int height, int width, double price) {
+    public Material(String name, String desc, String material, String type, int matNum, int length, int height, int width, double price) {
         this.name = name;
         this.desc = desc;
-        this.material = matrial;
+        this.material = material;
         this.type = type;
         this.matNum = matNum;
         this.length = length;
