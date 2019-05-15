@@ -78,6 +78,6 @@ public class CreateOffer extends Command {
 
         Carport carport = new Carport(height, length, width, roof, shed);
         
-        return "test";
+        return "offerPage";
     }
 }
