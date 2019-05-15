@@ -40,7 +40,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setInt(5, material.height);
             myStmt.setInt(6, material.width);
             myStmt.setDouble(7, material.getPrice());
-            myStmt.setString(8, material.getMatrial());
+            myStmt.setString(8, material.getMaterial());
             myStmt.setString(9, material.getType());
 
             myRs = myStmt.executeQuery();
@@ -63,7 +63,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setInt(4, material.height);
             myStmt.setInt(5, material.width);
             myStmt.setDouble(6, material.getPrice());
-            myStmt.setString(7, material.getMatrial());
+            myStmt.setString(7, material.getMaterial());
             myStmt.setString(8, material.getType());
 
             myRs = myStmt.executeQuery();

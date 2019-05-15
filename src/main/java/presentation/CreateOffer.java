@@ -8,11 +8,14 @@ package presentation;
 import data.Beam;
 import data.Carport;
 import data.Floor;
+import data.Material;
 import data.Rafter;
 import data.Roof;
+import data.Rooftiles;
 import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,23 +33,51 @@ public class CreateOffer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-            int height = Integer.parseInt(request.getParameter("height"));
-            int length = Integer.parseInt(request.getParameter("height"));
-            int width = Integer.parseInt(request.getParameter("height"));
-            int shedWidth = Integer.parseInt(request.getParameter("shedDepth"));
-            int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
-            
+        int height = Integer.parseInt(request.getParameter("height"));
+        int length = Integer.parseInt(request.getParameter("height"));
+        int width = Integer.parseInt(request.getParameter("height"));
+        int shedWidth = Integer.parseInt(request.getParameter("shedDepth"));
+        int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
+        int angle = Integer.parseInt(request.getParameter("angleChoice"));
 
-//            WallCovering wallCoverings = new WallCovering(request.getParameter("shedChoice"),height , shedDepth, shedWidth);
-//            Floor floor = new Floor(request.getParameter("floorChoice"), shedDepth, shedWidth);
-//            Shed shed = new Shed(shedDepth, shedWidth, wallCoverings, floor);
-//            
-//            Beam beam = new Beam(request.getParameter("beamChoice"), Integer.parseInt(request.getParameter("length")));
-//            Rafter rafter = new Rafter(request.getParameter("rafterChoice"), Integer.parseInt(request.getParameter("width")));
-//            WoodPost woodpost = new WoodPost(request.getParameter("woodpostChoice"), Integer.parseInt(request.getParameter("height")));
-//            Roof roof = new Roof(request.getParameter("flatOrNot"), request.getParameter("roofChoice"), Integer.parseInt(request.getParameter("angleChoice")), Integer.parseInt(request.getParameter("length")), Integer.parseInt(request.getParameter("width")), beam, rafter, woodpost);
-//            Carport carport = new Carport(Integer.parseInt(request.getParameter("height")), Integer.parseInt(request.getParameter("length")), Integer.parseInt(request.getParameter("width")), roof, shed);
+        int rooftileID = Integer.parseInt(request.getParameter("rooftileChoice"));
+        int rafterID = Integer.parseInt(request.getParameter("rafterChoice"));
+        int beamID = Integer.parseInt(request.getParameter("beamChoice"));
+        int woodPostID = Integer.parseInt(request.getParameter("woodpostChoice"));
+        int floorID = Integer.parseInt(request.getParameter("floorChoice"));
+        int wallCoveringID = Integer.parseInt(request.getParameter("shedChoice"));
 
+        Material rafterMat = logic.getMaterialFromId(rafterID);
+        Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterID);
+
+        Material beamMat = logic.getMaterialFromId(beamID);
+        Beam beam = new Beam(beamMat.getMaterial(), length, beamID);
+
+        Material woodPostMat = logic.getMaterialFromId(woodPostID);
+        WoodPost woodpost = new WoodPost(woodPostMat.getMaterial(), height, woodPostID);
+
+        Material floorMat = logic.getMaterialFromId(floorID);
+        Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
+
+        Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
+        WallCoverings wallCoverings = new WallCoverings(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
+        
+        Material rooftileMat = logic.getMaterialFromId(rooftileID);
+        Rooftiles rooftile = new Rooftiles(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
+        
+        session.setAttribute("rooftile", rooftileMat);
+        session.setAttribute("rafter", rafterMat);
+        session.setAttribute("beam", beamMat);
+        session.setAttribute("woodPost", woodPostMat);
+        session.setAttribute("floor", floorMat);
+        session.setAttribute("wallCovering", wallCoveringMat);
+
+        Shed shed = new Shed(shedDepth, shedWidth, wallCoverings, floor);
+
+        Roof roof = new Roof(request.getParameter("flatOrNot"), angle, length, width, beam, rafter, woodpost, rooftile);
+
+        Carport carport = new Carport(height, length, width, roof, shed);
+        
         return "test";
     }
 }

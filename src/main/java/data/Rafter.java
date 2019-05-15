@@ -31,7 +31,7 @@ public class Rafter {
         this.lenght = lenght;
         this.id = id;
     }
-    
+
     public String getMaterial() {
         return material;
     }

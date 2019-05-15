@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>Bestilling</title>
         <link href="${pageContext.request.contextPath}/StyleSheet.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -34,7 +34,7 @@
             <table id="shed">
                 <caption><b>Tag</b></caption>
                 <tr>
-                    <th>Med/Uden rejsning</th>
+                    <th>Med rejsning?</th>
                     <th>Tag materiale valg</th>
                     <th>Stolpe materiale valg</th>
                     <th>Grader</th>
@@ -47,11 +47,11 @@
                         </td>
 
                         <td>
-                            <select name="roofChoice">
+                            <select name="rooftileChoice">
                                 <% ArrayList<Material> roofMats = (ArrayList<Material>) session.getAttribute("allRoofMats");
                                     for (int i = 0; i < roofMats.size(); i++) {
                                 %>
-                                <option value="<%= roofMats.get(i) %>"><%out.print(roofMats.get(i).getName());%></option>
+                                <option value="<%= roofMats.get(i).getMatNum()%>"><%out.print(roofMats.get(i).getName());%></option>
                                 <%
                                     }
                                 %>
@@ -62,13 +62,13 @@
                                 <% ArrayList<Material> woodpostMats = (ArrayList<Material>) session.getAttribute("allWoodpostMats");
                                     for (int i = 0; i < woodpostMats.size(); i++) {
                                 %>
-                                <option value="<%= woodpostMats.get(i) %>"><%out.print(woodpostMats.get(i).getName());%></option>
+                                <option value="<%= woodpostMats.get(i).getMatNum()%>"><%out.print(woodpostMats.get(i).getName());%></option>
                                 <%
                                     }
                                 %>
                             </select>
                         </td>
-                        <td><input name="angleChoice" type="number" min="3" max="50" value="3" ></td>
+                        <td><input name="angleChoice" type="number" min="3" max="15" value="3" ></td>
                     </tr>
                 </tbody>
             </table>
@@ -86,7 +86,7 @@
                         <% ArrayList<Material> beamMats = (ArrayList<Material>) session.getAttribute("allBeamMats");
                             for (int i = 0; i < beamMats.size(); i++) {
                         %>
-                        <option value="<%= beamMats.get(i) %>"><%out.print(beamMats.get(i).getName());%></option>
+                        <option value="<%= beamMats.get(i).getMatNum()%>"><%out.print(beamMats.get(i).getName());%></option>
                         <%
                             }
                         %>
@@ -97,7 +97,7 @@
                         <% ArrayList<Material> rafterMats = (ArrayList<Material>) session.getAttribute("allRafterMats");
                             for (int i = 0; i < rafterMats.size(); i++) {
                         %>
-                        <option value="<%= rafterMats.get(i)%>"><%out.print(rafterMats.get(i).getName());%></option>
+                        <option value="<%= rafterMats.get(i).getMatNum()%>"><%out.print(rafterMats.get(i).getName());%></option>
                         <%
                             }
                         %>
@@ -118,11 +118,10 @@
                 <tr>
                     <td>                        
                         <select name="shedChoice">
-                            <option value="Intet skur">Intet skur</option>
                             <% ArrayList<Material> shedMats = (ArrayList<Material>) session.getAttribute("allShedMats");
                                 for (int i = 0; i < shedMats.size(); i++) {
                             %>
-                            <option value="<%= shedMats.get(i)%>"><%out.print(shedMats.get(i).getName());%></option>
+                            <option value="<%= shedMats.get(i).getMatNum()%>"><%out.print(shedMats.get(i).getName());%></option>
                             <%
                                 }
                             %>
@@ -134,7 +133,7 @@
                                 for (int i = 0; i < floorMats.size(); i++) {
                                     String name = floorMats.get(i).getName();
                             %>
-                            <option value="<%= floorMats.get(i)%>"><%out.print(floorMats.get(i).getName());%></option>
+                            <option value="<%= floorMats.get(i).getMatNum()%>"><%out.print(floorMats.get(i).getName());%></option>
                             <%
                                 }
                             %>
@@ -149,12 +148,20 @@
                 <tr>
                     <th>Navn</th>
                     <th>Email</th>
-                    <th>Addresse</th>
+                    <th>Levering til?</th>
                 </tr>
                 <tr>
                     <td><input name="customerName" type="text"></td>
                     <td><input name="customerEmail" type="text"></td>
-                    <td><input name="customerAddress" type="text"></td>
+                    <td>
+                        <select name="delivery">
+                            <option value="sjælland">Sjælland</option>
+                            <option value="jylland">Jylland</option>
+                            <option value="fyn">Fyn</option>
+                            <option value="andet">Andet</option>
+
+                        </select>
+                    </td>
                 </tr>
             </table>
             <input type="hidden" name="command" value="CreateOffer">

@@ -5,8 +5,6 @@
  */
 package presentation;
 
-import data.Material;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,19 +15,22 @@ import logic.FogException;
  *
  * @author Mkhansen
  */
-public class GoToOrderPage extends Command {
+public class Settings extends Command {
+
     private Facade logic = new Facade();
-    
+
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-        
+
         session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagbeklædning"));
         session.setAttribute("allRafterMats", logic.getListSpecificMaterials("Spær"));
         session.setAttribute("allShedMats", logic.getListSpecificMaterials("Beklædning"));
         session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
         session.setAttribute("allWoodpostMats", logic.getListSpecificMaterials("Stolpe"));
         session.setAttribute("allBeamMats", logic.getListSpecificMaterials("Rem"));
-        return "orderPage";
+
+        return "settingsPage";
     }
+
 }

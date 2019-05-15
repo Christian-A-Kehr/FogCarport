@@ -165,8 +165,8 @@ public class assemble implements AssembleInterface {
 
     @Override
     public WallCovering createGabledWallcover(Carport carport) {
-        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCoverings().getId());
-        WallCovering quick = carport.getRoof().getWallCoverings();
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCovering().getId());
+        WallCovering quick = carport.getRoof().getWallCovering();
         
         if (roof.getType().equals("Med rejsning")){
             area = CAL.calculateGabledArea(carport);

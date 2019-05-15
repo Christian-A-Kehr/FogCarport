@@ -21,5 +21,9 @@
             <input type="hidden" name="command" value="GoToOrderPage">
             <input type="submit" value="Start ny bestilling">
         </form>
+        <form action="Frontcontroller" method="POST">
+            <input type="hidden" name="command" value="Settings">
+            <input type="submit" value="Gå til indstillinger">
+        </form>
     </body>
 </html>

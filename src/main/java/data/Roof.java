@@ -11,18 +11,17 @@ package data;
  */
 public class Roof {
 
-    private String type, material;
+    private String type;
     private int angle, height, length, width;
     private Beam beam;
     private Rafter rafter;
     private WoodPost woodpost;
     private Rooftile rooftiles;   
     private Battens battens;
-    private WallCovering wallCoverings;
+    private WallCovering wallCovering;
 
-    public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftiles, Battens battens, WallCovering wallCoverings) {
+    public Roof(String type, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftile, Battens battens, WallCovering wallCovering) {
         this.type = type;
-        this.material = material;
         this.angle = angle;
         this.height = height;
         this.length = length;
@@ -30,30 +29,25 @@ public class Roof {
         this.beam = beam;
         this.rafter = rafter;
         this.woodpost = woodpost;
-        this.rooftiles = rooftiles;
+        this.rooftiles = rooftile;
         this.battens = battens;
-        this.wallCoverings = wallCoverings;
+        this.wallCovering = wallCovering;
     }
 
 
-    public Roof(String type, String material, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftiles) {
+    public Roof(String type, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftile) {
         this.type = type;
-        this.material = material;
         this.angle = angle;
         this.length = length;
         this.width = width;
         this.beam = beam;
         this.rafter = rafter;
         this.woodpost = woodpost;
-        this.rooftiles = rooftiles;
+        this.rooftiles = rooftile;
     }
 
     public String getType() {
         return type;
-    }
-
-    public String getMaterial() {
-        return material;
     }
 
     public int getAngle() {
@@ -109,8 +103,8 @@ public class Roof {
         return battens;
     }
 
-    public WallCovering getWallCoverings() {
-        return wallCoverings;
+    public WallCovering getWallCovering() {
+        return wallCovering;
     }
 
 }
