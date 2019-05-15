@@ -60,7 +60,7 @@ public class CreateOffer extends Command {
         Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
 
         Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
-        WallCovering wallCoverings = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
+        WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
         
         Material rooftileMat = logic.getMaterialFromId(rooftileID);
         Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
@@ -72,7 +72,7 @@ public class CreateOffer extends Command {
         session.setAttribute("floor", floorMat);
         session.setAttribute("wallCovering", wallCoveringMat);
 
-        Shed shed = new Shed(shedDepth, shedWidth, wallCoverings, floor);
+        Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
 
         Roof roof = new Roof(request.getParameter("flatOrNot"), angle, length, width, beam, rafter, woodpost, rooftile);
 
