@@ -118,7 +118,6 @@
                 <tr>
                     <td>                        
                         <select name="shedChoice">
-                            <option value="Intet skur">Intet skur</option>
                             <% ArrayList<Material> shedMats = (ArrayList<Material>) session.getAttribute("allShedMats");
                                 for (int i = 0; i < shedMats.size(); i++) {
                             %>
