@@ -11,7 +11,7 @@ import data.Floor;
 import data.Material;
 import data.Rafter;
 import data.Roof;
-import data.Rooftiles;
+import data.Rooftile;
 import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
@@ -60,10 +60,10 @@ public class CreateOffer extends Command {
         Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
 
         Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
-        WallCoverings wallCoverings = new WallCoverings(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
+        WallCovering wallCoverings = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
         
         Material rooftileMat = logic.getMaterialFromId(rooftileID);
-        Rooftiles rooftile = new Rooftiles(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
+        Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
         
         session.setAttribute("rooftile", rooftileMat);
         session.setAttribute("rafter", rafterMat);

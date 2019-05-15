@@ -65,7 +65,6 @@ public class assemble implements AssembleInterface {
         Roof quick = carport.getRoof();
 
         String type = quick.getType();
-        material = quick.getMaterial();
         int angle = quick.getAngle();
         height = getRoofHeight(carport);
         lenght = quick.getLength();
@@ -76,7 +75,7 @@ public class assemble implements AssembleInterface {
         rooftiles = createRoofTile(quick);
         
         wallCoverings = createGabledWallcover(carport);
-        roof = new Roof(type, material, angle, height, lenght, width, beam, rafter, woodpost, rooftiles, battens, wallCoverings);
+        roof = new Roof(type,angle, height, lenght, width, beam, rafter, woodpost, rooftiles, battens, wallCoverings);
         return roof;
     }
     
