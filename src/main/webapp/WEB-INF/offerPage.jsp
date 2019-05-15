@@ -19,6 +19,9 @@
         <div id="pdfprint">
             <h1>Tilbud</h1>
             <h2 id="fog">FOG</h2>
+            <p>Johannes Fog A/S</p>
+            <p>Firskovvej 20 - 2800 Lyngby</p>
+            <p>CVR-nr. 16314439</p>
             <h2>Alle mål er i mm</h2>
 
             <p>Højde = <%= request.getParameter("height")%> </p>
