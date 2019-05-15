@@ -10,14 +10,14 @@ package data;
  * @author Mkhansen
  */
 public class Material {
-    public String name, desc, matrial, type;
+    public String name, desc, material, type;
     public int matNum, length, height, width;
     private double price;
 
     public Material(String name, String desc, String matrial, String type, int matNum, int length, int height, int width, double price) {
         this.name = name;
         this.desc = desc;
-        this.matrial = matrial;
+        this.material = matrial;
         this.type = type;
         this.matNum = matNum;
         this.length = length;
@@ -34,8 +34,8 @@ public class Material {
         return desc;
     }
 
-    public String getMatrial() {
-        return matrial;
+    public String getMaterial() {
+        return material;
     }
 
     public String getType() {
