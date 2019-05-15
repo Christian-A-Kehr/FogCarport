@@ -25,11 +25,9 @@ public class Beam {
         this.totalPrice = totalPrice;
     }
 
-    public Beam(String material, int length, int height, int width, int id) {
+    public Beam(String material, int length, int id) {
         this.material = material;
         this.length = length;
-        this.height = height;
-        this.width = width;
         this.id = id;
     }
 
