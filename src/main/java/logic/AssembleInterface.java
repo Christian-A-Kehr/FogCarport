@@ -12,9 +12,9 @@ import data.Material;
 import data.Rafter;
 import data.Roof;
 import data.Shed;
-import data.WallCoverings;
+import data.WallCovering;
 import data.WoodPost;
-import data.Rooftiles;
+import data.Rooftile;
 
 /**
  *
@@ -36,11 +36,11 @@ public interface AssembleInterface {
 
     public Beam createBeam(Carport carport);
 
-    public WallCoverings createWallcover(Carport carport);
+    public WallCovering createWallcover(Carport carport);
 
-    public WallCoverings createGabledWallcover(Carport carport);
+    public WallCovering createGabledWallcover(Carport carport);
 
     public Floor createFloor(Shed shed);
 
-    public Rooftiles createRoofTile(Roof roof);
+    public Rooftile createRoofTile(Roof roof);
 }

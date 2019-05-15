@@ -9,12 +9,12 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-public class WallCoverings {
+public class WallCovering {
     private String material;
     private int length, width, id, amount;
     private double price, totalPrice;
 
-    public WallCoverings(String material, int length, int width, int id, int amount, double price, double totalPrice) {
+    public WallCovering(String material, int length, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.length = length;
         this.width = width;
@@ -24,7 +24,7 @@ public class WallCoverings {
         this.totalPrice = totalPrice;
     }
 
-    public WallCoverings(String material, int length, int width,int id) {
+    public WallCovering(String material, int length, int width,int id) {
         this.material = material;
         this.length = length;
         this.width = width;

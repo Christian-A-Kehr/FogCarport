@@ -11,7 +11,7 @@ import data.Floor;
 import data.Rafter;
 import data.Roof;
 import data.Shed;
-import data.WallCoverings;
+import data.WallCovering;
 import data.WoodPost;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ public class CreateOffer extends Command {
             int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
             
 
-//            WallCoverings wallCoverings = new WallCoverings(request.getParameter("shedChoice"),height , shedDepth, shedWidth);
+//            WallCovering wallCoverings = new WallCovering(request.getParameter("shedChoice"),height , shedDepth, shedWidth);
 //            Floor floor = new Floor(request.getParameter("floorChoice"), shedDepth, shedWidth);
 //            Shed shed = new Shed(shedDepth, shedWidth, wallCoverings, floor);
 //            

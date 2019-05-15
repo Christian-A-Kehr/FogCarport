@@ -11,10 +11,10 @@ package data;
  */
 public class Shed {
     private int depth, width; 
-    private WallCoverings wallCovering;
+    private WallCovering wallCovering;
     private Floor floor;
 
-    public Shed(int depth, int width, WallCoverings wallCovering, Floor floor) {
+    public Shed(int depth, int width, WallCovering wallCovering, Floor floor) {
         this.depth = depth;
         this.width = width;
         this.wallCovering = wallCovering;
@@ -29,7 +29,7 @@ public class Shed {
         return width;
     }
 
-    public WallCoverings getWallCovering() {
+    public WallCovering getWallCovering() {
         return wallCovering;
     }
 

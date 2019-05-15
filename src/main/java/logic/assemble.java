@@ -12,9 +12,9 @@ import data.Floor;
 import data.Material;
 import data.Rafter;
 import data.Roof;
-import data.Rooftiles;
+import data.Rooftile;
 import data.Shed;
-import data.WallCoverings;
+import data.WallCovering;
 import data.WoodPost;
 import data.Battens;
 
@@ -32,9 +32,9 @@ public class assemble implements AssembleInterface {
     private Rafter rafter;
     private Beam beam;
     private WoodPost woodpost;
-    private WallCoverings wallCoverings;
+    private WallCovering wallCoverings;
     private Floor floor;
-    private Rooftiles rooftiles;
+    private Rooftile rooftiles;
     private Battens battens;
     private int height, lenght, width, id, amount, depth, area;
     private double price, totalPrice;
@@ -52,16 +52,10 @@ public class assemble implements AssembleInterface {
         } else {
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
         }
-        height = carportComplte.getHeight();
-        lenght = carportComplte.getLength();
-        width = carportComplte.getWidth();
-        roof =
-        shed =
-        price = CAL.CalculateCarport(carportComplte);
         
-        carportComplte = new  Carport(height, lenght, width, roof, shed, price);
+        Carport done = carportComplte;
 
-        return carportComplte;
+        return done;
     }
 
    /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -106,7 +100,7 @@ public class assemble implements AssembleInterface {
         material = Quick.getMaterial();
         lenght = Quick.getLenght();
         height = Quick.getHeight();
-        width = Quick.getWidth();
+        width = Quick.getThickness();
         id = Quick.getId();
         amount = CAL.TotalLengthRaftersFlatRoof(carport);
         price = mat.getPrice();
@@ -153,9 +147,9 @@ public class assemble implements AssembleInterface {
     }
 
     @Override
-    public Rooftiles createRoofTile(Roof roof) {
+    public Rooftile createRoofTile(Roof roof) {
         Material mat = DATAACC.getMaterialFromId(roof.getRooftiles().getId());
-        Rooftiles quick = roof.getRooftiles();
+        Rooftile quick = roof.getRooftiles();
         material = quick.getMaterial();
         lenght = quick.getLenght();
         width = quick.getWidth();
@@ -165,14 +159,14 @@ public class assemble implements AssembleInterface {
         price = mat.getPrice();
         totalPrice = CAL.rooftilesTotalprice(price, amount);
 
-        rooftiles = new Rooftiles(material, lenght, width, id, amount, price, totalPrice);
+        rooftiles = new Rooftile(material, lenght, width, id, amount, price, totalPrice);
         return rooftiles;
     }
 
     @Override
-    public WallCoverings createGabledWallcover(Carport carport) {
+    public WallCovering createGabledWallcover(Carport carport) {
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCoverings().getId());
-        WallCoverings quick = carport.getRoof().getWallCoverings();
+        WallCovering quick = carport.getRoof().getWallCoverings();
         
         if (roof.getType().equals("Med rejsning")){
             area = CAL.calculateGabledArea(carport);
@@ -184,7 +178,7 @@ public class assemble implements AssembleInterface {
             amount     = CAL.calculateGabledWallCovering(roof);
             price      = mat.getPrice();
             totalPrice = CAL.calculateGabledWallCovering(roof);
-            wallCoverings = new WallCoverings(material, lenght, width, id, amount, price, totalPrice);
+            wallCoverings = new WallCovering(material, lenght, width, id, amount, price, totalPrice);
         }
         else{
             material   = quick.getMaterial();
@@ -194,7 +188,7 @@ public class assemble implements AssembleInterface {
             amount     = CAL.calculateGabledWallCovering(roof);
             price      = mat.getPrice();
             totalPrice = CAL.calculateGabledWallCovering(roof);
-            wallCoverings = new WallCoverings(material, lenght, width, id, amount, price, totalPrice);
+            wallCoverings = new WallCovering(material, lenght, width, id, amount, price, totalPrice);
         }
         return wallCoverings; 
     }
@@ -217,8 +211,8 @@ public class assemble implements AssembleInterface {
     }
 
     @Override
-    public WallCoverings createWallcover(Carport carport) {
-        WallCoverings quick = carport.getShed().getWallCovering();
+    public WallCovering createWallcover(Carport carport) {
+        WallCovering quick = carport.getShed().getWallCovering();
         Material mat = DATAACC.getMaterialFromId(quick.getId());
         
         material = quick.getMaterial();
@@ -229,7 +223,7 @@ public class assemble implements AssembleInterface {
         price = mat.getPrice();
         totalPrice = CAL.rooftilesTotalprice(price, amount);
 
-        wallCoverings = new WallCoverings(material, lenght, width, id, amount, price, totalPrice);
+        wallCoverings = new WallCovering(material, lenght, width, id, amount, price, totalPrice);
         return wallCoverings;
     }
 

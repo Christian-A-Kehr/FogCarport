@@ -5,13 +5,24 @@
  */
 package data;
 
+import java.util.List;
+
 /**
  *
  * @author Christian Ambjørn Kehr
  */
 public interface DataUpdaterInterface {
     
+    // Material's
+    public void createMaterial(Material material);
+    public void updateMaterial(int id, Material material);
+    public void dropMaterial(int id);
+    public List<Material> DisplayAllMaterial();
+    // Delivery's
+    public Delivery getDelivery(String location);  
+    public void updateDeliveryPrice(String location, double price);
+    // variable's 
+    public Demand getVariable(String name);
+    public void updateDemandVariables(String name, int measurements);
     
-    public void updateDemandVariables(Demand demand);
-            
 }

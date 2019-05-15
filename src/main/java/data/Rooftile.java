@@ -9,12 +9,12 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-public class Rooftiles {
+public class Rooftile {
     private String material;
     private int lenght, width, id, amount;
     private double price, totalPrice;
 
-    public Rooftiles(String material, int lenght, int width, int id, int amount, double price, double totalPrice) {
+    public Rooftile(String material, int lenght, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.lenght = lenght;
         this.width = width;
@@ -24,7 +24,7 @@ public class Rooftiles {
         this.totalPrice = totalPrice;
     }
 
-    public Rooftiles(String name, int lenght, int width, int id) {
+    public Rooftile(String name, int lenght, int width, int id) {
         this.material = name;
         this.lenght = lenght;
         this.width = width;

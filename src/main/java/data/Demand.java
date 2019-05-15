@@ -9,7 +9,7 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-class Demand {
+public class Demand {
     private String name;
     private int Measurements;
 
