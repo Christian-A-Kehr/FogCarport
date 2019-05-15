@@ -131,7 +131,6 @@
                         <select name="floorChoice">
                             <% ArrayList<Material> floorMats = (ArrayList<Material>) session.getAttribute("allFloorMats");
                                 for (int i = 0; i < floorMats.size(); i++) {
-                                    String name = floorMats.get(i).getName();
                             %>
                             <option value="<%= floorMats.get(i).getMatNum()%>"><%out.print(floorMats.get(i).getName());%></option>
                             <%
