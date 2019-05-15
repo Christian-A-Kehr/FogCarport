@@ -11,7 +11,7 @@ package data;
  */
 public class Roof {
 
-    private String type, material;
+    private String type;
     private int angle, height, length, width;
     private Beam beam;
     private Rafter rafter;
@@ -20,9 +20,8 @@ public class Roof {
     private Battens battens;
     private WallCoverings wallCoverings;
 
-    public Roof(String type, String material, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftiles rooftiles, Battens battens, WallCoverings wallCoverings) {
+    public Roof(String type, int angle, int height, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftiles rooftiles, Battens battens, WallCoverings wallCoverings) {
         this.type = type;
-        this.material = material;
         this.angle = angle;
         this.height = height;
         this.length = length;
@@ -36,9 +35,8 @@ public class Roof {
     }
 
 
-    public Roof(String type, String material, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftiles rooftiles) {
+    public Roof(String type, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftiles rooftiles) {
         this.type = type;
-        this.material = material;
         this.angle = angle;
         this.length = length;
         this.width = width;
@@ -50,10 +48,6 @@ public class Roof {
 
     public String getType() {
         return type;
-    }
-
-    public String getMaterial() {
-        return material;
     }
 
     public int getAngle() {
