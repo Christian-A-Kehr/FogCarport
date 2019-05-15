@@ -19,13 +19,12 @@ import logic.FogException;
  */
 public class GoToOrderPage extends Command {
     private Facade logic = new Facade();
-    private ArrayList<Material> chosenMats = new ArrayList<>();
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
         
-        session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagsten"));
+        session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagbeklædning"));
         session.setAttribute("allRafterMats", logic.getListSpecificMaterials("Spær"));
         session.setAttribute("allShedMats", logic.getListSpecificMaterials("Beklædning"));
         session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
