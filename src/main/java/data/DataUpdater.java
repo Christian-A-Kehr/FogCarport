@@ -25,7 +25,7 @@ public class DataUpdater implements DataUpdaterInterface {
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
     Material mat;
-
+    Delivery deliver; 
     @Override
     public void createMaterial(Material material) {
         try {
@@ -122,18 +122,20 @@ public class DataUpdater implements DataUpdaterInterface {
 
     @Override
     public Delivery getDelivery(String location) {
-
+        
         try {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("SELECT * FROM Fog.Delivery where Delivery_Location = '" + location + "';");
+            myStmt = connection.prepareCall("SELECT * FROM Fog.Delivery where Delivery_Location = '?';");
+            myStmt.setString(1, location);
             myRs = myStmt.executeQuery();
-
+            
+            deliver = new Delivery(location, myRs.getDouble("Measurements"));
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (Delivery) myRs;
+        return deliver;
     }
 
     @Override

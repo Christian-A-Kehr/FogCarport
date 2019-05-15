@@ -141,8 +141,8 @@ class Calculate implements LogicInterface {
     // WTF skete her... ryd op christian(mig selv) 
     @Override
     public int WallCoveringsNeededDepth(Shed shed) {
-        //overlay used for 100 mm width
-        int overlay = 150;
+        //overlay used for 100 mm width wallcover => standart width
+        int overlay = dataaccessor.getVariabel(5);
         int shedCoverDepth = shed.getDepth();
         int wallCoverWidth = shed.getWallCovering().getWidth();
         int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));

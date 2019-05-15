@@ -10,6 +10,12 @@ package data;
  * @author Christian Ambjørn Kehr
  */
 public class Delivery {
-    String location;
-    double price; 
+    private String location;
+    private double price; 
+
+    public Delivery(String location, double price) {
+        this.location = location;
+        this.price = price;
+    }
+    
 }
