@@ -27,6 +27,7 @@ abstract class Command {
         commands.put("CreateNewMaterial", new CreateNewMaterial());
         commands.put("UpdateMaterial", new UpdateMaterial());
         commands.put("DeleteMaterial", new DeleteMaterial());
+        commands.put("CommandDrawing", new CommandDrawing());
 //        commands.put( "login", new Login() );
     }
 
