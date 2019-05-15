@@ -23,6 +23,7 @@ abstract class Command {
         commands = new HashMap<>();
         commands.put( "GoToOrderPage", new GoToOrderPage());
         commands.put("CreateOffer",new CreateOffer());
+        commands.put("Settings", new Settings());
 //        commands.put( "login", new Login() );
     }
 
