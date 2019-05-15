@@ -22,13 +22,8 @@ public class Settings extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-
-        session.setAttribute("allRoofMats", logic.getListSpecificMaterials("Tagbeklædning"));
-        session.setAttribute("allRafterMats", logic.getListSpecificMaterials("Spær"));
-        session.setAttribute("allShedMats", logic.getListSpecificMaterials("Beklædning"));
-        session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
-        session.setAttribute("allWoodpostMats", logic.getListSpecificMaterials("Stolpe"));
-        session.setAttribute("allBeamMats", logic.getListSpecificMaterials("Rem"));
+        
+        session.setAttribute("allMats", logic.getAllMaterials());
 
         return "settingsPage";
     }
