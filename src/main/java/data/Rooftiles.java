@@ -24,8 +24,8 @@ public class Rooftiles {
         this.totalPrice = totalPrice;
     }
 
-    public Rooftiles(String name, int lenght, int width, int id) {
-        this.material = name;
+    public Rooftiles(String material, int lenght, int width, int id) {
+        this.material = material;
         this.lenght = lenght;
         this.width = width;
         this.id = id;
