@@ -214,11 +214,13 @@ class Calculate implements LogicInterface {
     
     @Override
     public int battensNeeded(Carport carport) {
-        
         int battensHeight = carport.getRoof().getBatten().getHeight();
         int battensDistance = 100; // This is an example. Find legislation!
-         int stretchBattens =  (int) ((carport.getWidth() / 2 ) / Math.cos(carport.getRoof().getAngle()));
-       int battensNeededDouble = ((stretchBattens + battensDistance) / (battensHeight + battensDistance));
-        int battensNeededInt =  (int) (Math.ceil(battensNeededDouble / 1000.0) * 1000);
-         return battensNeededInt;    
-    }}
+
+        double stretchBattensOneSide = (int) ((carport.getWidth() / 2) / Math.cos(carport.getRoof().getAngle()));
+        double stretchBattensTotal = 2 * stretchBattensOneSide;
+        double battensNeededDouble = ((stretchBattensTotal + battensDistance) / (battensHeight + battensDistance));
+        int battensNeededInt = (int) (Math.ceil(battensNeededDouble / 1000.0) * 1000);
+        return battensNeededInt;
+    }
+}
