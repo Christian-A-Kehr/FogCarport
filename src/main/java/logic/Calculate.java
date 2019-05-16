@@ -94,7 +94,7 @@ class Calculate implements LogicInterface {
         int overHang4 = dataaccessor.getVariabel(8); // 150;
         int stretchForBeams = (carportWidth - (overHang3 + overHang4));
         double totalNumbersWoodpostsDouble = (stretchForBeams + beamsDistance)/((carport.getRoof().getBeam().getWidth() + beamsDistance));
-        int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumbersWoodpostsDouble / 1000.0) * 1000);;
+        int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumbersWoodpostsDouble / 1000.0) * 1000);
         return totalNumbersWoodpostsInt;
     }
         // beams are cut to custom measures 
@@ -214,7 +214,11 @@ class Calculate implements LogicInterface {
     
     @Override
     public int battensNeeded(Carport carport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-}
+        
+        int battensHeight = carport.getRoof().getBatten().getHeight();
+        int battensDistance = 100; // This is an example. Find legislation!
+         int stretchBattens =  (int) ((carport.getWidth() / 2 ) / Math.cos(carport.getRoof().getAngle()));
+       int battensNeededDouble = ((stretchBattens + battensDistance) / (battensHeight + battensDistance));
+        int battensNeededInt =  (int) (Math.ceil(battensNeededDouble / 1000.0) * 1000);
+         return battensNeededInt;    
+    }}
