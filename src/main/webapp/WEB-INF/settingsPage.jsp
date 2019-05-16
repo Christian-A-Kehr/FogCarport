@@ -18,6 +18,7 @@
         <h1>Velkommen til instillinger, her kan du tilføje, opdatére og slette materialer mm.</h1>
         <table>
             <form action="Frontcontroller" method="POST">
+                <caption>Tilføj materiale</caption>
                 <tr><th>Navn</th><th>Vare nummer</th><th>Beskrivelse</th><th>Længde</th><th>Højde</th><th>Bredde</th><th>Pris</th><th>Materiale</th><th>Type</th></tr>
                         <% ArrayList<Material> allMats = (ArrayList<Material>) session.getAttribute("allMats");
                             for (int i = 0; i < allMats.size(); i++) {
@@ -54,35 +55,44 @@
                     }
                 %>
                 </tr>
-
-
-
-
-
+                <td><input name="nameChoice" type="text"></td>
+                <td><input id="newMatInput" name="matNumChoice" type="number" value="0"></td>
+                <td><input name="descriptionChoice" type="text"></td>
+                <td><input id="newMatInput" name="lengthChoice" type="number"></td>
+                <td><input id="newMatInput" name="heightChoice" type="number"></td>
+                <td><input id="newMatInput" name="widthChoice" type="number"></td>
+                <td><input id="newMatInput" name="priceChoice" type="number"></td>
+                <td><input name="materialChoice" type="text"></td>
+                <td>
+                    <select name="typeChoice">
+                        <% ArrayList<String> matTypes = (ArrayList<String>) session.getAttribute("allMatTypes");
+                            for (int i = 0; i < matTypes.size(); i++) {
+                        %>
+                        <option value="<%= matTypes.get(i)%>"><%out.print(matTypes.get(i));%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                </td>
                 <tr>
-                <input type="hidden" name="command" value="CreateNewMaterial">
-                <input type="submit" onclick="alert('Materiale tilføjet')" value="Tilføj Materiale">
+                <input type="hidden" name="command" value="CreateOrUpdateMaterial">
+                <td colspan="9" ><input type="submit" onclick="alert('Materiale tilføjet')" value="Tilføj Materiale/Opdatér Materiale"></td>
             </form>
         </tr>
     </table>
-
-    <table>
-        <form action="Frontcontroller" method="POST">
-            <th>WOHOOOOO 2</th>
-            <input type="hidden" name="command" value="UpdateMaterial">
-            <input type="submit" onclick="alert('Materiale opdatéret')" value="Opdatér Materiale">
-        </form>
-    </table>
-</table>
-
-
 <table>
+    <caption>Slet materiale</caption>
+    <th colspan="2">Slet materiale</th>
     <form action="Frontcontroller" method="POST">
-        <th>WOHOOOOO 3</th>
+    <tr>
+        <td>Indtast varenummer
+            <input name="deleteChoice" type="number" value="0" min="0"></td>
         <input type="hidden" name="command" value="DeleteMaterial">
-        <input type="submit" onclick="alert('Materiale slettet')" value="Slet Materiale">
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" onclick="alert('Materiale slettet')" value="Slet Materiale"></td>
     </form>
-</table>
+</tr>
 </table>
 </body>
 </html>
