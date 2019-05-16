@@ -23,6 +23,7 @@ public class Settings extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
         
+        session.setAttribute("allMatTypes", logic.getMaterialType());
         session.setAttribute("allMats", logic.getAllMaterials());
 
         return "settingsPage";
