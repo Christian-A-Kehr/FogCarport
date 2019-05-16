@@ -205,11 +205,10 @@ public class Assemble implements AssembleInterface {
             int id = quick.getId();
             int amount = CAL.battensNeeded(carport);
             double price = mat.getPrice();
-            double totalPrice = 
-            Batten Batten = new 
-            return wallCovering;
+            double totalPrice = amount * price;
+            Batten batten = new Batten(material, lenght, width, width, id, amount, price, totalPrice);
+            return batten;
         }
-        return 
     }
 
     ///////////////////////////////////////Shed////////////////////////////////////////////
