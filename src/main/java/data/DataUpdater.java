@@ -56,7 +56,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("UPDATE `Fog`.`Materials` SET `Material_Name` = (?), `Help_Description` = (?), `Length` = (?), `Height` = (?), `Width` = (?), `Price` = (?), `Material` = (?), `Type` = (?) WHERE (`Vare_nummer` = '" + id + "');");
+            myStmt = connection.prepareStatement("UPDATE Materials SET Material_Name = (?), `Help_Description` = (?), `Length` = (?), `Height` = (?), `Width` = (?), `Price` = (?), `Material` = (?), `Type` = (?) WHERE (`Vare_nummer` = '" + id + "');");
 
             myStmt.setString(1, material.getName());
             myStmt.setString(2, material.getDesc());
