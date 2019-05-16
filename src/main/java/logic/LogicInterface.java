@@ -10,7 +10,7 @@ import data.WoodPost;
 public interface LogicInterface {
    
    // all calculations i made in M therefor int is used isted of double
-    public Carport CalculateCarport(Carport carport);
+    public double CalculateCarport(Carport carport);
     public int WoodPostNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double WooPostTotalPrice(Carport carport);
     public int NumbersOfRaftersFlatRoof(Carport carport);
@@ -33,6 +33,7 @@ public interface LogicInterface {
     public double rooftilesTotalprice(Double price, int amount);
     public Carport GetPrices(Carport carport);
     public int battensNeeded(Carport carport);
+    
     
     
    

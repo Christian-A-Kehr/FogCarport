@@ -33,7 +33,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("INSERT INTO Materials (`Material_Name`, `Vare_nummer`, `Help_Description`, `Length`, `Height`, `Width`, `Price`, `Material`, `Type`) VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?');");
+            myStmt = connection.prepareStatement("INSERT INTO Materials (Material_Name, Vare_nummer, Help_Description, Length, Height, Width, Price, Material, `Type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
             myStmt.setString(1, material.getName());
             myStmt.setInt(2, material.getMatNum());
             myStmt.setString(3, material.getDesc());

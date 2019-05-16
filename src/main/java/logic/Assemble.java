@@ -214,6 +214,7 @@ public class Assemble implements AssembleInterface {
     ///////////////////////////////////////Shed////////////////////////////////////////////
     @Override
     public Shed createShed(Carport carport) {
+        // throw buildExcpetion 
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
         Shed Quick = carport.getShed();
         int depth = Quick.getDepth();

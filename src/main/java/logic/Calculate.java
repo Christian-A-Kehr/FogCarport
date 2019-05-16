@@ -135,7 +135,7 @@ class Calculate implements LogicInterface {
 
     @Override
     public int calculateGabledWallCovering(Roof roof) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     // WTF skete her... ryd op christian(mig selv) 
@@ -157,7 +157,6 @@ class Calculate implements LogicInterface {
         // regn nu hvor mange der skal være på indersiden
       
         //return totalAmount;
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -197,13 +196,13 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public Carport CalculateCarport(Carport carport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double CalculateCarport(Carport carport) {
+        
     }
 
     @Override
     public Carport GetPrices(Carport carport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
