@@ -10,6 +10,7 @@ import data.DataUpdater;
 import data.Delivery;
 import data.Demand;
 import data.Material;
+import data.NoDataException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +22,16 @@ public class Facade {
 
     DataAccessor data = new DataAccessor();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoDataException {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
 //        logic.getAllMaterials();
         //System.out.println(logic.getMaterial("Spær C18"));
         //System.err.println(getAllMaterials());
-        String lal = "Fyn"; 
-        System.err.println(getDelivery(lal));
+    //    System.out.println(getMaterialType());
+        
+//        String lal = "Fyn"; 
+//        System.err.println(getDelivery(lal));
           //DisplayAllMaterial();
 
     }
@@ -50,6 +53,10 @@ public class Facade {
     public Material getMaterialFromId(int id) {
         return data.getMaterialFromId(id);
     }
+    
+    public ArrayList<String> getMaterialType(){
+        return data.getType();
+    }
 
     /////////////////////////////////DataUpdater///////////////////////////////////////////////////
     
@@ -70,7 +77,7 @@ public class Facade {
         dataUp.dropMaterial(id);
     }
 
-    public static Delivery getDelivery(String location) {
+    public static Delivery getDelivery(String location) throws NoDataException {
         return dataUp.getDelivery(location);
     }
 

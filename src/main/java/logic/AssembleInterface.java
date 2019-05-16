@@ -5,6 +5,7 @@
  */
 package logic;
 
+import data.Batten;
 import data.Beam;
 import data.Carport;
 import data.Floor;
@@ -22,7 +23,7 @@ import data.Rooftile;
  */
 public interface AssembleInterface {
 
-    public Carport assembleCarport(Carport carport);
+    public Carport AssembleCarport(Carport carport);
 
     public int getRoofHeight(Carport carport);
 
@@ -43,4 +44,7 @@ public interface AssembleInterface {
     public Floor createFloor(Shed shed);
 
     public Rooftile createRoofTile(Roof roof);
+
+    public Batten createBatten(Carport carport);
+    
 }

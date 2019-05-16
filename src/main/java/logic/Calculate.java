@@ -212,4 +212,8 @@ class Calculate implements LogicInterface {
         return total;
     }
 
+    int battensNeeded(Carport carport) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
