@@ -33,7 +33,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("INSERT INTO `Fog`.`Materials` (`Material_Name`, `Vare_nummer`, `Help_Description`, `Length`, `Height`, `Width`, `Price`, `Material`, `Type`) VALUES ('?', '?', '?', '?', '2', '?', '?', '?', '?');");
+            myStmt = connection.prepareStatement("INSERT INTO `Fog`.`Materials` (`Material_Name`, `Vare_nummer`, `Help_Description`, `Length`, `Height`, `Width`, `Price`, `Material`, `Type`) VALUES ('?', '?', '?', '?', '2', '?', '?', '?', '?');");
             myStmt.setString(1, material.getName());
             myStmt.setInt(2, material.getMatNum());
             myStmt.setString(3, material.getDesc());
@@ -56,7 +56,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("UPDATE `Fog`.`Materials` SET `Material_Name` = '?', `Help_Description` = '?', `Length` = '?', `Height` = '?', `Width` = '?', `Price` = '?', `Material` = '?', `Type` = '?' WHERE (`Vare_nummer` = '" + id + "');");
+            myStmt = connection.prepareStatement("UPDATE `Fog`.`Materials` SET `Material_Name` = '?', `Help_Description` = '?', `Length` = '?', `Height` = '?', `Width` = '?', `Price` = '?', `Material` = '?', `Type` = '?' WHERE (`Vare_nummer` = '" + id + "');");
 
             myStmt.setString(1, material.getName());
             myStmt.setString(2, material.getDesc());
@@ -80,8 +80,8 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("DELETE FROM `Fog`.`Materials` WHERE (`Vare_nummer` = '?');");
-            myStmt.setInt(1, id);
+            myStmt = connection.prepareStatement("DELETE FROM `Fog`.`Materials` WHERE (`Vare_nummer` = '" + id + "');");
+            //myStmt.setInt(1, id);
             myStmt.execute();
 
         } catch (SQLException ex) {
@@ -151,7 +151,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("UPDATE `Fog`.`Delivery` SET `Delivery_Price` = '?' WHERE (`Delivery_Location` = '?')");
+            myStmt = connection.prepareStatement("UPDATE `Fog`.`Delivery` SET `Delivery_Price` = '?' WHERE (`Delivery_Location` = '?')");
 
             myStmt.setDouble(1, price);
             myStmt.setString(2, location);
