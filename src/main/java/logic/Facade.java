@@ -62,12 +62,12 @@ public class Facade {
     
     static DataUpdater dataUp = new data.DataUpdater();
 
-    public void saveMaterial(int id, Material material) {
+    public void saveMaterial(Material material) {
         List<Material> AllMats = dataUp.DisplayAllMaterial();
 
         for (int i = 0; i < AllMats.size(); i++) {
-            if (AllMats.get(i).getMatNum() == id) {
-                dataUp.updateMaterial(id, material);
+            if (AllMats.get(i).getMatNum() == material.getMatNum()) {
+                dataUp.updateMaterial(material.getMatNum(), material);
             }
             dataUp.createMaterial(material);
         }
