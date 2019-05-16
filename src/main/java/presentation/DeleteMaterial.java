@@ -7,6 +7,7 @@ package presentation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.Facade;
 import logic.FogException;
 
 /**
@@ -15,10 +16,13 @@ import logic.FogException;
  */
 public class DeleteMaterial extends Command {
 
+    private Facade logic = new Facade();
+
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
+        logic.dropMaterial(Integer.parseInt(request.getParameter("deleteChoice")));
         
-        return "settingsPage";
+        return new Settings().execute(request, response);
     }
-    
+
 }
