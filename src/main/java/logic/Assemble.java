@@ -22,7 +22,7 @@ import data.Batten;
  *
  * @author Christian Ambjørn Kehr
  */
-public class Samling implements AssembleInterface {
+public class Assemble implements AssembleInterface {
 
     private final DataAccessor DATAACC = new DataAccessor();
     private final Calculate CAL = new Calculate();
