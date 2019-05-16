@@ -80,7 +80,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("DELETE FROM Materials` WHERE `Vare_nummer` = ?;");
+            myStmt = connection.prepareStatement("DELETE FROM Materials WHERE `Vare_nummer` = (?);");
             myStmt.setInt(1, id);
             myStmt.executeUpdate();
 
