@@ -15,15 +15,18 @@
         <title>Start Page</title>
         <link href="${pageContext.request.contextPath}/StyleSheet.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <h2>Velkommen</h2>
-        <form action="Frontcontroller" method="POST">
-            <input type="hidden" name="command" value="GoToOrderPage">
-            <input type="submit" value="Start ny bestilling">
-        </form>
-        <form action="Frontcontroller" method="POST">
-            <input type="hidden" name="command" value="Settings">
-            <input type="submit" value="Gå til indstillinger">
-        </form>
-    </body>
+    <div id="index">
+        <body>
+            <h2>Velkommen</h2>
+            <form action="Frontcontroller" method="POST">
+                <input type="hidden" name="command" value="GoToOrderPage">
+                <input type="submit" value="Start ny bestilling">
+            </form>
+
+            <form action="Frontcontroller" method="POST">
+                <input type="hidden" name="command" value="Settings">
+                <input type="submit" value="Gå til indstillinger">
+            </form>
+        </body>
+    </div>
 </html>
