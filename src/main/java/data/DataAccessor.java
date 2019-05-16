@@ -243,6 +243,29 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return price;
     }
+
+    @Override
+    public ArrayList<String> getType() {
+          ArrayList<String> types = new ArrayList<>();
+
+        try {
+            DBConnector connect = new DBConnector();
+
+            String query = "SELECT type FROM Fog.Materials;";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String type = rs.getString("Type");
+                types.add(type);
+            }
+            return types;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return types;
+    }
     
     
 }

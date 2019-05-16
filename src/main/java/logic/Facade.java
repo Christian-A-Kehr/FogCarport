@@ -10,6 +10,7 @@ import data.DataUpdater;
 import data.Delivery;
 import data.Demand;
 import data.Material;
+import data.NoDataException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,19 +22,23 @@ public class Facade {
 
     DataAccessor data = new DataAccessor();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoDataException {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
 //        logic.getAllMaterials();
-        System.out.println(logic.getMaterial("Spær C18"));
+        //System.out.println(logic.getMaterial("Spær C18"));
+        //System.err.println(getAllMaterials());
+    //    System.out.println(getMaterialType());
+        
+//        String lal = "Fyn"; 
+//        System.err.println(getDelivery(lal));
+          //DisplayAllMaterial();
 
     }
 ///////////////////////////////////dataAccessor///////////////////////////////////
 
     public ArrayList<Material> getAllMaterials() {
         ArrayList list = new ArrayList(data.getAllMaterials());
-        System.err.println(list);
-
         return list;
     }
 
@@ -48,10 +53,14 @@ public class Facade {
     public Material getMaterialFromId(int id) {
         return data.getMaterialFromId(id);
     }
+    
+    public ArrayList<String> getMaterialType(){
+        return data.getType();
+    }
 
     /////////////////////////////////DataUpdater///////////////////////////////////////////////////
     
-    DataUpdater dataUp = new data.DataUpdater();
+    static DataUpdater dataUp = new data.DataUpdater();
 
     public void saveMaterial(int id, Material material) {
         List<Material> AllMats = dataUp.DisplayAllMaterial();
@@ -68,11 +77,7 @@ public class Facade {
         dataUp.dropMaterial(id);
     }
 
-    public List<Material> DisplayAllMaterial() {
-        return DisplayAllMaterial();
-    }
-
-    public Delivery getDelivery(String location) {
+    public static Delivery getDelivery(String location) throws NoDataException {
         return dataUp.getDelivery(location);
     }
 

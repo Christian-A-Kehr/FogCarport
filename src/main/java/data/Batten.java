@@ -9,12 +9,12 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-public class Battens {
+public class Batten {
  private String material;
  private int lenght, height, width, id, amount; 
  private double price, totalPrice;
 
-    public Battens(String material, int lenght, int height, int width, int id, int amount, double price, double totalPrice) {
+    public Batten(String material, int lenght, int height, int width, int id, int amount, double price, double totalPrice) {
         this.material = material;
         this.lenght = lenght;
         this.height = height;
@@ -25,7 +25,7 @@ public class Battens {
         this.totalPrice = totalPrice;
     }
 
-    public Battens(String material, int lenght, int width, int id) {
+    public Batten(String material, int lenght, int width, int id) {
         this.material = material;
         this.lenght = lenght;
         this.width = width;

@@ -141,8 +141,8 @@ class Calculate implements LogicInterface {
     // WTF skete her... ryd op christian(mig selv) 
     @Override
     public int WallCoveringsNeededDepth(Shed shed) {
-        //overlay used for 100 mm width
-        int overlay = 150;
+        //overlay used for 100 mm width wallcover => standart width
+        int overlay = dataaccessor.getVariabel(5);
         int shedCoverDepth = shed.getDepth();
         int wallCoverWidth = shed.getWallCovering().getWidth();
         int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
@@ -210,6 +210,10 @@ class Calculate implements LogicInterface {
     public double rooftilesTotalprice(Double price, int amount) {
         double total = amount * price;
         return total;
+    }
+
+    int battensNeeded(Carport carport) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

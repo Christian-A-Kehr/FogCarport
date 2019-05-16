@@ -43,4 +43,6 @@ public interface DataAcessorInterface {
     
     public double getDeliveryPrice(String name);
     
+    public ArrayList<String> getType();
+    
 }

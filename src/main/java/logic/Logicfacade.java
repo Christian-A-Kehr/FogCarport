@@ -9,6 +9,7 @@ import data.DataUpdater;
 import data.Delivery;
 import data.Demand;
 import data.Material;
+import data.NoDataException;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ DataUpdater dataUp = new data.DataUpdater();
         return DisplayAllMaterial();
     }
 
-    public Delivery getDelivery(String location) {
+    public Delivery getDelivery(String location) throws NoDataException{
         return dataUp.getDelivery(location);
     }
 

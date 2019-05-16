@@ -9,13 +9,10 @@ package data;
  *
  * @author Christian Ambjørn Kehr
  */
-public class Delivery {
-    private String location;
-    private double price; 
-
-    public Delivery(String location, double price) {
-        this.location = location;
-        this.price = price;
+public class NoDataException extends Exception{
+    
+    public NoDataException(String message){
+        super(message);
     }
     
 }

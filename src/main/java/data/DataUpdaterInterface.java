@@ -19,7 +19,7 @@ public interface DataUpdaterInterface {
     public void dropMaterial(int id);
     public List<Material> DisplayAllMaterial();
     // Delivery's
-    public Delivery getDelivery(String location);  
+    public Delivery getDelivery(String location) throws  NoDataException;  
     public void updateDeliveryPrice(String location, double price);
     // variable's 
     public Demand getVariable(String name);

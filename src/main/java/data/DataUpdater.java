@@ -25,6 +25,7 @@ public class DataUpdater implements DataUpdaterInterface {
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
     Material mat;
+  
 
     @Override
     public void createMaterial(Material material) {
@@ -121,19 +122,27 @@ public class DataUpdater implements DataUpdaterInterface {
     }
 
     @Override
-    public Delivery getDelivery(String location) {
-
+    public Delivery getDelivery(String location) throws  NoDataException{
+            Delivery Dev = null;
         try {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("SELECT * FROM Fog.Delivery where Delivery_Location = '" + location + "';");
+            myStmt = connection.prepareStatement("SELECT * FROM Fog.Delivery where Delivery.Delivery_Location = '?';");
+            myStmt.setString(1, location);
             myRs = myStmt.executeQuery();
-
+            if (myRs.next()) {
+              Dev = new Delivery(location, myRs.getDouble("Measurements"));
+            }
+            else {
+                throw new NoDataException("Location:  " + location + "was not found") ;
+            }
+            
         } catch (SQLException ex) {
+            // Database fejl besked. 
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (Delivery) myRs;
+        return Dev;
     }
 
     @Override
@@ -155,7 +164,7 @@ public class DataUpdater implements DataUpdaterInterface {
 
     @Override
     public Demand getVariable(String name) {
-       try {
+        try {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
@@ -167,11 +176,10 @@ public class DataUpdater implements DataUpdaterInterface {
         }
         return (Demand) myRs;
     }
-   
 
     @Override
     public void updateDemandVariables(String name, int measurements) {
-       try {
+        try {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
@@ -185,6 +193,5 @@ public class DataUpdater implements DataUpdaterInterface {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
 }
