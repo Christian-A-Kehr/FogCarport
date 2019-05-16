@@ -251,7 +251,7 @@ public class DataAccessor implements DataAcessorInterface {
         try {
             DBConnector connect = new DBConnector();
 
-            String query = "SELECT type FROM Fog.Materials;";
+            String query = "SELECT DISTINCT Type FROM Fog.Materials;";
 
             Connection connection = connect.getConnection();
             Statement stmt = connection.createStatement();
