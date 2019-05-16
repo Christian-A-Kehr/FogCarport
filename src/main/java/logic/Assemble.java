@@ -200,17 +200,16 @@ public class Assemble implements AssembleInterface {
             return batten;
         } else {
             String material = quick.getMaterial();
-//            int lenght =
-//            int width = 
-//            int id = 
-//            int 
-//            double price = 
-//            double totalPrice =
-//            Batten Batten = new 
-//            return wallCovering;
+            int lenght = quick.getLenght();
+            int width = quick.getWidth();
+            int id = quick.getId();
+            int amount = CAL.battensNeeded(carport);
+            double price = mat.getPrice();
+            double totalPrice = 
+            Batten Batten = new 
+            return wallCovering;
         }
-        //////////////////////////////////77
-        return batter = new Batten("sand", 0, 0, 0);
+        return 
     }
 
     ///////////////////////////////////////Shed////////////////////////////////////////////
