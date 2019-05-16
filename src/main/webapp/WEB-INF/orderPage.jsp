@@ -165,6 +165,7 @@
             </table>
             <input type="hidden" name="command" value="CreateOffer">
             <input type="submit" value="Opret tilbud">
+            <input type="submit" value="Se stykliste">
         </form>
     </body>
 </html>
