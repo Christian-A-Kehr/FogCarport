@@ -44,9 +44,9 @@
             <p>Skur dybde = <%= request.getParameter("shedDepth")%> </p>
             <p>Skur bredde = <%= request.getParameter("shedWidth")%> </p>
             <p>Valg af gulv = <%= request.getParameter("floorChoice")%> </p>
+            <p>Levering = <%= request.getParameter("customerAddress")%> </p>
             <p>Kunde navn = <%= request.getParameter("customerName")%> </p>
             <p>Kunde email = <%= request.getParameter("customerEmail")%> </p>
-            <p>Kunde Addresse = <%= request.getParameter("customerAddress")%> </p>
         </div>
 
         <input type="button" id="printbutton" value="Gem tilbud">   
