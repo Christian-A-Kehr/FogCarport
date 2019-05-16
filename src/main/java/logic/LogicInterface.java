@@ -32,7 +32,8 @@ public interface LogicInterface {
     public int roofArea(Roof roof);
     public double rooftilesTotalprice(Double price, int amount);
     public Carport GetPrices(Carport carport);
-        
+    public int battensNeeded(Carport carport);
+    
     
    
 }
