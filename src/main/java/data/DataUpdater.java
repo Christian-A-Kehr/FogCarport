@@ -80,9 +80,9 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("DELETE FROM `Fog`.`Materials` WHERE (`Vare_nummer` = '" + id + "');");
-            //myStmt.setInt(1, id);
-            myStmt.execute();
+            myStmt = connection.prepareStatement("DELETE FROM Materials` WHERE `Vare_nummer` = (?);");
+            myStmt.setInt(1, id);
+            myStmt.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,7 +168,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("SELECT * FROM Fog.Variabler where Varibable_name = '" + name + "';");
+            myStmt = connection.prepareStatement("SELECT * FROM Fog.Variabler where Varibable_name = '" + name + "';");
             myRs = myStmt.executeQuery();
 
         } catch (SQLException ex) {
