@@ -23,26 +23,26 @@ public class Facade {
     static DataAccessor data = new DataAccessor();
 
     /////////////////////////////testing///////////////////////////////////
-    public static void main(String[] args) throws NoDataException {
-        Facade logic = new Facade();
-        //logic.getMaterialLogic();
-//        logic.getAllMaterials();
-//        String name = "Spær C18";
-//        System.out.println(logic.getMaterial(name));
-        //System.err.println(getAllMaterials());
-        //    System.out.println(getMaterialType());
-
-//        String lal = "Fyn"; 
-//        System.err.println(getDelivery(lal));
-        //DisplayAllMaterial();
-        //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
-       //saveMaterial(testMat);
-        //dataUp.updateMaterial(50, testMat);
-        
-        System.err.println(getDeliveryLocations());
-        
-        
-    }
+//    public static void main(String[] args) throws NoDataException {
+//        Facade logic = new Facade();
+//        //logic.getMaterialLogic();
+////        logic.getAllMaterials();
+////        String name = "Spær C18";
+////        System.out.println(logic.getMaterial(name));
+//        //System.err.println(getAllMaterials());
+//        //    System.out.println(getMaterialType());
+//
+////        String lal = "Fyn"; 
+////        System.err.println(getDelivery(lal));
+//        //DisplayAllMaterial();
+//        //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
+//       //saveMaterial(testMat);
+//        //dataUp.updateMaterial(50, testMat);
+//        
+//        System.err.println(getDeliveryLocations());
+//        
+//        
+//    }
 ///////////////////////////////////dataAccessor///////////////////////////////////
 
     public ArrayList<Material> getAllMaterials() {
@@ -101,7 +101,7 @@ public class Facade {
         dataUp.updateDemandVariables(name, measurements);
     }
     
-    public static ArrayList<Delivery> getDeliveryLocations(){
+    public ArrayList<Delivery> getDeliveryLocations(){
         return data.getDeliveryLocations();
     }
 }
