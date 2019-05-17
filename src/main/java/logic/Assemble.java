@@ -215,7 +215,8 @@ public class Assemble implements AssembleInterface {
     @Override
     public Shed createShed(Carport carport)  {
         try {
-            Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
+    
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
         Shed Quick = carport.getShed();
         int depth = Quick.getDepth();
         int width = Quick.getWidth();
@@ -227,7 +228,6 @@ public class Assemble implements AssembleInterface {
         } catch (Exception e) {
         }
         // throw buildExcpetion 
-         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
     }
 
