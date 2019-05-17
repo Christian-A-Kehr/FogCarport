@@ -99,5 +99,8 @@ public class Facade {
     public void updateDemandVariables(String name, int measurements) {
         dataUp.updateDemandVariables(name, measurements);
     }
-
+    
+    public ArrayList<Delivery> getDeliveryLocations(){
+        return data.getDeliveryLocations();
+    }
 }
