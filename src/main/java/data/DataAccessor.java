@@ -273,8 +273,8 @@ public class DataAccessor implements DataAcessorInterface {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String dLocation = rs.getString("Location");
-                Double dPrice = rs.getDouble("Price");
+                String dLocation = rs.getString("Delivery_Location");
+                Double dPrice = rs.getDouble("Delivery_Price");
 
                 deliveryList.add(new Delivery(dLocation, dPrice));
             }

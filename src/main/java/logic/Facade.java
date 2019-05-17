@@ -27,8 +27,8 @@ public class Facade {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
 //        logic.getAllMaterials();
-        String name = "Spær C18";
-        System.out.println(logic.getMaterial(name));
+//        String name = "Spær C18";
+//        System.out.println(logic.getMaterial(name));
         //System.err.println(getAllMaterials());
         //    System.out.println(getMaterialType());
 
@@ -39,6 +39,7 @@ public class Facade {
        //saveMaterial(testMat);
         //dataUp.updateMaterial(50, testMat);
         
+        System.err.println(getDeliveryLocations());
         
         
     }
@@ -100,7 +101,7 @@ public class Facade {
         dataUp.updateDemandVariables(name, measurements);
     }
     
-    public ArrayList<Delivery> getDeliveryLocations(){
+    public static ArrayList<Delivery> getDeliveryLocations(){
         return data.getDeliveryLocations();
     }
 }
