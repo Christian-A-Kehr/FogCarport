@@ -44,4 +44,6 @@ public interface FacadeInterface {
     public void updateDemandVariables(String name, int measurements);
 
     public ArrayList<Delivery> getDeliveryLocations();
+    
+    public ArrayList<Demand> getAllDemands();
 }
