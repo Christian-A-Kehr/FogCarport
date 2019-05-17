@@ -30,6 +30,8 @@ public class GoToOrderPage extends Command {
         session.setAttribute("allFloorMats", logic.getListSpecificMaterials("Gulv"));
         session.setAttribute("allWoodpostMats", logic.getListSpecificMaterials("Stolpe"));
         session.setAttribute("allBeamMats", logic.getListSpecificMaterials("Rem"));
+        session.setAttribute("deliveryList", logic.getDeliveryLocations());
+            
         return "orderPage";
     }
 }
