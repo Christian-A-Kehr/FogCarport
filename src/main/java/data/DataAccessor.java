@@ -15,19 +15,17 @@ import java.util.ArrayList;
  * @author Mkhansen
  */
 public class DataAccessor implements DataAcessorInterface {
-        //int Variabel; // used to get variables in getVariable
+    //int Variabel; // used to get variables in getVariable
 //    private final DBConnector CONNECTOR;
 //    
 //    public DataAccessor(DBConnector c){
 //        this.CONNECTOR = c;
 //    }
-            
+
     //public static void main(String[] args) {
 //        System.out.println(GetListSpecificMaterials("Tagsten"));
-           //System.err.println(getVariabel(1));
-   // }
-    Beam beam;
-    double price;
+    //System.err.println(getVariabel(1));
+    // }
     @Override
     public ArrayList<Material> getAllMaterials() {
         ArrayList<Material> list = new ArrayList<>();
@@ -120,10 +118,10 @@ public class DataAccessor implements DataAcessorInterface {
             throw new RuntimeException(e);
         }
     }
-    
-     @Override
+
+    @Override
     public Material getMaterialFromId(int id) {
-          Material Mat = null;
+        Material Mat = null;
 
         try {
             DBConnector connect = new DBConnector();
@@ -138,7 +136,7 @@ public class DataAccessor implements DataAcessorInterface {
                 String desc = rs.getString("Help_Description");
                 String material = rs.getString("Material");
                 String type = rs.getString("Type");
-                
+
                 int length = rs.getInt("Length");
                 int height = rs.getInt("Height");
                 int width = rs.getInt("Width");
@@ -152,7 +150,6 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return Mat;
     }
-
 
     @Override
     public Offer getOffer(int Id) {
@@ -180,7 +177,7 @@ public class DataAccessor implements DataAcessorInterface {
         int Variabel = 0;
         try {
             DBConnector connect = new DBConnector();
-             
+
             String query = "SELECT * FROM Fog.Variabler where idVariabler ='" + id + "';";
 
             Connection connection = connect.getConnection();
@@ -188,7 +185,6 @@ public class DataAccessor implements DataAcessorInterface {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int matNum = rs.getInt("Measurements");
-                
 
                 Variabel = matNum;
             }
@@ -201,10 +197,10 @@ public class DataAccessor implements DataAcessorInterface {
 
     @Override
     public int getMaterialPrice(int id) {
-          int Variabel = 0;
+        int Variabel = 0;
         try {
             DBConnector connect = new DBConnector();
-             
+
             String query = "SELECT * FROM Materials where Vare_nummer ='" + id + "';";
 
             Connection connection = connect.getConnection();
@@ -212,7 +208,6 @@ public class DataAccessor implements DataAcessorInterface {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int matNum = rs.getInt("Measurements");
-                
 
                 Variabel = matNum;
             }
@@ -225,7 +220,7 @@ public class DataAccessor implements DataAcessorInterface {
 
     @Override
     public double getDeliveryPrice(String location) {
-        
+        double price = 0;
         try {
             DBConnector connect = new DBConnector();
 
@@ -246,7 +241,7 @@ public class DataAccessor implements DataAcessorInterface {
 
     @Override
     public ArrayList<String> getType() {
-          ArrayList<String> types = new ArrayList<>();
+        ArrayList<String> types = new ArrayList<>();
 
         try {
             DBConnector connect = new DBConnector();
@@ -266,6 +261,27 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return types;
     }
-    
-    
+
+    public ArrayList<Delivery> getDeliveryLocations() {
+        ArrayList<Delivery> deliveryList = new ArrayList<>();
+        try {
+            DBConnector connect = new DBConnector();
+
+            String query = "SELECT * FROM Fog.Delivery;";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String dLocation = rs.getString("Location");
+                Double dPrice = rs.getDouble("Price");
+
+                deliveryList.add(new Delivery(dLocation, dPrice));
+            }
+            return deliveryList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deliveryList;
+    }
 }
