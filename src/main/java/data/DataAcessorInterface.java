@@ -45,4 +45,6 @@ public interface DataAcessorInterface {
     
     public ArrayList<String> getType();
     
+    public ArrayList<Demand> getAllDemands();
+    
 }
