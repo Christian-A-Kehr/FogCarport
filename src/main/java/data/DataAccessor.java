@@ -284,4 +284,28 @@ public class DataAccessor implements DataAcessorInterface {
         }
         return deliveryList;
     }
+
+    @Override
+    public ArrayList<Demand> getAllDemands() {
+        ArrayList<Demand> demandList = new ArrayList<>();
+        try {
+            DBConnector connect = new DBConnector();
+
+            String query = "SELECT * FROM Fog.Variabler;";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("Varibable_name");
+                int measure = rs.getInt("Measurements");
+
+                demandList.add(new Demand(name, measure));
+            }
+            return demandList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return demandList;
+    }
 }
