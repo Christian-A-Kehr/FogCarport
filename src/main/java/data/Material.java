@@ -11,8 +11,8 @@ package data;
  */
 public class Material {
 
-    public String name, desc, material, type;
-    public int matNum, length, height, width;
+    private String name, desc, material, type;
+    private int matNum, length, height, width;
     private double price;
 
     public Material(String name, String desc, String material, String type, int matNum, int length, int height, int width, double price) {
