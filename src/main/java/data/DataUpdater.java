@@ -43,8 +43,8 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(7, material.getPrice());
             myStmt.setString(8, material.getMaterial());
             myStmt.setString(9, material.getType());
-
-            myRs = myStmt.executeQuery();
+           
+            myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,8 +66,8 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(6, material.getPrice());
             myStmt.setString(7, material.getMaterial());
             myStmt.setString(8, material.getType());
-
-            myRs = myStmt.executeQuery();
+            
+            myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }

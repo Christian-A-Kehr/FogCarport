@@ -10,6 +10,7 @@ package data;
  * @author Mkhansen
  */
 public class Material {
+
     public String name, desc, material, type;
     public int matNum, length, height, width;
     private double price;
@@ -62,10 +63,9 @@ public class Material {
         return price;
     }
 
-
     @Override
     public String toString() {
-        return name; 
+        return "Material{" + "name=" + name + ", desc=" + desc + ", material=" + material + ", type=" + type + ", matNum=" + matNum + ", length=" + length + ", height=" + height + ", width=" + width + ", price=" + price + '}';
     }
-   
+
 }

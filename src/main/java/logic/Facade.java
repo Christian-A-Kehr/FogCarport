@@ -20,20 +20,27 @@ import java.util.List;
  */
 public class Facade {
 
-    DataAccessor data = new DataAccessor();
+    static DataAccessor data = new DataAccessor();
 
+    /////////////////////////////testing///////////////////////////////////
     public static void main(String[] args) throws NoDataException {
         Facade logic = new Facade();
         //logic.getMaterialLogic();
 //        logic.getAllMaterials();
-        //System.out.println(logic.getMaterial("Spær C18"));
+        String name = "Spær C18";
+        System.out.println(logic.getMaterial(name));
         //System.err.println(getAllMaterials());
-    //    System.out.println(getMaterialType());
-        
+        //    System.out.println(getMaterialType());
+
 //        String lal = "Fyn"; 
 //        System.err.println(getDelivery(lal));
-          //DisplayAllMaterial();
-
+        //DisplayAllMaterial();
+        //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
+       //saveMaterial(testMat);
+        //dataUp.updateMaterial(50, testMat);
+        
+        
+        
     }
 ///////////////////////////////////dataAccessor///////////////////////////////////
 
@@ -53,15 +60,14 @@ public class Facade {
     public Material getMaterialFromId(int id) {
         return data.getMaterialFromId(id);
     }
-    
-    public ArrayList<String> getMaterialType(){
+
+    public ArrayList<String> getMaterialType() {
         return data.getType();
     }
 
     /////////////////////////////////DataUpdater///////////////////////////////////////////////////
-    
     static DataUpdater dataUp = new data.DataUpdater();
-
+    //Tested
     public void saveMaterial(Material material) {
         List<Material> AllMats = dataUp.DisplayAllMaterial();
 
@@ -69,10 +75,11 @@ public class Facade {
             if (AllMats.get(i).getMatNum() == material.getMatNum()) {
                 dataUp.updateMaterial(material.getMatNum(), material);
             }
+            else {
             dataUp.createMaterial(material);
-        }
+        }}
     }
-
+    // tested
     public void dropMaterial(int id) {
         dataUp.dropMaterial(id);
     }

@@ -1,4 +1,5 @@
 package logic;
+
 import data.Carport;
 import data.DBConnector;
 import data.DataAccessor;
@@ -20,30 +21,31 @@ import java.lang.*;
  */
 class Calculate implements LogicInterface {
 
-    private DataAccessor dataaccessor = new DataAccessor();  
-        // roof. length 0,8 + 0,3 
+    private DataAccessor dataaccessor = new DataAccessor();
+    // roof. length 0,8 + 0,3 
+
     @Override
     public int WoodPostNeeded(Carport carport) {
-           // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
+        // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
         // L1, L2 og L3's værdier skal laves om til variabler, som kan rettes af bruger.
         int carPortLength = carport.getLength();
         int woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
         int overHang1 = dataaccessor.getVariabel(1); // 1500 mm
         int overHang2 = dataaccessor.getVariabel(1); // 1500 mm
         int stretchForWoodposts = (carPortLength - (overHang1 + overHang2));
-        double totalNumberNoodpostsDouble = (stretchForWoodposts + woodPostsDistance)/ (carport.getRoof().getWoodpost().getWidth() + woodPostsDistance)*2;
+        double totalNumberNoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (carport.getRoof().getWoodpost().getWidth() + woodPostsDistance) * 2;
         // 1000 = nearest meter 
         int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumberNoodpostsDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal.
         // int TotalPosts = woodposts_pr_beams * BeamsNeeded(carport);
         return totalNumbersWoodpostsInt;
     }
-    
+
     @Override
     public double WooPostTotalPrice(Carport carport) {
-        double totalPrice = (((WoodPostNeeded(carport) * carport.getHeight())/1000) * carport.getRoof().getWoodpost().getprice());
+        double totalPrice = (((WoodPostNeeded(carport) * carport.getHeight()) / 1000) * carport.getRoof().getWoodpost().getprice());
         return totalPrice;
     }
-    
+
     @Override
     public int NumbersOfRaftersFlatRoof(Carport carport) {
         int rafterWidth = dataaccessor.getVariabel(4);  // 195;
@@ -55,21 +57,24 @@ class Calculate implements LogicInterface {
         int integerNumbersRafters = (int) (Math.ceil(totalNumbersRaftersDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal. 
         return integerNumbersRafters;
     }
+
     @Override
     public int TotalLengthRaftersFlatRoof(Carport carport) {
         int totalLength = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
         return totalLength;
     }
+
     @Override
     public double TotalPriceRaftersFlatRoof(Carport carport) {
         double totalRafterPrice = (TotalLengthRaftersFlatRoof(carport) / 1000) * carport.getRoof().getRafter().getMprice(); // Der divideres med 1000 for at kunne gange med meterprisen.
         return totalRafterPrice;
 
     }
+
     //TEST DENNE PGA INT cast Vigtigt! 
     @Override
     public int TotalLengthRaftersWithSlope(Carport carport) {
-        int lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2 ) / Math.cos(carport.getRoof().getAngle())); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
+        int lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2) / Math.cos(carport.getRoof().getAngle())); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
         // Derefter findes længden af c via formlen c = b * cos(A).
         int lengthBothSidesWithSlope = 2 * lengthSingleRafterWithSlope;                                      // Der ganges med to for at få længden af begge hældningssider.
         int totalLengthAllThreeSides = (NumbersOfRaftersFlatRoof(carport) * lengthBothSidesWithSlope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
@@ -87,30 +92,31 @@ class Calculate implements LogicInterface {
 
     @Override
     public int BeamsNeeded(Carport carport) {
-       // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
+        // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
         int carportWidth = carport.getWidth();
         int beamsDistance = dataaccessor.getVariabel(2); //4000;
         int overHang3 = dataaccessor.getVariabel(7); //150;
         int overHang4 = dataaccessor.getVariabel(8); // 150;
         int stretchForBeams = (carportWidth - (overHang3 + overHang4));
-        double totalNumbersWoodpostsDouble = (stretchForBeams + beamsDistance)/((carport.getRoof().getBeam().getWidth() + beamsDistance));
+        double totalNumbersWoodpostsDouble = (stretchForBeams + beamsDistance) / ((carport.getRoof().getBeam().getWidth() + beamsDistance));
         int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumbersWoodpostsDouble / 1000.0) * 1000);
         return totalNumbersWoodpostsInt;
     }
-        // beams are cut to custom measures 
+    // beams are cut to custom measures 
+
     @Override
     public double beamsPrice(Carport carport) {
         int lenghtPrBeam = carport.getHeight();
         double totalPrice = (lenghtPrBeam * BeamsNeeded(carport)) * carport.getRoof().getBeam().getprice();
-        return totalPrice; 
+        return totalPrice;
     }
 
     @Override
     public int floorArea(Shed shed) {
-       int floorArea = shed.getDepth() * shed.getWidth();
-       return floorArea;
+        int floorArea = shed.getDepth() * shed.getWidth();
+        return floorArea;
     }
-     
+
     @Override
     public double floorPrice(Floor floor) {
         double floorsPrice = floor.getLength() * floor.getWidth() * floor.getprice();
@@ -119,23 +125,23 @@ class Calculate implements LogicInterface {
 
     @Override
     public int calulateGabledHeight(Roof roof) {
-       int roofSlope = roof.getAngle();
-       int gabledHeight  = (int) ((int) roof.getWidth() * Math.tan(roofSlope));
-       return gabledHeight;
+        int roofSlope = roof.getAngle();
+        int gabledHeight = (int) ((int) roof.getWidth() * Math.tan(roofSlope));
+        return gabledHeight;
     }
 
     @Override
     public int calculateGabledArea(Carport carport) {
         double gableheight = calulateGabledHeight(carport.getRoof());
         double gablewidth = carport.getWidth();
-        int gablehalfarea  = (int) (0.5 * (gableheight * gablewidth));
+        int gablehalfarea = (int) (0.5 * (gableheight * gablewidth));
         int gablearea = gablehalfarea * 2;
         return gablearea;
     }
 
     @Override
     public int calculateGabledWallCovering(Roof roof) {
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // WTF skete her... ryd op christian(mig selv) 
@@ -155,14 +161,14 @@ class Calculate implements LogicInterface {
 
         // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
         // regn nu hvor mange der skal være på indersiden
-      
         //return totalAmount;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public double calculateWallCoveringPrice(int totalWallCover, double price) {
-       
-        double total =  totalWallCover * price;
+
+        double total = totalWallCover * price;
         return total;
     }
 
@@ -180,29 +186,29 @@ class Calculate implements LogicInterface {
     public int WallCoveringsNeededwidth(Shed shed) {
         int length = shed.getDepth();
         int width = shed.getWidth();
-        int area = length * width; 
+        int area = length * width;
         return area;
     }
 
     @Override
     public int roofArea(Roof roof) {
         // first we find the roofs width on one side by finding miss c (Vedhæft evt regne regler) 
-        int b = roof.getWidth(); 
+        int b = roof.getWidth();
         int A = roof.getAngle();
-        int c = (int) (b / Math.cos(A));     
+        int c = (int) (b / Math.cos(A));
         // then using c = as a rectangles width, the area can be calulated  
         int area = c * roof.getLength() * 2; // * 2 because there's two sides. 
-        return area; 
+        return area;
     }
 
     @Override
     public double CalculateCarport(Carport carport) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Carport GetPrices(Carport carport) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -210,7 +216,7 @@ class Calculate implements LogicInterface {
         double total = amount * price;
         return total;
     }
-    
+
     @Override
     public int battensNeeded(Carport carport) {
         int battensHeight = carport.getRoof().getBatten().getHeight();
@@ -222,4 +228,5 @@ class Calculate implements LogicInterface {
         int battensNeededInt = (int) (Math.ceil(battensNeededDouble / 1000.0) * 1000);
         return battensNeededInt;
     }
+
 }
