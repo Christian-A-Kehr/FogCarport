@@ -2,10 +2,12 @@
 package logic;
 
 import data.Carport;
+import data.Delivery;
 import data.Floor;
 import data.Roof;
 import data.Shed;
 import data.WoodPost;
+import java.util.ArrayList;
 
 public interface LogicInterface {
    
@@ -34,8 +36,5 @@ public interface LogicInterface {
     public Carport GetPrices(Carport carport);
     public int battensNeeded(Carport carport);
     
-    
-    
-   
 }
 
