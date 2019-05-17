@@ -37,8 +37,8 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setInt(2, material.getMatNum());
             myStmt.setString(3, material.getDesc());
             myStmt.setInt(4, material.getLength());
-            myStmt.setInt(5, material.height);
-            myStmt.setInt(6, material.width);
+            myStmt.setInt(5, material.getHeight());
+            myStmt.setInt(6, material.getWidth());
             myStmt.setDouble(7, material.getPrice());
             myStmt.setString(8, material.getMaterial());
             myStmt.setString(9, material.getType());
@@ -60,8 +60,8 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setString(1, material.getName());
             myStmt.setString(2, material.getDesc());
             myStmt.setInt(3, material.getLength());
-            myStmt.setInt(4, material.height);
-            myStmt.setInt(5, material.width);
+            myStmt.setInt(4, material.getHeight());
+            myStmt.setInt(5, material.getWidth());
             myStmt.setDouble(6, material.getPrice());
             myStmt.setString(7, material.getMaterial());
             myStmt.setString(8, material.getType());

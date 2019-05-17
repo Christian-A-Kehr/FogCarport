@@ -228,7 +228,7 @@ public class Assemble implements AssembleInterface {
         } catch (Exception e) {
         }
         // throw buildExcpetion 
-        
+         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -264,5 +264,6 @@ public class Assemble implements AssembleInterface {
         Floor floor = new Floor(material, lenght, width, id, amount, price, totalPrice);
         return floor;
     }
+    
 
 }
