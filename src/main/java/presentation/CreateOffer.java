@@ -78,6 +78,9 @@ public class CreateOffer extends Command {
 
         Carport carport = new Carport(height, length, width, roof, shed);
         
+        if(request.getParameter("mat").equals("Se stykliste")){
+            return "listOfMaterialsPage";
+        }
         return "offerPage";
     }
 }
