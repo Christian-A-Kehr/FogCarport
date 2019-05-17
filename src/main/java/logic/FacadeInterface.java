@@ -12,7 +12,6 @@ import data.Material;
 import data.NoDataException;
 import java.util.ArrayList;
 import java.util.List;
-import static logic.Facade.data;
 
 /**
  *
@@ -40,7 +39,7 @@ public interface FacadeInterface {
 
     public void updateDeliveryPrice(String location, double price);
 
-    public Demand getVariable(String name);
+    public Demand getVariable(String name) throws NoDataException;
 
     public void updateDemandVariables(String name, int measurements);
 

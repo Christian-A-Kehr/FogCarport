@@ -25,7 +25,6 @@ public class DataUpdater implements DataUpdaterInterface {
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
     Material mat;
-  
 
     @Override
     public void createMaterial(Material material) {
@@ -43,7 +42,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(7, material.getPrice());
             myStmt.setString(8, material.getMaterial());
             myStmt.setString(9, material.getType());
-           
+
             myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,7 +65,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(6, material.getPrice());
             myStmt.setString(7, material.getMaterial());
             myStmt.setString(8, material.getType());
-            
+
             myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,26 +121,28 @@ public class DataUpdater implements DataUpdaterInterface {
     }
 
     @Override
-    public Delivery getDelivery(String location) throws  NoDataException{
-            Delivery Dev = null;
+    public Delivery getDelivery(String location) throws NoDataException {
+        Delivery Dev = null;
         try {
+            
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("SELECT * FROM Fog.Delivery where Delivery.Delivery_Location = '?';");
+            myStmt = connection.prepareStatement("SELECT * FROM Delivery where Delivery_Location = ?;");
             myStmt.setString(1, location);
             myRs = myStmt.executeQuery();
             if (myRs.next()) {
-              Dev = new Delivery(location, myRs.getDouble("Measurements"));
+                Dev = new Delivery(location, myRs.getDouble("Delivery_Price"));
+                return Dev;
+            } else {
+                throw new NoDataException("Location:  " + location + "was not found");
             }
-            else {
-                throw new NoDataException("Location:  " + location + "was not found") ;
-            }
-            
+
         } catch (SQLException ex) {
             // Database fejl besked. 
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // need this removed... 
         return Dev;
     }
 
@@ -151,7 +152,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("UPDATE `Fog`.`Delivery` SET `Delivery_Price` = '?' WHERE (`Delivery_Location` = '?')");
+            myStmt = connection.prepareStatement("UPDATE Delivery SET `Delivery_Price` = ? WHERE `Delivery_Location` = ?");
 
             myStmt.setDouble(1, price);
             myStmt.setString(2, location);
@@ -163,18 +164,28 @@ public class DataUpdater implements DataUpdaterInterface {
     }
 
     @Override
-    public Demand getVariable(String name) {
+    public Demand getVariable(String name) throws NoDataException {
+         Demand demand = null;
         try {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareStatement("SELECT * FROM Fog.Variabler where Varibable_name = '" + name + "';");
+            myStmt = connection.prepareStatement("SELECT * FROM Fog.Variabler where Varibable_name = ?;");
+            myStmt.setString(1, name);
             myRs = myStmt.executeQuery();
+            if (myRs.next()) {
+                demand = new Demand(name, myRs.getInt("Measurements"));
+                return demand;
+            } else {
+                throw new NoDataException("Variabel:  " + name + "was not found");
+            }
 
         } catch (SQLException ex) {
+            // Database fejl besked. 
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (Demand) myRs;
+        // need this removed... 
+        return demand;
     }
 
     @Override
@@ -183,7 +194,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("UPDATE `Fog`.`Variabler` SET `Measurements` = '?' WHERE (`Varibable_name` = '?');");
+            myStmt = connection.prepareCall("UPDATE Variabler SET `Measurements` = ? WHERE Varibable_name = ?;");
 
             myStmt.setDouble(1, measurements);
             myStmt.setString(2, name);

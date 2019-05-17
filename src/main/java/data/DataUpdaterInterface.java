@@ -22,7 +22,7 @@ public interface DataUpdaterInterface {
     public Delivery getDelivery(String location) throws  NoDataException;  
     public void updateDeliveryPrice(String location, double price);
     // variable's 
-    public Demand getVariable(String name);
+    public Demand getVariable(String name) throws NoDataException;
     public void updateDemandVariables(String name, int measurements);
     
 }
