@@ -17,5 +17,17 @@ public class Delivery {
         this.location = location;
         this.price = price;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
     
 }
