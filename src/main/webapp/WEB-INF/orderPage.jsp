@@ -4,6 +4,7 @@
     Author     : Mkhansen
 --%>
 
+<%@page import="data.Delivery"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.Material"%>
 <%@page import="data.Material"%>
@@ -154,18 +155,20 @@
                     <td><input name="customerEmail" type="text"></td>
                     <td>
                         <select name="delivery">
-                            <option value="sjælland">Sjælland</option>
-                            <option value="jylland">Jylland</option>
-                            <option value="fyn">Fyn</option>
-                            <option value="andet">Andet</option>
-
+                            <% ArrayList<Delivery> deliveryList = (ArrayList<Delivery>) session.getAttribute("deliveryList");
+                                for (int i = 0; i < deliveryList.size(); i++) {
+                            %>
+                            <option value="<%= deliveryList.get(i)%>"><%out.print(deliveryList.get(i).getLocation());%></option>
+                            <%
+                                }
+                            %>
                         </select>
                     </td>
                 </tr>
             </table>
             <input type="hidden" name="command" value="CreateOffer">
-            <input type="submit" value="Opret tilbud">
-            <input type="submit" value="Se stykliste">
+            <input type="submit" name="mat" value="Opret tilbud">
+            <input type="submit" name="mat" value="Se stykliste">
         </form>
     </body>
 </html>
