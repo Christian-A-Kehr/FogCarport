@@ -92,7 +92,7 @@ public class DataUpdater implements DataUpdaterInterface {
     @Override
     public List<Material> DisplayAllMaterial() {
         ArrayList<Material> Mats = new ArrayList<>();
-
+        // redo with preparedstatment 
         try {
             connect = new DBConnector();
 
@@ -156,7 +156,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(1, price);
             myStmt.setString(2, location);
 
-            myStmt.execute();
+            myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
