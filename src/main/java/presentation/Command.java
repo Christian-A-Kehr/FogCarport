@@ -28,6 +28,7 @@ abstract class Command {
         commands.put("DeleteMaterial", new DeleteMaterial());
         commands.put("CommandDrawing", new CommandDrawing());
         commands.put("ChangeDemand", new ChangeDemand());
+        commands.put("ChangeDelivery", new ChangeDelivery());
     }
 
     static Command from( HttpServletRequest request ) {
