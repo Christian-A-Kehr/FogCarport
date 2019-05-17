@@ -22,14 +22,14 @@ import data.Rooftile;
  * @author Christian Ambjørn Kehr
  */
 public interface AssembleInterface {
-
+    // if time add throws BuildException to all methods 
     public Carport AssembleCarport(Carport carport);
 
     public int getRoofHeight(Carport carport);
 
     public Roof createRoof(Carport carport);
 
-    public Shed createShed(Carport carport);
+    public Shed createShed(Carport carport) throws BuildException;
 
     public Rafter createRafter(Carport carport);
 

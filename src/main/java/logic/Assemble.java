@@ -17,6 +17,8 @@ import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
 import data.Batten;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,17 +32,22 @@ public class Assemble implements AssembleInterface {
     @Override
     public Carport AssembleCarport(Carport carport) {
         Roof roof = createRoof(carport);
-        Carport carportComplte;
+        Carport carportComplte = null;
 
         if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
-            Shed shed = createShed(carport);
-
-            carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
-            return carportComplte;
+            try {
+                Shed shed = createShed(carport);
+                
+                carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
+                return carportComplte;
+            } catch (BuildException ex) {
+                Logger.getLogger(Assemble.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
             return carportComplte;
         }
+        return carportComplte;
     }
 
     /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -213,9 +220,14 @@ public class Assemble implements AssembleInterface {
 
     ///////////////////////////////////////Shed////////////////////////////////////////////
     @Override
-    public Shed createShed(Carport carport)  {
+    public Shed createShed(Carport carport) throws BuildException{
+        Shed shed = null;
+        if (carport.getShed().getWidth() == 0 && carport.getShed().getDepth() == 0){
+            throw new BuildException("Build faild at shed");
+        }
+        else{
         try {
-    
+        
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
         Shed Quick = carport.getShed();
         int depth = Quick.getDepth();
@@ -223,12 +235,12 @@ public class Assemble implements AssembleInterface {
         WallCovering wallCovering = createWallcover(carport);
         Floor floor = createFloor(Quick);
 
-        Shed shed = new Shed(depth, width, wallCovering, floor);
+        shed = new Shed(depth, width, wallCovering, floor);
         return shed;
         } catch (Exception e) {
         }
-        // throw buildExcpetion 
-         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        return shed;
     }
 
     @Override
@@ -265,5 +277,4 @@ public class Assemble implements AssembleInterface {
         return floor;
     }
     
-
 }
