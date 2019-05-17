@@ -25,36 +25,35 @@ public class Facade {
     /////////////////////////////testing///////////////////////////////////
     public static void main(String[] args) throws NoDataException {
         Facade logic = new Facade();
-        //logic.getMaterialLogic();
-//        logic.getAllMaterials();
-//        String name = "Spær C18";
-//        System.out.println(logic.getMaterial(name));
         //System.err.println(getAllMaterials());
-        //    System.out.println(getMaterialType());
+//         String type = "spær";
+//         System.err.println(getListSpecificMaterials(type));
+        String name = "Spær C18";
+        getMaterial(name);
 
+//    System.out.println(getMaterialType());
 //        String lal = "Fyn"; 
 //        System.err.println(getDelivery(lal));
         //DisplayAllMaterial();
         //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
-       //saveMaterial(testMat);
+        //saveMaterial(testMat);
         //dataUp.updateMaterial(50, testMat);
-        
-        System.err.println(getDeliveryLocations());
-        
-        
+        // System.err.println(getDeliveryLocations());
     }
 ///////////////////////////////////dataAccessor///////////////////////////////////
+    //tested
 
     public ArrayList<Material> getAllMaterials() {
         ArrayList list = new ArrayList(data.getAllMaterials());
         return list;
     }
 
+    //tested
     public ArrayList<Material> getListSpecificMaterials(String type) {
         return data.getListSpecificMaterials(type);
     }
-
-    public Material getMaterial(String name) {
+    /////////////////////////// 
+    public static Material getMaterial(String name) {
         return data.getMaterial(name);
     }
 
@@ -68,6 +67,7 @@ public class Facade {
 
     /////////////////////////////////DataUpdater///////////////////////////////////////////////////
     static DataUpdater dataUp = new data.DataUpdater();
+
     //Tested
     public void saveMaterial(Material material) {
         List<Material> AllMats = dataUp.DisplayAllMaterial();
@@ -75,11 +75,12 @@ public class Facade {
         for (int i = 0; i < AllMats.size(); i++) {
             if (AllMats.get(i).getMatNum() == material.getMatNum()) {
                 dataUp.updateMaterial(material.getMatNum(), material);
+            } else {
+                dataUp.createMaterial(material);
             }
-            else {
-            dataUp.createMaterial(material);
-        }}
+        }
     }
+
     // tested
     public void dropMaterial(int id) {
         dataUp.dropMaterial(id);
@@ -100,8 +101,9 @@ public class Facade {
     public void updateDemandVariables(String name, int measurements) {
         dataUp.updateDemandVariables(name, measurements);
     }
-    
-    public static ArrayList<Delivery> getDeliveryLocations(){
+
+    //tested
+    public ArrayList<Delivery> getDeliveryLocations() {
         return data.getDeliveryLocations();
     }
 }
