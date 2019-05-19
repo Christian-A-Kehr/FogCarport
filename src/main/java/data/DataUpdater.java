@@ -199,7 +199,7 @@ public class DataUpdater implements DataUpdaterInterface {
             myStmt.setDouble(1, measurements);
             myStmt.setString(2, name);
 
-            myStmt.execute();
+            myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
