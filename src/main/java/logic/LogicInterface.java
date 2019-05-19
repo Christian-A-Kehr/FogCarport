@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface LogicInterface {
    
-   // all calculations i made in M therefor int is used isted of double
+   // all calculations i made in mm therefor int is used isted of double
     public double CalculateCarport(Carport carport);
     public int WoodPostNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
     public double WooPostTotalPrice(Carport carport);
@@ -25,7 +25,7 @@ public interface LogicInterface {
     public int floorArea(Shed shed);
     public double floorPrice(Floor floor);
     public int calulateGabledHeight(Roof roof);
-    public int calculateGabledArea(Carport carport);
+    public int calculateGabledArea(Roof roof);
     public int calculateGabledWallCovering(Roof roof);
     public int WallCoveringsNeededDepth(Shed shed);
     public double calculateWallCoveringPrice(int totalWallCover, double price);

@@ -66,7 +66,8 @@ public class Assemble implements AssembleInterface {
         Batten batten = createBatten(carport);
 
         Rooftile rooftile = createRoofTile(quick);
-
+        // hardcoded
+        WallCovering standart = DATAACC.getMaterialFromId(500)
         WallCovering wallCovering = createGabledWallcover(carport);
         Roof roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
         return roof;
@@ -107,7 +108,7 @@ public class Assemble implements AssembleInterface {
 
     @Override
     public WoodPost createWoodpost(Carport carport) {
-        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());  
         WoodPost Quick = carport.getRoof().getWoodpost();
         String material = Quick.getMaterial();
         int lenght = Quick.getLength();
@@ -157,28 +158,33 @@ public class Assemble implements AssembleInterface {
         return rooftiles;
     }
 
+    //  Hardcoded shit incomming
     @Override
     public WallCovering createGabledWallcover(Carport carport) {
-        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCovering().getId());
-        WallCovering quick = carport.getRoof().getWallCovering();
-
+        // Lav understående bruger input for det fucker med koden man skal hardcode det lort!
+        
+//        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCovering().getId());
+//        WallCovering quick = carport.getRoof().getWallCovering();
+       
+        // fuck up plan... bruger oversåtende hvis du får tid til at lave det ordenligt 
+        Material mat = DATAACC.getMaterialFromId(standart.getId());        
         if (carport.getRoof().getType().equals("Med rejsning")) {
             int area = CAL.calculateGabledArea(carport);
 
-            String material = quick.getMaterial();
+            String material = standart.getMaterial();
             int lenght = CAL.calculateGabledWallCovering(carport.getRoof());
-            int width = quick.getWidth();
-            int id = quick.getId();
+            int width = standart.getWidth();
+            int id = standart.getId();
             int amount = CAL.calculateGabledWallCovering(carport.getRoof());
             double price = mat.getPrice();
             double totalPrice = CAL.calculateGabledWallCovering(carport.getRoof());
             WallCovering wallCovering = new WallCovering(material, lenght, width, id, amount, price, totalPrice);
             return wallCovering;
         } else {
-            String material = quick.getMaterial();
+            String material = standart.getMaterial();
             int lenght = CAL.calculateGabledWallCovering(carport.getRoof());
-            int width = quick.getWidth();
-            int id = quick.getId();
+            int width = standart.getWidth();
+            int id = standart.getId();
             int amount = CAL.calculateGabledWallCovering(carport.getRoof());
             double price = mat.getPrice();
             double totalPrice = CAL.calculateGabledWallCovering(carport.getRoof());
@@ -193,7 +199,7 @@ public class Assemble implements AssembleInterface {
         Batten quick = carport.getRoof().getBatten();
         Batten batter;
         if (carport.getRoof().getType().equals("Med rejsning")) {
-            int area = CAL.calculateGabledArea(carport);
+            int area = CAL.calculateGabledArea(carport.getRoof());
 
             String material = quick.getMaterial();
             int lenght = carport.getWidth();
@@ -257,6 +263,7 @@ public class Assemble implements AssembleInterface {
         double totalPrice = CAL.rooftilesTotalprice(price, amount);
 
         WallCovering wallCoverings = new WallCovering(material, lenght, width, id, amount, price, totalPrice);
+        // Forced to make hardcoded solution, not optimal. 
         return wallCoverings;
     }
 

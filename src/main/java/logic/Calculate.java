@@ -20,7 +20,7 @@ import java.lang.*;
  * @author Claus Mikkelsen Findinge
  */
 class Calculate implements LogicInterface {
-
+huske at slette noteform i comamnd
     private DataAccessor dataaccessor = new DataAccessor();
     // roof. length 0,8 + 0,3 
 
@@ -131,9 +131,9 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public int calculateGabledArea(Carport carport) {
-        double gableheight = calulateGabledHeight(carport.getRoof());
-        double gablewidth = carport.getWidth();
+    public int calculateGabledArea(Roof roof) {
+        double gableheight = calulateGabledHeight(roof);
+        double gablewidth = roof.getWidth();
         int gablehalfarea = (int) (0.5 * (gableheight * gablewidth));
         int gablearea = gablehalfarea * 2;
         return gablearea;
@@ -141,7 +141,11 @@ class Calculate implements LogicInterface {
 
     @Override
     public int calculateGabledWallCovering(Roof roof) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // needs to calulate the number of boards needed
+        int gableArea = calculateGabledArea(roof);
+        
+        
+        return 
     }
 
     // WTF skete her... ryd op christian(mig selv) 
@@ -151,18 +155,20 @@ class Calculate implements LogicInterface {
         int overlay = dataaccessor.getVariabel(5);
         int shedCoverDepth = shed.getDepth();
         int wallCoverWidth = shed.getWallCovering().getWidth();
+        // one board is need in both ends to cover the woodpost
         int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
+        // when calculation placements of the board, one board is places against the woodpost inner side. 
         int distenceToCover = shedCoverDepth - wallCoverWidth;
-        int wallCOverFits = distenceToCover / MaxCover;
-        int nearst = (int) (Math.ceil(wallCOverFits / 1000.0) * 1000);
-        int finalCoverNeeded = distenceToCover / nearst;
-        int finalCoverNeededtotal = (int) (Math.ceil(finalCoverNeeded / 100.0) * 100.0);
-        int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
-
+        int wallCoverFits = distenceToCover / MaxCover;
+        int nearst = (int) (Math.ceil(wallCoverFits / 1000.0) * 1000);
+        int outerCover = distenceToCover / nearst;
+        int outerCoverNeeded = (int) (Math.ceil(outerCover / 100.0) * 100.0);
+        // Find ud af om næste linje er tanke torsk eller vigtig
+        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
         // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
-        // regn nu hvor mange der skal være på indersiden
-        //return totalAmount;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int indercover = outerCoverNeeded - 1; 
+        int totalAmount = indercover + outerCover;
+        return totalAmount;
     }
 
     @Override
@@ -184,10 +190,26 @@ class Calculate implements LogicInterface {
 
     @Override
     public int WallCoveringsNeededwidth(Shed shed) {
-        int length = shed.getDepth();
-        int width = shed.getWidth();
-        int area = length * width;
-        return area;
+         //overlay used for 100 mm width wallcover => standart width
+        int overlay = dataaccessor.getVariabel(5);
+        int shedCoverDepth = shed.getWidth();
+        int wallCoverWidth = shed.getWallCovering().getWidth();
+        // one board is need in both ends to cover the woodpost
+        int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
+        // when calculation placements of the board, one board is places against the woodpost inner side. 
+        int distenceToCover = shedCoverDepth - wallCoverWidth;
+        int wallCoverFits = distenceToCover / MaxCover;
+        int nearst = (int) (Math.ceil(wallCoverFits / 1000.0) * 1000);
+        int outerCover = distenceToCover / nearst;
+        int outerCoverNeeded = (int) (Math.ceil(outerCover / 100.0) * 100.0);
+        // Find ud af om næste linje er tanke torsk eller vigtig
+        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
+
+        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
+        int indercover = outerCoverNeeded - 1; 
+        
+        int totalAmount = indercover + outerCover;
+        return totalAmount; 
     }
 
     @Override
