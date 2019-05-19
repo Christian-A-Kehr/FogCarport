@@ -131,4 +131,9 @@ public class Facade implements FacadeInterface{
     public ArrayList<Delivery> getDeliveryLocations() {
         return data.getDeliveryLocations();
     }
+
+    @Override
+    public ArrayList<Demand> getAllDemands() {
+        return data.getAllDemands();
+    }
 }
