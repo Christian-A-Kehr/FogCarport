@@ -21,10 +21,10 @@ import java.util.logging.Logger;
  */
 public class DataUpdater implements DataUpdaterInterface {
 
-    DBConnector connect = null;
-    PreparedStatement myStmt = null;
-    ResultSet myRs = null;
-    Material mat;
+    private DBConnector connect = null;
+    private PreparedStatement myStmt = null;
+    private ResultSet myRs = null;
+    private Material mat;
 
     @Override
     public void createMaterial(Material material) {
@@ -194,7 +194,7 @@ public class DataUpdater implements DataUpdaterInterface {
             connect = new DBConnector();
             Connection connection = connect.getConnection();
 
-            myStmt = connection.prepareCall("UPDATE Variabler SET `Measurements` = ? WHERE Varibable_name = ?;");
+            myStmt = connection.prepareStatement("UPDATE Variabler SET `Measurements` = ? WHERE Varibable_name = ?;");
 
             myStmt.setDouble(1, measurements);
             myStmt.setString(2, name);
