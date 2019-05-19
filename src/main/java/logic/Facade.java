@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class Facade implements FacadeInterface{
 
-    DataAccessor data = new DataAccessor();
-    DataUpdater dataUp = new data.DataUpdater();
+    private DataAccessor data = new DataAccessor();
+    private DataUpdater dataUp = new data.DataUpdater();
 
     /////////////////////////////testing///////////////////////////////////
 //    public static void main(String[] args) throws NoDataException {
