@@ -46,22 +46,22 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public int NumbersOfRaftersFlatRoof(Carport carport) {
+    public int NumbersOfRaftersFlatRoof(double Distance) {
         double rafterWidth = dataaccessor.getVariabel(4);  // 195;
         double rafterDistance = dataaccessor.getVariabel(3); // 600;
         // følgende spærdimensioner = variabler fra database
         //   double spændvidde = 4.02;
-        double totalNumbersRaftersDouble = ((carport.getLength() + rafterDistance) / (rafterWidth + rafterDistance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
+        double totalNumbersRaftersDouble = ((Distance + rafterDistance) / (rafterWidth + rafterDistance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
         //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "manglerr med én, da int altid runder ned." en efterfølgende afstandmåling.
         //int integerNumbersRafters = (int) (Math.ceil(totalNumbersRaftersDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal. 
-        double lala = Math.ceil(totalNumbersRaftersDouble);
-        int integerNumbersRafters = (int) lala;
+        double Round = Math.ceil(totalNumbersRaftersDouble);
+        int integerNumbersRafters = (int) Round;
         return integerNumbersRafters;
     }
 
     @Override
     public int TotalLengthRaftersFlatRoof(Carport carport) {
-        double totalLength = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
+        double totalLength = (NumbersOfRaftersFlatRoof(carport.getWidth()) * carport.getLength());
         int mm = (int) totalLength;
         return mm;
     }
@@ -79,17 +79,16 @@ class Calculate implements LogicInterface {
         double lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle()))); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
         // Derefter findes længden af c via formlen c = b * cos(A).
         double lengthBothSidesWithSlope = 2 * lengthSingleRafterWithSlope;                                      // Der ganges med to for at få længden af begge hældningssider.
-       // fatter ikke den næste linje. prøver igen i morgen tidligt. 
-        double totalLengthAllThreeSides = (NumbersOfRaftersFlatRoof(carport) * lengthBothSidesWithSlope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
+        double totalLength = NumbersOfRaftersFlatRoof(lengthBothSidesWithSlope) * carport.getLength() ; // Antal spær ganges med længden 
         // af de to hældningssider. Resultatet plusses
         // med den samlede længde af de flade spær.
-        int round = (int) Math.round(totalLengthAllThreeSides);
+        int round = (int) Math.round(totalLength);
         return round;
     }
 
     @Override
     public double TotalPriceRaftersWithSlope(Carport carport) {
-        double totalprice = (TotalLengthRaftersWithSlope(carport) / 100) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
+        double totalprice = (TotalLengthRaftersWithSlope(carport) / 1000) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
         return totalprice;
 
     }

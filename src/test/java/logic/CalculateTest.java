@@ -80,14 +80,23 @@ public class CalculateTest {
     @Test
     public void testNumbersOfRaftersFlatRoof() {
         System.out.println("NumbersOfRaftersFlatRoof");
-        Carport carport = testCarport;
+        double distance = 5000;
         Calculate instance = new Calculate();
-        int expResult = 6;
-        int result = instance.NumbersOfRaftersFlatRoof(carport);
+        int expResult = 8;
+        int result = instance.NumbersOfRaftersFlatRoof(distance);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
+    public void testNumbersOfRaftersFlatRoofUsingSlop() {
+        System.out.println("NumbersOfRaftersFlatRoof");
+        double distance = 4000;
+        Calculate instance = new Calculate();
+        int expResult = 6;
+        int result = instance.NumbersOfRaftersFlatRoof(distance);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
     /**
      * Test of TotalLengthRaftersFlatRoof method, of class Calculate.
      */
@@ -96,7 +105,7 @@ public class CalculateTest {
         System.out.println("TotalLengthRaftersFlatRoof");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        int expResult = 30000;
+        int expResult = 32000;
         int result = instance.TotalLengthRaftersFlatRoof(carport);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -110,7 +119,7 @@ public class CalculateTest {
         System.out.println("TotalPriceRaftersFlatRoof");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 600.0;
+        double expResult = 640.0;
         double result = instance.TotalPriceRaftersFlatRoof(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -124,7 +133,7 @@ public class CalculateTest {
         System.out.println("TotalLengthRaftersWithSlope");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        int expResult = 0;
+        int expResult = 32000;
         int result = instance.TotalLengthRaftersWithSlope(carport);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -138,7 +147,7 @@ public class CalculateTest {
         System.out.println("TotalPriceRaftersWithSlope");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 0.0;
+        double expResult = 640.0;
         double result = instance.TotalPriceRaftersWithSlope(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
