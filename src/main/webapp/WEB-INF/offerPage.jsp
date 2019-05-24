@@ -38,7 +38,7 @@
             <p>Højde = <%= request.getParameter("height")%> </p>
             <p>Længde = <%= request.getParameter("length")%> </p>
             <p>Bredde = <%= request.getParameter("width")%> </p>
-            <p>Med/Uden rejsning = <%= request.getParameter("flatOrNotChoice")%> </p>
+            <p>Med/Uden rejsning = <%= request.getParameter("flatOrNot")%> </p>
             <p>Tag materiale = <%= request.getParameter("roofChoice")%> </p>
             <p>Stolpe materiale = <%= request.getParameter("woodpostChoice")%> </p>
             <p>Valg af grader = <%= request.getParameter("angleChoice")%> </p>
