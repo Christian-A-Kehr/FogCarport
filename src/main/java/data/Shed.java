@@ -36,5 +36,10 @@ public class Shed {
     public Floor getFloor() {
         return floor;
     }
+
+    @Override
+    public String toString() {
+        return "Shed{" + "depth=" + depth + ", width=" + width + ", wallCovering=" + wallCovering + ", floor=" + floor + '}';
+    }
     
 }
