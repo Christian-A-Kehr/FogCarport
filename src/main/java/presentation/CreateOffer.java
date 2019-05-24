@@ -16,9 +16,13 @@ import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.Assemble;
+import logic.BuildException;
 import logic.Facade;
 import logic.FogException;
 
@@ -29,10 +33,12 @@ import logic.FogException;
 public class CreateOffer extends Command {
 
     private Facade logic = new Facade();
+    private Assemble assemble = new Assemble();
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
+        String roofType = request.getParameter("flatOrNot");
         int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("height"));
         int width = Integer.parseInt(request.getParameter("height"));
@@ -61,24 +67,33 @@ public class CreateOffer extends Command {
 
         Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
         WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
-        
+
         Material rooftileMat = logic.getMaterialFromId(rooftileID);
         Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
-        
-        session.setAttribute("rooftile", rooftileMat);
-        session.setAttribute("rafter", rafterMat);
-        session.setAttribute("beam", beamMat);
-        session.setAttribute("woodPost", woodPostMat);
-        session.setAttribute("floor", floorMat);
-        session.setAttribute("wallCovering", wallCoveringMat);
+
+//        session.setAttribute("rooftile", rooftileMat);
+//        session.setAttribute("rafter", rafterMat);
+//        session.setAttribute("beam", beamMat);
+//        session.setAttribute("woodPost", woodPostMat);
+//        session.setAttribute("floor", floorMat);
+//        session.setAttribute("wallCovering", wallCoveringMat);
 
         Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
 
-        Roof roof = new Roof(request.getParameter("flatOrNot"), angle, length, width, beam, rafter, woodpost, rooftile);
+        Roof roof = new Roof(roofType, angle, length, width, beam, rafter, woodpost, rooftile);
 
         Carport carport = new Carport(height, length, width, roof, shed);
-        
-        if(request.getParameter("mat").equals("Se stykliste")){
+
+        try {
+            session.setAttribute("carport", assemble.AssembleCarport(carport));
+            session.setAttribute("roof", assemble.createRoof(carport));
+            session.setAttribute("shed", assemble.createShed(carport));
+            
+        } catch (BuildException ex) {
+            return "orderPage";
+        }
+
+        if (request.getParameter("mat").equals("Se stykliste")) {
             return "listOfMaterialsPage";
         }
         return "offerPage";
