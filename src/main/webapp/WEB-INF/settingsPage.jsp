@@ -75,11 +75,13 @@
                         <%
                             }
                         %>
+                        <option value="Ny type">Ny type</option>
+                        <option><input name="newTypeChoice" type="text"></option>
                     </select>
                 </td>
                 <tr>
                 <input type="hidden" name="command" value="CreateOrUpdateMaterial">
-                <td colspan="9" ><input type="submit" onclick="alert('Materiale tilføjet')" value="Tilføj Materiale/Opdatér Materiale"></td>
+                <td colspan="9" ><input type="submit" onclick="alert('Materiale tilføjet')" value="Tilføj/Opdatér Materiale"></td>
             </form>
         </tr>
     </table>
@@ -109,13 +111,30 @@
 <table>
     <th colspan="2">Rediger levering</th>
     <form action="Frontcontroller" method="POST">
+        <tr><th>Område</th><th>Pris</th></tr>
+                <%
+                    ArrayList<Delivery> deliveryList = (ArrayList<Delivery>) session.getAttribute("deliveryList");
+                    for (int i = 0; i < deliveryList.size(); i++) {
+                %>
+        <tr>
+            <td>
+        <option value="<%= deliveryList.get(i).getLocation()%>"><%out.print(deliveryList.get(i).getLocation());%></option>
+        </td>
+        <td>
+        <option value="<%= deliveryList.get(i).getPrice()%>"><%out.print(deliveryList.get(i).getPrice());%></option>
+        </td>
+        <%
+            }
+        %>
+        </tr>
+        <tr><th>Vælg område</th></tr>
         <tr>
             <td>
                 <select name="delivery">
-                    <% ArrayList<Delivery> deliveryList = (ArrayList<Delivery>) session.getAttribute("deliveryList");
+                    <%
                         for (int i = 0; i < deliveryList.size(); i++) {
                     %>
-                    <option value="<%= deliveryList.get(i)%>"><%out.print(deliveryList.get(i).getLocation());%></option>
+                    <option value="<%= deliveryList.get(i).getLocation().toString()%>"><%out.print(deliveryList.get(i).getLocation());%></option>
                     <%
                         }
                     %>
@@ -123,8 +142,8 @@
             </td>
             <td>Ny pris
                 <input type="number" name="newPrice" min="0" value="0">
+                <input type="hidden" name="command" value="ChangeDelivery">
             </td>
-        <input type="hidden" name="command" value="ChangeDelivery">
         </tr>
         <tr>
             <td colspan="2"><input type="submit" onclick="alert('Levering redigeret')" value="Rediger levering"></td>
@@ -162,11 +181,13 @@
                         }
                     %>
                 </select></td>
-            <td><input type="number" name="measureChoice" value="1" min="1"></td>
+            <td><input type="number" name="measureChoice" value="1" min="1">
+                <input type="hidden" name="command" value="ChangeDemand"></td>
         </tr>
         <tr>
-        <input type="hidden" name="command" value="ChangeDemand">
-            <td colspan="2"><input type="submit" onclick="alert('Lovkrav ændret')" value="Rediger lovkrav"></td>
+            <td colspan="2">
+                <input type="submit" onclick="alert('Lovkrav ændret')" value="Rediger lovkrav">
+            </td>
     </form>
 </tr>
 </table>
