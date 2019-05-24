@@ -204,5 +204,36 @@ public class DataUpdater implements DataUpdaterInterface {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    // undo this. 
+    public Material getMaterialFromId(int id) {
+        Material Mat = null;
+
+        try {
+            DBConnector connect = new DBConnector();
+
+            String query = "SELECT * FROM MaterialsTest WHERE Vare_nummer =" + id + ";";
+
+            Connection connection = connect.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("Material_Name");
+                String desc = rs.getString("Help_Description");
+                String material = rs.getString("Material");
+                String type = rs.getString("Type");
+
+                int length = rs.getInt("Length");
+                int height = rs.getInt("Height");
+                int width = rs.getInt("Width");
+                double price = rs.getDouble("Price");
+
+                Mat = new Material(name, desc, material, type, id, length, height, width, price);
+            }
+            return Mat;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Mat;
+    }
 
 }

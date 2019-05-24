@@ -43,9 +43,10 @@ public class Facade implements FacadeInterface{
 //        System.err.println(getDelivery(location));
         //updateDeliveryPrice(location, 1475); // 1475
 //        String variable = "Udhæng_max";
-//        //System.err.println(getVariable(variable));
+//        System.err.println(getVariable(variable));
 //        updateDemandVariables(variable, 150); // 150
-        // System.err.println(getDeliveryLocations());
+//         System.err.println(getDeliveryLocations());
+    
 
 //    }
 ///////////////////////////////////dataAccessor///////////////////////////////////
@@ -116,7 +117,7 @@ public class Facade implements FacadeInterface{
         dataUp.updateDeliveryPrice(location, price);
     }
     //tested
-    @Override
+//    @Override
     public Demand getVariable(String name) throws NoDataException {
         return dataUp.getVariable(name);
     }

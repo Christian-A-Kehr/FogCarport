@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.lang.*;
+import java.util.HashMap;
 
 /**
  *
@@ -20,48 +21,49 @@ import java.lang.*;
  * @author Claus Mikkelsen Findinge
  */
 class Calculate implements LogicInterface {
-huske at slette noteform i comamnd
+//huske at slette noteform i comamnd
+
     private DataAccessor dataaccessor = new DataAccessor();
     // roof. length 0,8 + 0,3 
 
+    /////////////////////////////////roof///////////////////////////////////////////////
     @Override
     public int WoodPostNeeded(Carport carport) {
-        // hvis tiden tillader, så skal l1, l2 og l3 kunne ændres ved hjælp af database
-        // L1, L2 og L3's værdier skal laves om til variabler, som kan rettes af bruger.
-        int carPortLength = carport.getLength();
-        int woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
-        int overHang1 = dataaccessor.getVariabel(1); // 1500 mm
-        int overHang2 = dataaccessor.getVariabel(1); // 1500 mm
-        int stretchForWoodposts = (carPortLength - (overHang1 + overHang2));
-        double totalNumberNoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (carport.getRoof().getWoodpost().getWidth() + woodPostsDistance) * 2;
-        // 1000 = nearest meter 
-        int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumberNoodpostsDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal.
-        // int TotalPosts = woodposts_pr_beams * BeamsNeeded(carport);
-        return totalNumbersWoodpostsInt;
+        double carportLength = carport.getLength();
+        double woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
+        double overHang1 = dataaccessor.getVariabel(1); // 150 mm
+        double overHang2 = dataaccessor.getVariabel(1); // 150 mm
+        double stretchForWoodposts = (carportLength - (overHang1 + overHang2));
+        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (carport.getRoof().getWoodpost().getWidth() + woodPostsDistance) * BeamsNeeded(carport);
+        int rounded = (int) Math.ceil(totalNumberwoodpostsDouble);
+        return rounded;
     }
 
     @Override
     public double WooPostTotalPrice(Carport carport) {
-        double totalPrice = (((WoodPostNeeded(carport) * carport.getHeight()) / 1000) * carport.getRoof().getWoodpost().getprice());
+        double totalPrice = (WoodPostNeeded(carport) * (carport.getHeight() )) * carport.getRoof().getWoodpost().getprice() / 1000;
         return totalPrice;
     }
 
     @Override
     public int NumbersOfRaftersFlatRoof(Carport carport) {
-        int rafterWidth = dataaccessor.getVariabel(4);  // 195;
-        int rafterDistance = dataaccessor.getVariabel(5); // 600;
+        double rafterWidth = dataaccessor.getVariabel(4);  // 195;
+        double rafterDistance = dataaccessor.getVariabel(3); // 600;
         // følgende spærdimensioner = variabler fra database
         //   double spændvidde = 4.02;
         double totalNumbersRaftersDouble = ((carport.getLength() + rafterDistance) / (rafterWidth + rafterDistance)); // bredde på spær og afstand til næste spær slåes sammen til en enhed. 
         //Den samlede længde divideres op i carportens længde + spærafstand, da den sidste spær "manglerr med én, da int altid runder ned." en efterfølgende afstandmåling.
-        int integerNumbersRafters = (int) (Math.ceil(totalNumbersRaftersDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal. 
+        //int integerNumbersRafters = (int) (Math.ceil(totalNumbersRaftersDouble / 1000.0) * 1000); // kan ikke benytte int + 1, da det kan ske, at udregningen bliver et heltal. 
+        double lala = Math.ceil(totalNumbersRaftersDouble);
+        int integerNumbersRafters = (int) lala;
         return integerNumbersRafters;
     }
 
     @Override
     public int TotalLengthRaftersFlatRoof(Carport carport) {
-        int totalLength = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
-        return totalLength;
+        double totalLength = (NumbersOfRaftersFlatRoof(carport) * carport.getWidth());
+        int mm = (int) totalLength;
+        return mm;
     }
 
     @Override
@@ -74,13 +76,15 @@ huske at slette noteform i comamnd
     //TEST DENNE PGA INT cast Vigtigt! 
     @Override
     public int TotalLengthRaftersWithSlope(Carport carport) {
-        int lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2) / Math.cos(carport.getRoof().getAngle())); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
+        double lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle()))); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
         // Derefter findes længden af c via formlen c = b * cos(A).
-        int lengthBothSidesWithSlope = 2 * lengthSingleRafterWithSlope;                                      // Der ganges med to for at få længden af begge hældningssider.
-        int totalLengthAllThreeSides = (NumbersOfRaftersFlatRoof(carport) * lengthBothSidesWithSlope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
+        double lengthBothSidesWithSlope = 2 * lengthSingleRafterWithSlope;                                      // Der ganges med to for at få længden af begge hældningssider.
+       // fatter ikke den næste linje. prøver igen i morgen tidligt. 
+        double totalLengthAllThreeSides = (NumbersOfRaftersFlatRoof(carport) * lengthBothSidesWithSlope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
         // af de to hældningssider. Resultatet plusses
         // med den samlede længde af de flade spær.
-        return totalLengthAllThreeSides;
+        int round = (int) Math.round(totalLengthAllThreeSides);
+        return round;
     }
 
     @Override
@@ -92,145 +96,78 @@ huske at slette noteform i comamnd
 
     @Override
     public int BeamsNeeded(Carport carport) {
-        // B1, B2 og B3's værdier skal laves om til variabler, som kan rettes af bruger.
         int carportWidth = carport.getWidth();
         int beamsDistance = dataaccessor.getVariabel(2); //4000;
         int overHang3 = dataaccessor.getVariabel(7); //150;
         int overHang4 = dataaccessor.getVariabel(8); // 150;
         int stretchForBeams = (carportWidth - (overHang3 + overHang4));
-        double totalNumbersWoodpostsDouble = (stretchForBeams + beamsDistance) / ((carport.getRoof().getBeam().getWidth() + beamsDistance));
-        int totalNumbersWoodpostsInt = (int) (Math.ceil(totalNumbersWoodpostsDouble / 1000.0) * 1000);
-        return totalNumbersWoodpostsInt;
+        double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((carport.getRoof().getBeam().getWidth() + beamsDistance));
+        int totalBeamsNeeded = (int) (Math.ceil(totalNumbersBeams / 1000.0) * 1000);
+        int Total = (totalBeamsNeeded / 1000) + 2; // outer sides
+        return Total;
     }
     // beams are cut to custom measures 
 
     @Override
     public double beamsPrice(Carport carport) {
-        int lenghtPrBeam = carport.getHeight();
-        double totalPrice = (lenghtPrBeam * BeamsNeeded(carport)) * carport.getRoof().getBeam().getprice();
-        return totalPrice;
-    }
-
-    @Override
-    public int floorArea(Shed shed) {
-        int floorArea = shed.getDepth() * shed.getWidth();
-        return floorArea;
-    }
-
-    @Override
-    public double floorPrice(Floor floor) {
-        double floorsPrice = floor.getLength() * floor.getWidth() * floor.getprice();
-        return floorsPrice;
+        double lenghtPrBeam = carport.getHeight();
+        double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carport)) * carport.getRoof().getBeam().getprice();
+        return Math.round(totalPrice);
     }
 
     @Override
     public int calulateGabledHeight(Roof roof) {
-        int roofSlope = roof.getAngle();
-        int gabledHeight = (int) ((int) roof.getWidth() * Math.tan(roofSlope));
-        return gabledHeight;
+        double roofSlope = roof.getAngle();
+        double gabledHeight = (roof.getWidth() / 2) * Math.tan(Math.toRadians(roofSlope));
+        int round = (int) Math.round(gabledHeight);
+        return round;
     }
 
     @Override
-    public int calculateGabledArea(Roof roof) {
-        double gableheight = calulateGabledHeight(roof);
-        double gablewidth = roof.getWidth();
-        int gablehalfarea = (int) (0.5 * (gableheight * gablewidth));
-        int gablearea = gablehalfarea * 2;
-        return gablearea;
+    public double calculateGabledArea(Roof roof) {
+        double gableheight = calulateGabledHeight(roof) / 1000;
+        double gablewidth = roof.getWidth() / 1000;
+        double gableAreaOneSide = (0.5 * (gableheight * gablewidth));
+
+        return gableAreaOneSide;
     }
 
     @Override
-    public int calculateGabledWallCovering(Roof roof) {
+    public double calculateGabledWallCoveringPrice(int boardsNeeded, double price, Roof roof) {
         // needs to calulate the number of boards needed
-        int gableArea = calculateGabledArea(roof);
-        
-        
-        return 
-    }
-
-    // WTF skete her... ryd op christian(mig selv) 
-    @Override
-    public int WallCoveringsNeededDepth(Shed shed) {
-        //overlay used for 100 mm width wallcover => standart width
-        int overlay = dataaccessor.getVariabel(5);
-        int shedCoverDepth = shed.getDepth();
-        int wallCoverWidth = shed.getWallCovering().getWidth();
-        // one board is need in both ends to cover the woodpost
-        int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
-        // when calculation placements of the board, one board is places against the woodpost inner side. 
-        int distenceToCover = shedCoverDepth - wallCoverWidth;
-        int wallCoverFits = distenceToCover / MaxCover;
-        int nearst = (int) (Math.ceil(wallCoverFits / 1000.0) * 1000);
-        int outerCover = distenceToCover / nearst;
-        int outerCoverNeeded = (int) (Math.ceil(outerCover / 100.0) * 100.0);
-        // Find ud af om næste linje er tanke torsk eller vigtig
-        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
-        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
-        int indercover = outerCoverNeeded - 1; 
-        int totalAmount = indercover + outerCover;
-        return totalAmount;
+        int WallCoverAmount = boardsNeeded * (calulateGabledHeight(roof) / roof.getWallCovering().getLength());
+        Double totalPrice = WallCoverAmount * price;
+        return totalPrice;
     }
 
     @Override
-    public double calculateWallCoveringPrice(int totalWallCover, double price) {
-
-        double total = totalWallCover * price;
+    public int calculateGabledWallcoverAmount(Roof roof) {
+        double roofside = roof.getWidth() / 2;
+        // if you take one half of the roof (trekant), find the m2 (firkant), you will get the missing half to spair 
+        double area = roofside * calulateGabledHeight(roof);
+        double boardsNeeded = Math.ceil(roofside / roof.getWallCovering().getWidth());
+        int total = (int) boardsNeeded;
         return total;
-    }
-
-    @Override
-    public int totalWallCoveringsNeeded(Shed shed) {
-        int sideOne = WallCoveringsNeededDepth(shed);
-        int sideTwo = WallCoveringsNeededDepth(shed);
-        int sideThree = WallCoveringsNeededwidth(shed);
-        int sideFour = WallCoveringsNeededwidth(shed);
-        int allSides = sideOne + sideTwo + sideThree + sideFour;
-        return allSides;
-    }
-
-    @Override
-    public int WallCoveringsNeededwidth(Shed shed) {
-         //overlay used for 100 mm width wallcover => standart width
-        int overlay = dataaccessor.getVariabel(5);
-        int shedCoverDepth = shed.getWidth();
-        int wallCoverWidth = shed.getWallCovering().getWidth();
-        // one board is need in both ends to cover the woodpost
-        int MaxCover = ((2 * wallCoverWidth) - (2 * overlay));
-        // when calculation placements of the board, one board is places against the woodpost inner side. 
-        int distenceToCover = shedCoverDepth - wallCoverWidth;
-        int wallCoverFits = distenceToCover / MaxCover;
-        int nearst = (int) (Math.ceil(wallCoverFits / 1000.0) * 1000);
-        int outerCover = distenceToCover / nearst;
-        int outerCoverNeeded = (int) (Math.ceil(outerCover / 100.0) * 100.0);
-        // Find ud af om næste linje er tanke torsk eller vigtig
-        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
-
-        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
-        int indercover = outerCoverNeeded - 1; 
-        
-        int totalAmount = indercover + outerCover;
-        return totalAmount; 
     }
 
     @Override
     public int roofArea(Roof roof) {
         // first we find the roofs width on one side by finding miss c (Vedhæft evt regne regler) 
-        int b = roof.getWidth();
-        int A = roof.getAngle();
-        int c = (int) (b / Math.cos(A));
-        // then using c = as a rectangles width, the area can be calulated  
-        int area = c * roof.getLength() * 2; // * 2 because there's two sides. 
-        return area;
-    }
 
-    @Override
-    public double CalculateCarport(Carport carport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Carport GetPrices(Carport carport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double b = roof.getWidth();
+        double A = roof.getAngle();
+        if (!(roof.getType().equals("Med rejsning"))) {
+            int flatRoof = (int) ((b / 1000) * (roof.getLength() / 1000));
+            return flatRoof;
+        } else {
+            //double c = (b / Math.cos(A));
+            double vinkelSum = 180 - A * 2;
+            double c = ((b / 1000) * (Math.sin(Math.toRadians(A)) / Math.sin(Math.toRadians(vinkelSum))));
+            // then using c = as a rectangles width, the area can be calulated  
+            double area = ((c * (roof.getLength() / 1000)) * 2); // * 2 because there's two sides. 
+            int done = (int) Math.round(area); // no half m2. 
+            return done;
+        }
     }
 
     @Override
@@ -239,16 +176,118 @@ huske at slette noteform i comamnd
         return total;
     }
 
+    //claus
     @Override
     public int battensNeeded(Carport carport) {
-        int battensHeight = carport.getRoof().getBatten().getHeight();
-        int battensDistance = 100; // This is an example. Find legislation!
+        double battensHeight = carport.getRoof().getBatten().getHeight();
+        double battensDistance = 100; // This is an example. Find legislation!
 
-        double stretchBattensOneSide = (int) ((carport.getWidth() / 2) / Math.cos(carport.getRoof().getAngle()));
+        double stretchBattensOneSide = ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle())));
         double stretchBattensTotal = 2 * stretchBattensOneSide;
         double battensNeededDouble = ((stretchBattensTotal + battensDistance) / (battensHeight + battensDistance));
-        int battensNeededInt = (int) (Math.ceil(battensNeededDouble / 1000.0) * 1000);
-        return battensNeededInt;
+        int round = (int) Math.ceil(battensNeededDouble);
+        return round;
+    }
+
+    double battensPrice(int amount, double price, Roof roof) {
+        double total = (amount * (roof.getLength() / 1000) * price);
+        return total;
+
+    }
+
+    /////////////////////////////////////////////Sheed///////////////////////////////////
+    // WTF skete her... ryd op christian(mig selv) 
+    @Override
+    public int WallCoveringsNeededDepth(Shed shed, WoodPost woodpost) {
+        //overlay used for 100 mm width wallcover => standart width
+        double overlay = dataaccessor.getVariabel(5); // 150
+        double shedCoverDepth = shed.getDepth() - (2 * woodpost.getWidth() - (2* dataaccessor.getVariabel(1))); // 1200
+        double wallCoverWidth = shed.getWallCovering().getWidth();
+        double woodPostWidth = woodpost.getWidth();
+        // distance to second board 
+        double MaxCover = ((2 * wallCoverWidth) + (2 * overlay));
+        // when calculation placements of the board, one board is places against the woodpost inner side. 
+        double distenceToCover = shedCoverDepth - wallCoverWidth;
+        double wallCoverFits = distenceToCover / MaxCover;
+        double nearst = (Math.ceil(wallCoverFits / 1000.0) * 1000);
+        double outerCover = Math.ceil(distenceToCover / nearst);
+        int Round = (int) outerCover;
+        // Find ud af om næste linje er tanke torsk eller vigtig
+        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
+        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
+        int indercover = Round - 1;
+        int totalAmount = (indercover + Round);
+        return totalAmount;
+    }
+
+    @Override
+    public double calculateWallCoveringPrice(int totalWallCover, double price) {
+        double total = totalWallCover * price;
+        return total;
+    }
+
+    @Override
+    public int totalWallCoveringsNeeded(Shed shed, WoodPost woodPost) {
+        int sideOne = WallCoveringsNeededDepth(shed, woodPost);
+        int sideTwo = WallCoveringsNeededDepth(shed, woodPost);
+        int sideThree = WallCoveringsNeededwidth(shed, woodPost);
+        int sideFour = WallCoveringsNeededwidth(shed, woodPost);
+        int allSides = sideOne + sideTwo + sideThree + sideFour;
+        return allSides;
+    }
+
+    @Override
+    public int WallCoveringsNeededwidth(Shed shed, WoodPost woodPost) {
+        //overlay used for 100 mm width wallcover => standart width
+        double overlay = dataaccessor.getVariabel(5); // 150
+        double shedCoverWidth = shed.getWidth() - (2 * woodPost.getWidth() - (2* dataaccessor.getVariabel(1))); // 1200
+        double wallCoverWidth = shed.getWallCovering().getWidth();
+        double woodPostWidth = woodPost.getWidth();
+        // distance to second board 
+        double MaxCover = ((2 * wallCoverWidth) + (2 * overlay));
+        // when calculation placements of the board, one board is places against the woodpost inner side. 
+        double distenceToCover = shedCoverWidth - wallCoverWidth;
+        double wallCoverFits = distenceToCover / MaxCover;
+        double nearst = (Math.ceil(wallCoverFits / 1000.0) * 1000);
+        double outerCover = Math.ceil(distenceToCover / nearst);
+        int Round = (int) outerCover;
+        // Find ud af om næste linje er tanke torsk eller vigtig
+        //int Overlay = (shedCoverDepth - finalCoverNeededtotal) / 2;
+        // https://www.lav-det-selv.dk/artikler/id/76/s/1-paa-2-beklaedning
+        int indercover = Round - 1;
+        int totalAmount = (indercover + Round);
+        return totalAmount;
+    }
+
+    @Override
+    public int floorArea(Shed shed) {
+        int floorArea = shed.getDepth() /1000 * shed.getWidth() / 1000;
+        return floorArea;
+    }
+
+    //////////////////////////////////// Carport //////////////////////////////////
+    //
+    @Override
+    public HashMap<String, String> CalculateCarport(Carport carport) {
+        HashMap<String, String> prices = new HashMap();
+        // roof prices
+        double beamPrice = carport.getRoof().getBeam().getTotalPrice();
+        double rafterPrice = carport.getRoof().getRafter().getTotalPrice();
+        double rooftilesPrice = carport.getRoof().getRooftiles().getTotalPrice();
+        double battenPrice = carport.getRoof().getBatten().getTotalPrice();
+        double wallcoverPrice = carport.getRoof().getWallCovering().getTotalPrice();
+        double woodpostPrice = carport.getRoof().getWoodpost().getTotalPrice();
+        double roofPrice = beamPrice + rafterPrice + rooftilesPrice + battenPrice + wallcoverPrice + woodpostPrice;
+        // add to map
+        prices.put("RoofPrice ", roofPrice + " kr");
+        //  Shed prices  
+        Shed Quick = carport.getShed();
+        double shedPrice = Quick.getWallCovering().getTotalPrice() + Quick.getFloor().getTotalPrice();
+        prices.put("ShedPrice ", shedPrice + " kr");
+        double carportPrice = shedPrice + roofPrice;
+        prices.put("Carport ", carportPrice + " kr");
+
+        return prices;
     }
 
 }
