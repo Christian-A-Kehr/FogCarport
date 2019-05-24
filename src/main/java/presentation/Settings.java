@@ -25,7 +25,9 @@ public class Settings extends Command {
         
         session.setAttribute("allMatTypes", logic.getMaterialType());
         session.setAttribute("allMats", logic.getAllMaterials());
-
+        session.setAttribute("deliveryList", logic.getDeliveryLocations());
+        session.setAttribute("demandsList", logic.getAllDemands());
+        
         return "settingsPage";
     }
 
