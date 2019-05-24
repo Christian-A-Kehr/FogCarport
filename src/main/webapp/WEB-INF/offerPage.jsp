@@ -4,6 +4,9 @@
     Author     : Mkhansen
 --%>
 
+<%@page import="data.Roof"%>
+<%@page import="data.Shed"%>
+<%@page import="data.Carport"%>
 <%@page import="data.Material"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,6 +26,14 @@
             <p>Firskovvej 20 - 2800 Lyngby</p>
             <p>CVR-nr. 16314439</p>
             <h2>Alle mål er i mm</h2>
+            <% session.getAttribute("carport"); %>
+            <% Shed shed = (Shed) session.getAttribute("shed"); %>
+            <% Roof roof = (Roof) session.getAttribute("roof"); %>
+            <p>Carport højde YOOOOOOO = ${carp.getHeight()}</p>
+            <p>Carport højde YOOOOOOO = ${carp.getHeight()} </p>
+            <p>Skur dybde YOOOOOOO = ${shed.getDepth()} </p>
+            <p>Skur pris YOOOOOOO = ${shed.getFloor().getprice()}</p>
+            <p>Skur totalpris YOOOOOOO =  ${shed.getFloor().getTotalPrice()} </p>
 
             <p>Højde = <%= request.getParameter("height")%> </p>
             <p>Længde = <%= request.getParameter("length")%> </p>
