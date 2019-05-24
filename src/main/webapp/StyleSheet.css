@@ -1,12 +1,12 @@
 input[type=button], input[type=submit], input[type=reset] {
-  background-color: #4CAF50; /* Green */
-  border:1.5px solid black;
-  border-radius: 10px;
-  color: black;
-  padding: 5px;
-  text-align: center;
-  display: inline-block;
-  font-size: 14px;
+    background-color: #4CAF50; /* Green */
+    border:1.5px solid black;
+    border-radius: 10px;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
 }
 body{
     font-family: Arial;
@@ -42,10 +42,9 @@ caption{
     line-height: 2.5;
 }
 #newMatInput{
-    width: 40px;
+    width: 50px;
 }
 #tableButton{
-    
     width: 50%;
     align-items: flex-end;
 }
