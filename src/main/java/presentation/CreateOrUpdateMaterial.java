@@ -25,6 +25,9 @@ public class CreateOrUpdateMaterial extends Command {
         String desc = request.getParameter("descriptionChoice");
         String material = request.getParameter("materialChoice");
         String type = request.getParameter("typeChoice");
+        if(request.getParameter("typeChoice").equalsIgnoreCase("Ny Type")){
+            type = request.getParameter("newTypeChoice");
+        }
         int matNum = Integer.parseInt(request.getParameter("matNumChoice"));
         int length = Integer.parseInt(request.getParameter("lengthChoice"));
         int height = Integer.parseInt(request.getParameter("heightChoice"));
