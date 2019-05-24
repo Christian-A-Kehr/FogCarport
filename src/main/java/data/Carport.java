@@ -70,5 +70,10 @@ public class Carport {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Carport{" + "height=" + height + ", length=" + length + ", width=" + width + ", roof=" + roof + ", shed=" + shed + ", price=" + price + '}';
+    }
+
     
 }
