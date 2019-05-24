@@ -21,7 +21,7 @@ public class DeleteMaterial extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         logic.dropMaterial(Integer.parseInt(request.getParameter("deleteChoice")));
-        
+         
         return new Settings().execute(request, response);
     }
 
