@@ -330,7 +330,7 @@ public class CalculateTest {
     @Test
     public void testCalculateCarport() {
         HashMap<String, String> newMap = new HashMap();
-        newMap.put("RoofPrice ", 6279.0 + " Kr");
+        newMap.put("RoofPrice ", 6279.0 + " kr");
         newMap.put("ShedPrice ", 4000.0 + " kr");
         newMap.put("Carport ", 10279.0 + " kr");
 
