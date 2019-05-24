@@ -214,7 +214,8 @@ public class Assemble implements AssembleInterface {
 
     @Override
     public Batten createBatten(Carport carport) {
-        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getBatten().getId());
+        Material mat = DATAACC.getMaterial("Lægte Spærtræ");
+         //getMaterialFromId(carport.getRoof().getBatten().getId());
         Batten quick = carport.getRoof().getBatten();
         Batten batter;
         if (carport.getRoof().getType().equals("Med rejsning")) {
