@@ -107,5 +107,10 @@ public class Roof {
         return wallCovering;
     }
 
+    @Override
+    public String toString() {
+        return "Roof{" + "type=" + type + ", angle=" + angle + ", height=" + height + ", length=" + length + ", width=" + width + ", beam=" + beam + ", rafter=" + rafter + ", woodpost=" + woodpost + ", rooftiles=" + rooftiles + ", battens=" + battens + ", wallCovering=" + wallCovering + '}';
+    }
+
 
 }
