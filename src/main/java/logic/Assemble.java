@@ -99,20 +99,29 @@ public class Assemble implements AssembleInterface {
     public Rafter createRafter(Carport carport) {
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getRafter().getId());
         Rafter Quick = carport.getRoof().getRafter();
+        Rafter rafter;
+        int amount;
+        double totalPrice;
         String material = Quick.getMaterial();
         int lenght = Quick.getLenght();
         int height = Quick.getHeight();
         int width = Quick.getThickness();
         int id = Quick.getId();
-        int amount = CAL.TotalLengthRaftersFlatRoof(carport);
+        int rafterFlat = CAL.NumbersOfRaftersFlatRoof(carport.getLength());
         double price = mat.getPrice();
-        double totalPrice = CAL.rooftilesTotalprice(price, amount);
-
-        Rafter rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
-
+        if (carport.getRoof().getType().equals("Med rejsning")){
+        amount = CAL.NumberOfRaftersSlopedRoof(carport) + rafterFlat;
+        totalPrice = CAL.TotalPriceRaftersWithSlope(carport);
+        rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
+        return rafter;
+        }
+        else{
+        amount = rafterFlat;
+        totalPrice = CAL.TotalPriceRaftersFlatRoof(carport);
+        rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
         return rafter;
     }
-
+    }
     // done
     @Override
     public WoodPost createWoodpost(Carport carport) {
@@ -120,11 +129,11 @@ public class Assemble implements AssembleInterface {
         WoodPost Quick = carport.getRoof().getWoodpost();
         String material = Quick.getMaterial();
         int lenght = Quick.getLength();
-        int height = mat.getHeight();
+        int height = carport.getHeight();
         int width = Quick.getWidth();
         int id = Quick.getId();
         double price = mat.getPrice();
-        int amount = CAL.TotalLengthRaftersFlatRoof(carport);
+        int amount = CAL.WoodPostNeeded(carport);
         double totalPrice = CAL.WooPostTotalPrice(carport);
 
         WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
@@ -140,7 +149,7 @@ public class Assemble implements AssembleInterface {
         int Hwidth = standart.getWidth();
         int Hid = standart.getMatNum();
         double Hprice = mat.getPrice();
-        int Hamount = CAL.TotalLengthRaftersFlatRoof(carport);
+        int Hamount = CAL.WoodPostNeeded(carport);
         double HtotalPrice = CAL.WooPostTotalPrice(carport);
 
         WoodPost Hardcode = new WoodPost(Hmaterial, Hlenght, Hwidth, Hid, Hamount, Hprice, HtotalPrice);
@@ -158,7 +167,7 @@ public class Assemble implements AssembleInterface {
         int height = mat.getHeight();
         int width = Quick.getWidth();
         int id = Quick.getId();
-        int amount = CAL.TotalLengthRaftersFlatRoof(carport);
+        int amount = CAL.BeamsNeeded(carport);
         double price = mat.getPrice();
         double totalPrice = CAL.beamsPrice(carport);
 
@@ -223,7 +232,7 @@ public class Assemble implements AssembleInterface {
         // lægte spærtræ = hardcoded burde være i variabler 
         Material mat = DATAACC.getMaterial("Lægte Spærtræ");
         //getMaterialFromId(carport.getRoof().getBatten().getId());
-        Batten quick = carport.getRoof().getBatten();
+        //Batten quick = carport.getRoof().getBatten();
         
         String material = "Lægte Spærtræ";
         int lenght = carport.getWidth();

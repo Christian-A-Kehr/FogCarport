@@ -61,9 +61,9 @@ class Calculate implements LogicInterface {
 
     @Override
     public int TotalLengthRaftersFlatRoof(Carport carport) {
-        double totalLength = (NumbersOfRaftersFlatRoof(carport.getWidth()) * carport.getLength());
-        int mm = (int) totalLength;
-        return mm;
+        double totalLength = (NumbersOfRaftersFlatRoof(carport.getLength()) * carport.getWidth());
+        int round = (int) Math.round(totalLength);
+        return round;
     }
 
     @Override
@@ -76,20 +76,27 @@ class Calculate implements LogicInterface {
     //TEST DENNE PGA INT cast Vigtigt! 
     @Override
     public int TotalLengthRaftersWithSlope(Carport carport) {
-        double lengthSingleRafterWithSlope = (int) ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle()))); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
+        double lengthSingleRafterWithSlope = ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle()))); // Der ganges med 0,5 for at kunne danne en retvinklet trekant. 
         // Derefter findes længden af c via formlen c = b * cos(A).
         double lengthBothSidesWithSlope = 2 * lengthSingleRafterWithSlope;                                      // Der ganges med to for at få længden af begge hældningssider.
-        double totalLength = NumbersOfRaftersFlatRoof(lengthBothSidesWithSlope) * carport.getLength() ; // Antal spær ganges med længden 
+        double totalLength = (NumberOfRaftersSlopedRoof(carport) * lengthBothSidesWithSlope) + TotalLengthRaftersFlatRoof(carport); // Antal spær ganges med længden 
         // af de to hældningssider. Resultatet plusses
         // med den samlede længde af de flade spær.
         int round = (int) Math.round(totalLength);
         return round;
     }
+    // er det her noget hejs, kan man bare gør som med fladt tag eller overser jeg noget
+    @Override
+    public int NumberOfRaftersSlopedRoof(Carport carport) {
+        int number = NumbersOfRaftersFlatRoof(carport.getLength()) *2 ; // 3 because 2 ekstra rafters is add pr rafter.  
+        return number; 
+    }
 
     @Override
     public double TotalPriceRaftersWithSlope(Carport carport) {
-        double totalprice = (TotalLengthRaftersWithSlope(carport) / 1000) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
-        return totalprice;
+        double lenght = TotalLengthRaftersWithSlope(carport);
+        double totalprice = (lenght / 1000) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
+        return Math.floor(totalprice * 100) / 100;
 
     }
 
@@ -97,8 +104,8 @@ class Calculate implements LogicInterface {
     public int BeamsNeeded(Carport carport) {
         int carportWidth = carport.getWidth();
         int beamsDistance = dataaccessor.getVariabel(2); //4000;
-        int overHang3 = dataaccessor.getVariabel(7); //150;
-        int overHang4 = dataaccessor.getVariabel(8); // 150;
+        int overHang3 = dataaccessor.getVariabel(1); //150;
+        int overHang4 = dataaccessor.getVariabel(1); // 150;
         int stretchForBeams = (carportWidth - (overHang3 + overHang4));
         double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((carport.getRoof().getBeam().getWidth() + beamsDistance));
         int totalBeamsNeeded = (int) (Math.ceil(totalNumbersBeams / 1000.0) * 1000);
