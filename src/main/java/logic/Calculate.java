@@ -29,19 +29,32 @@ class Calculate implements LogicInterface {
     /////////////////////////////////roof///////////////////////////////////////////////
     @Override
     public int WoodPostNeeded(Carport carport) {
+        double standartWoodpostwidth = dataaccessor.getVariabel(6);
         double carportLength = carport.getLength();
         double woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
         double overHang1 = dataaccessor.getVariabel(1); // 150 mm
         double overHang2 = dataaccessor.getVariabel(1); // 150 mm
         double stretchForWoodposts = (carportLength - (overHang1 + overHang2));
-        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (carport.getRoof().getWoodpost().getWidth() + woodPostsDistance) * BeamsNeeded(carport);
+        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (standartWoodpostwidth + woodPostsDistance) * BeamsNeeded(carport.getWidth(), carport.getRoof().getBeam().getWidth());
+        int rounded = (int) Math.ceil(totalNumberwoodpostsDouble);
+        return rounded;
+    }
+
+    public int WoodPostNeededViaShed(Roof roof, Shed shed) {
+        double standartWoodpostwidth = dataaccessor.getVariabel(6);
+        double carportLength = roof.getLength();
+        double woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
+        double overHang1 = dataaccessor.getVariabel(1); // 150 mm
+        double overHang2 = dataaccessor.getVariabel(1); // 150 mm
+        double stretchForWoodposts = (carportLength - (overHang1 + overHang2));
+        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (roof.getWoodpost().getWidth() + woodPostsDistance) * BeamsNeeded(roof.getWidth(), roof.getWoodpost().getWidth());
         int rounded = (int) Math.ceil(totalNumberwoodpostsDouble);
         return rounded;
     }
 
     @Override
     public double WooPostTotalPrice(Carport carport) {
-        double totalPrice = (WoodPostNeeded(carport) * (carport.getHeight() )) * carport.getRoof().getWoodpost().getprice() / 1000;
+        double totalPrice = (WoodPostNeeded(carport) * (carport.getHeight())) * carport.getRoof().getWoodpost().getprice() / 1000;
         return totalPrice;
     }
 
@@ -85,11 +98,12 @@ class Calculate implements LogicInterface {
         int round = (int) Math.round(totalLength);
         return round;
     }
+
     // er det her noget hejs, kan man bare gør som med fladt tag eller overser jeg noget
     @Override
     public int NumberOfRaftersSlopedRoof(Carport carport) {
-        int number = NumbersOfRaftersFlatRoof(carport.getLength()) *2 ; // 3 because 2 ekstra rafters is add pr rafter.  
-        return number; 
+        int number = NumbersOfRaftersFlatRoof(carport.getLength()) * 2; // 3 because 2 ekstra rafters is add pr rafter.  
+        return number;
     }
 
     @Override
@@ -101,23 +115,43 @@ class Calculate implements LogicInterface {
     }
 
     @Override
-    public int BeamsNeeded(Carport carport) {
-        int carportWidth = carport.getWidth();
-        int beamsDistance = dataaccessor.getVariabel(2); //4000;
-        int overHang3 = dataaccessor.getVariabel(1); //150;
-        int overHang4 = dataaccessor.getVariabel(1); // 150;
-        int stretchForBeams = (carportWidth - (overHang3 + overHang4));
-        double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((carport.getRoof().getBeam().getWidth() + beamsDistance));
+    public int BeamsNeeded(double DistianceWith, double BeamWidth) {
+        double coveringDistances = DistianceWith;
+        double beamsDistance = dataaccessor.getVariabel(2); //4000;
+        double overHang3 = dataaccessor.getVariabel(1); //150;
+        double overHang4 = dataaccessor.getVariabel(1); // 150;
+        double stretchForBeams = (coveringDistances - (overHang3 + overHang4));
+        double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((BeamWidth + beamsDistance));
         int totalBeamsNeeded = (int) (Math.ceil(totalNumbersBeams / 1000.0) * 1000);
         int Total = (totalBeamsNeeded / 1000) + 2; // outer sides
         return Total;
+    }
+    @Override
+    public int BeamsNeededShed(double carportWidth, double shedWidth, double beamWidth) {
+        double coveringDistances = carportWidth;
+        double beamsDistance = dataaccessor.getVariabel(2); //4000;
+        double overhang;
+        // overhang in one or two sides
+        if (coveringDistances == shedWidth) {
+            overhang = dataaccessor.getVariabel(1) * 2; //300
+        } else {
+            overhang = dataaccessor.getVariabel(1);
+        }
+        double stretchForBeams = (shedWidth - (overhang));
+        double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((beamWidth + beamsDistance));
+        int totalBeamsNeeded = (int) (Math.ceil(totalNumbersBeams));
+        int Total = (totalBeamsNeeded / 1000) + 2; // outer sides
+        return  totalBeamsNeeded;
+        //return Total;
     }
     // beams are cut to custom measures 
 
     @Override
     public double beamsPrice(Carport carport) {
+        double carportWidth = carport.getWidth();
+        double beamWidth = carport.getRoof().getBeam().getWidth();
         double lenghtPrBeam = carport.getHeight();
-        double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carport)) * carport.getRoof().getBeam().getprice();
+        double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carportWidth, beamWidth)) * carport.getRoof().getBeam().getprice();
         return Math.round(totalPrice);
     }
 
@@ -162,10 +196,7 @@ class Calculate implements LogicInterface {
 
         double b = roof.getWidth();
         double A = roof.getAngle();
-        if (!(roof.getType().equals("Med rejsning"))) {
-            int flatRoof = (int) ((b / 1000) * (roof.getLength() / 1000));
-            return flatRoof;
-        } else {
+        if (roof.getType().equals("Med rejsning")) {
             //double c = (b / Math.cos(A));
             double vinkelSum = 180 - A * 2;
             double c = ((b / 1000) * (Math.sin(Math.toRadians(A)) / Math.sin(Math.toRadians(vinkelSum))));
@@ -173,6 +204,9 @@ class Calculate implements LogicInterface {
             double area = ((c * (roof.getLength() / 1000)) * 2); // * 2 because there's two sides. 
             int done = (int) Math.round(area); // no half m2. 
             return done;
+        } else {
+            int flatRoof = (int) ((b / 1000) * (roof.getLength() / 1000));
+            return flatRoof;
         }
     }
 
@@ -207,7 +241,7 @@ class Calculate implements LogicInterface {
     public int WallCoveringsNeededDepth(Shed shed, WoodPost woodpost) {
         //overlay used for 100 mm width wallcover => standart width
         double overlay = dataaccessor.getVariabel(5); // 150
-        double shedCoverDepth = shed.getDepth() - (2 * woodpost.getWidth() - (2* dataaccessor.getVariabel(1))); // 1200
+        double shedCoverDepth = shed.getDepth() - (2 * woodpost.getWidth() - (2 * dataaccessor.getVariabel(1))); // 1200
         double wallCoverWidth = shed.getWallCovering().getWidth();
         double woodPostWidth = woodpost.getWidth();
         // distance to second board 
@@ -246,7 +280,7 @@ class Calculate implements LogicInterface {
     public int WallCoveringsNeededwidth(Shed shed, WoodPost woodPost) {
         //overlay used for 100 mm width wallcover => standart width
         double overlay = dataaccessor.getVariabel(5); // 150
-        double shedCoverWidth = shed.getWidth() - (2 * woodPost.getWidth() - (2* dataaccessor.getVariabel(1))); // 1200
+        double shedCoverWidth = shed.getWidth() - (2 * woodPost.getWidth() - (2 * dataaccessor.getVariabel(1))); // 1200
         double wallCoverWidth = shed.getWallCovering().getWidth();
         double woodPostWidth = woodPost.getWidth();
         // distance to second board 
@@ -267,7 +301,7 @@ class Calculate implements LogicInterface {
 
     @Override
     public int floorArea(Shed shed) {
-        int floorArea = shed.getDepth() /1000 * shed.getWidth() / 1000;
+        int floorArea = shed.getDepth() / 1000 * shed.getWidth() / 1000;
         return floorArea;
     }
 

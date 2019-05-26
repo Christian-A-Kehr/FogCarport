@@ -30,7 +30,7 @@ public class Roof {
         this.rafter = rafter;
         this.woodpost = woodpost;
         this.rooftiles = rooftile;
-        this.battens = battens;
+        this.battens = battens; 
         this.wallCovering = wallCovering;
     }
 

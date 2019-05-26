@@ -32,19 +32,20 @@ public class Assemble implements AssembleInterface {
 
     @Override
     public Carport AssembleCarport(Carport carport) {
-        Roof roof = createRoof(carport);
-        Carport carportComplte = null;
 
+        Carport carportComplte = null;
+        Roof roof;
         if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
             try {
                 Shed shed = createShed(carport);
-
+                roof = createRoofViaShed(carport, shed);
                 carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
                 return carportComplte;
             } catch (BuildException ex) {
                 Logger.getLogger(Assemble.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
+            roof = createRoof(carport);
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
             return carportComplte;
         }
@@ -78,7 +79,33 @@ public class Assemble implements AssembleInterface {
         }
     }
 
-    // done 
+    public Roof createRoofViaShed(Carport carport, Shed shed) {
+        Roof quick = carport.getRoof();
+        Roof roof;
+        String type = quick.getType();
+        int angle = quick.getAngle();
+        int height = getRoofHeight(carport);
+        int lenght = quick.getLength();
+        int width = quick.getWidth();
+        Rafter rafter = createRafter(carport);
+        Rooftile rooftile = createRoofTile(quick);
+        Beam beam = createBeamViaShed(carport);
+        WoodPost woodpost = createWoodpostViaShed(carport);
+
+        if (carport.getRoof().getType().equals("Med rejsning")) {
+            Batten batten = createBatten(carport);
+            WallCovering wallCovering = createGabledWallcover(carport);
+            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
+            return roof;
+
+        } else {
+            roof = new Roof(type, angle, lenght, width, beam, rafter, woodpost, rooftile);
+            return roof;
+        }
+
+    }
+
+// done 
     @Override
     public int getRoofHeight(Carport carport) {
         int height;
@@ -109,22 +136,55 @@ public class Assemble implements AssembleInterface {
         int id = Quick.getId();
         int rafterFlat = CAL.NumbersOfRaftersFlatRoof(carport.getLength());
         double price = mat.getPrice();
-        if (carport.getRoof().getType().equals("Med rejsning")){
-        amount = CAL.NumberOfRaftersSlopedRoof(carport) + rafterFlat;
-        totalPrice = CAL.TotalPriceRaftersWithSlope(carport);
-        rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
-        return rafter;
+        if (carport.getRoof().getType().equals("Med rejsning")) {
+            amount = CAL.NumberOfRaftersSlopedRoof(carport) + rafterFlat;
+            totalPrice = CAL.TotalPriceRaftersWithSlope(carport);
+            rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
+            return rafter;
+        } else {
+            amount = rafterFlat;
+            totalPrice = CAL.TotalPriceRaftersFlatRoof(carport);
+            rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
+            return rafter;
         }
-        else{
-        amount = rafterFlat;
-        totalPrice = CAL.TotalPriceRaftersFlatRoof(carport);
-        rafter = new Rafter(material, lenght, height, width, id, amount, price, totalPrice);
-        return rafter;
     }
-    }
+
     // done
     @Override
     public WoodPost createWoodpost(Carport carport) {
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
+        WoodPost Quick = carport.getRoof().getWoodpost();
+        String material = Quick.getMaterial();
+        int lenght = Quick.getLength();
+        int height = carport.getHeight();
+        int width = Quick.getWidth();
+        int id = Quick.getId();
+        double price = mat.getPrice();
+        int amount = CAL.WoodPostNeeded(carport);
+        double totalPrice = CAL.WooPostTotalPrice(carport);
+
+        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
+
+        // return woodpost
+        // hardcoded
+        DataUpdater dataUp = new DataUpdater();
+        Material standart = dataUp.getMaterialFromId(500);
+
+        String Hmaterial = standart.getMaterial();
+        int Hlenght = standart.getLength();
+        int Hheight = mat.getHeight();
+        int Hwidth = standart.getWidth();
+        int Hid = standart.getMatNum();
+        double Hprice = mat.getPrice();
+        int Hamount = CAL.WoodPostNeeded(carport);
+        double HtotalPrice = CAL.WooPostTotalPrice(carport);
+
+        WoodPost Hardcode = new WoodPost(Hmaterial, Hlenght, Hwidth, Hid, Hamount, Hprice, HtotalPrice);
+
+        return Hardcode;
+    }
+
+    public WoodPost createWoodpostViaShed(Carport carport) {
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
         WoodPost Quick = carport.getRoof().getWoodpost();
         String material = Quick.getMaterial();
@@ -165,9 +225,43 @@ public class Assemble implements AssembleInterface {
         String material = Quick.getMaterial();
         int lenght = Quick.getLength();
         int height = mat.getHeight();
-        int width = Quick.getWidth();
+        int width = mat.getWidth();
         int id = Quick.getId();
-        int amount = CAL.BeamsNeeded(carport);
+        int amount = CAL.BeamsNeeded(carport.getWidth(), carport.getRoof().getBeam().getWidth());
+        double price = mat.getPrice();
+        double totalPrice = CAL.beamsPrice(carport);
+
+        Beam beam = new Beam(material, lenght, height, width, id, amount, price, totalPrice);
+        return beam;
+    }
+
+    public Beam createBeamViaShed(Carport carport) {
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getBeam().getId());
+
+        Beam Quick = carport.getRoof().getBeam();
+        String material = Quick.getMaterial();
+        int lenght = Quick.getLength();
+        int height = mat.getHeight();
+        int width = mat.getWidth();
+        int id = Quick.getId();
+        int sheedAmount = CAL.BeamsNeeded(carport.getShed().getWidth(), width);
+        int amount; 
+        double distanceLeft = carport.getWidth()- carport.getShed().getWidth();
+        if (distanceLeft == 0) {
+        amount = sheedAmount;
+        }
+        else{
+           double distanceLeftOneSide = distanceLeft + DATAACC.getVariabel(1);
+        int remaindingBeams = CAL.BeamsNeeded(distanceLeftOneSide , width);
+        if (remaindingBeams > 3){
+            amount = sheedAmount + 1;
+        }
+        else{
+          amount = sheedAmount + remaindingBeams - 2;
+        }
+        }
+        
+        amount = CAL.BeamsNeeded(distanceLeft, width);
         double price = mat.getPrice();
         double totalPrice = CAL.beamsPrice(carport);
 
@@ -233,7 +327,7 @@ public class Assemble implements AssembleInterface {
         Material mat = DATAACC.getMaterial("Lægte Spærtræ");
         //getMaterialFromId(carport.getRoof().getBatten().getId());
         //Batten quick = carport.getRoof().getBatten();
-        
+
         String material = "Lægte Spærtræ";
         int lenght = carport.getWidth();
         int height = mat.getHeight();

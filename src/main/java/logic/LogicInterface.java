@@ -28,9 +28,10 @@ public interface LogicInterface {
     public int TotalLengthRaftersWithSlope(Carport carport);
     public double TotalPriceRaftersWithSlope(Carport carport);
     //beams
-    public int BeamsNeeded(Carport carport); // skal laves om til int length (nuværende = carport)
+    public int BeamsNeeded(double carportWidth, double beamWidth); // skal laves om til int length (nuværende = carport)
+    public int BeamsNeededShed(double carportWidth, double shedWidth, double beamWidth);
     public double beamsPrice(Carport carport); 
-
+    
     //floor
     public int floorArea(Shed shed);
 

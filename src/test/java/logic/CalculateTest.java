@@ -42,7 +42,6 @@ public class CalculateTest {
     Carport testCarport = new Carport(2100, 4000, 5000, testRoof, testShed);
 
     Roof faltRoof = new Roof("uden rejsning", angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, testWallcover);
-
     public CalculateTest() {
     }
 
@@ -162,13 +161,42 @@ public class CalculateTest {
     public void testBeamsNeeded() {
         System.out.println("BeamsNeeded");
         Carport carport = testCarport;
+        double carportWith = carport.getWidth();
+        double beamWith = carport.getRoof().getBeam().getWidth();
         Calculate instance = new Calculate();
         int expResult = 3;
-        int result = instance.BeamsNeeded(carport);
+        int result = instance.BeamsNeeded(carportWith, beamWith);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
+    @Test
+    public void testBeamsNeededShedEndToEndIfEqual() {
+        System.out.println("BeamsNeededShed");
+        
+        double carportWith = 4650;
+        double shedWidth = carportWith;
+        double beamWith = 195;
+        Calculate instance = new Calculate();
+        int expResult = 2;
+        int result = instance.BeamsNeededShed(carportWith, shedWidth , beamWith);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+     @Test
+    public void testBeamsNeededShedEndToEndIfNotEqual() {
+        System.out.println("BeamsNeededShed");
+        
+        double carportWith = 8650;
+        double shedWidth = 4650;
+        double beamWith = 195;
+        Calculate instance = new Calculate();
+        int expResult = 3;
+        int result = instance.BeamsNeededShed(carportWith, shedWidth , beamWith);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
     /**
      * Test of beamsPrice method, of class Calculate.
      */
