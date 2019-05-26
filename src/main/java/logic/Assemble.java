@@ -153,20 +153,21 @@ public class Assemble implements AssembleInterface {
     @Override
     public WoodPost createWoodpost(Carport carport) {
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
-        WoodPost Quick = carport.getRoof().getWoodpost();
-        String material = Quick.getMaterial();
-        int lenght = Quick.getLength();
-        int height = carport.getHeight();
-        int width = Quick.getWidth();
-        int id = Quick.getId();
-        double price = mat.getPrice();
-        int amount = CAL.WoodPostNeeded(carport);
-        double totalPrice = CAL.WooPostTotalPrice(carport);
-
-        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
+//        WoodPost Quick = carport.getRoof().getWoodpost();
+//        String material = Quick.getMaterial();
+//        int lenght = Quick.getLength();
+//        int height = carport.getHeight();
+//        int width = Quick.getWidth();
+//        int id = Quick.getId();
+//        double price = mat.getPrice();
+//        int amount = CAL.WoodPostNeeded(carport);
+//        double totalPrice = CAL.WooPostTotalPrice(carport);
+//
+//        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
 
         // return woodpost
-        // hardcoded
+        
+// hardcoded
         DataUpdater dataUp = new DataUpdater();
         Material standart = dataUp.getMaterialFromId(6);
 
