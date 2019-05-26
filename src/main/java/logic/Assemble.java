@@ -168,7 +168,7 @@ public class Assemble implements AssembleInterface {
         // return woodpost
         // hardcoded
         DataUpdater dataUp = new DataUpdater();
-        Material standart = dataUp.getMaterialFromId(500);
+        Material standart = dataUp.getMaterialFromId(6);
 
         String Hmaterial = standart.getMaterial();
         int Hlenght = standart.getLength();
