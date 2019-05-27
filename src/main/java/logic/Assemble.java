@@ -31,25 +31,26 @@ public class Assemble implements AssembleInterface {
     private final Calculate CAL = new Calculate();
 
     @Override
-    public Carport AssembleCarport(Carport carport) {
+    public Carport AssembleCarport(Carport carport) throws BuildException{
 
-        Carport carportComplte = null;
+        Carport carportComplte;
         Roof roof;
-        if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
-            try {
+         try {
+        if (carport.getShed().getDepth() > 0 && carport.getShed().getWidth() > 0) {
+           
                 Shed shed = createShed(carport);
                 roof = createRoofViaShed(carport, shed);
                 carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
                 return carportComplte;
-            } catch (BuildException ex) {
-                Logger.getLogger(Assemble.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         } else {
             roof = createRoof(carport);
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
             return carportComplte;
         }
-        return carportComplte;
+        } catch (BuildException ex) {
+            throw new BuildException("fail at shed");
+            }
     }
 
     /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -168,8 +169,7 @@ public class Assemble implements AssembleInterface {
         // return woodpost
         
 // hardcoded
-        DataUpdater dataUp = new DataUpdater();
-        Material standart = dataUp.getMaterialFromId(6);
+        Material standart = DATAACC.getMaterialFromId(6);
 
         String Hmaterial = standart.getMaterial();
         int Hlenght = standart.getLength();
@@ -392,10 +392,10 @@ public class Assemble implements AssembleInterface {
         int lenght = shed.getDepth();
         int width = shed.getWidth();
         int id = quick.getId();
-        Double price = mat.getPrice();
+        double price = mat.getPrice();
         int c = CAL.floorArea(shed) / (lenght * width);
         int amount = ((int) Math.ceil(c / 100.0));
-        Double totalPrice = amount * price;
+        double totalPrice = amount * price;
 
         Floor floor = new Floor(material, lenght, width, id, amount, price, totalPrice);
         return floor;
