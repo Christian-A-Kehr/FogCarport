@@ -15,6 +15,8 @@ import data.Rooftile;
 import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,61 +40,107 @@ public class CreateOffer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
-        String roofType = request.getParameter("flatOrNot");
-        int height = Integer.parseInt(request.getParameter("height"));
-        int length = Integer.parseInt(request.getParameter("height"));
-        int width = Integer.parseInt(request.getParameter("height"));
-        int shedWidth = Integer.parseInt(request.getParameter("shedDepth"));
-        int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
-        int angle = Integer.parseInt(request.getParameter("angleChoice"));
-
-        int rooftileID = Integer.parseInt(request.getParameter("rooftileChoice"));
-        int rafterID = Integer.parseInt(request.getParameter("rafterChoice"));
-        int beamID = Integer.parseInt(request.getParameter("beamChoice"));
-        int woodPostID = Integer.parseInt(request.getParameter("woodpostChoice"));
-        int floorID = Integer.parseInt(request.getParameter("floorChoice"));
-        int wallCoveringID = Integer.parseInt(request.getParameter("shedChoice"));
-
-        Material rafterMat = logic.getMaterialFromId(rafterID);
-        Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterID);
-
-        Material beamMat = logic.getMaterialFromId(beamID);
-        Beam beam = new Beam(beamMat.getMaterial(), length, beamID);
-
-        Material woodPostMat = logic.getMaterialFromId(woodPostID);
-        WoodPost woodpost = new WoodPost(woodPostMat.getMaterial(), height, woodPostID);
-
-        Material floorMat = logic.getMaterialFromId(floorID);
-        Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
-
-        Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
-        WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
-
-        Material rooftileMat = logic.getMaterialFromId(rooftileID);
-        Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
-
-//        session.setAttribute("rooftile", rooftileMat);
-//        session.setAttribute("rafter", rafterMat);
-//        session.setAttribute("beam", beamMat);
-//        session.setAttribute("woodPost", woodPostMat);
-//        session.setAttribute("floor", floorMat);
-//        session.setAttribute("wallCovering", wallCoveringMat);
-
-        Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
-
-        Roof roof = new Roof(roofType, angle, length, width, beam, rafter, woodpost, rooftile);
-
-        Carport carport = new Carport(height, length, width, roof, shed);
-
         try {
+
+            String roofType = request.getParameter("flatOrNot");
+            int height = Integer.parseInt(request.getParameter("height"));
+            int length = Integer.parseInt(request.getParameter("height"));
+            int width = Integer.parseInt(request.getParameter("height"));
+            int shedWidth = Integer.parseInt(request.getParameter("shedDepth"));
+            int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
+            int angle = Integer.parseInt(request.getParameter("angleChoice"));
+
+            int rooftileID = Integer.parseInt(request.getParameter("rooftileChoice"));
+            int rafterID = Integer.parseInt(request.getParameter("rafterChoice"));
+            int beamID = Integer.parseInt(request.getParameter("beamChoice"));
+            int woodPostID = Integer.parseInt(request.getParameter("woodpostChoice"));
+            int floorID = Integer.parseInt(request.getParameter("floorChoice"));
+            int wallCoveringID = Integer.parseInt(request.getParameter("shedChoice"));
+
+            Material rafterMat = logic.getMaterialFromId(rafterID);
+            Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterID);
+//            Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterMat.getHeight(), rafterMat.getWidth(), rafterID, amount, price, totalprice);
+//            String material, int lenght, int height, int thickness, int id, int amount, double price, double totalPrice
+
+            Material beamMat = logic.getMaterialFromId(beamID);
+            Beam beam = new Beam(beamMat.getMaterial(), length, beamID);
+
+            Material woodpostMat = logic.getMaterialFromId(woodPostID);
+            WoodPost woodpost = new WoodPost(woodpostMat.getMaterial(), height, woodPostID);
+
+            Material floorMat = logic.getMaterialFromId(floorID);
+            Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
+
+            Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
+            WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
+
+            Material rooftileMat = logic.getMaterialFromId(rooftileID);
+            Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
+
+            session.setAttribute("rooftile", rooftileMat);
+            session.setAttribute("rafter", rafterMat);
+            session.setAttribute("rafterName", rafterMat.getName());
+            session.setAttribute("beam", beamMat.getName());
+            session.setAttribute("woodpost", woodpostMat.getName());
+            session.setAttribute("floor", floorMat.getName());
+            session.setAttribute("wallCovering", wallCoveringMat);
+
+            Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
+
+            Roof roof = new Roof(roofType, angle, length, width, beam, rafter, woodpost, rooftile);
+
+            Carport carport = new Carport(height, length, width, roof, shed);
+
+            Rafter rafterOff = (Rafter) assemble.createRafter(carport);
+            Beam beamOff = (Beam) assemble.createBeam(carport);
+            WoodPost woodpostOff = (WoodPost) assemble.createWoodpost(carport);
+            Floor floorOff = (Floor) assemble.createFloor(shed);
+            Carport carp = (Carport) assemble.AssembleCarport(carport);
+            Shed shedTest = (Shed) assemble.createShed(carport);
+
+            session.setAttribute("rafterMPrice", carp.getRoof().getRafter().getMprice());
+            session.setAttribute("rafterMat", rafterOff.getMaterial());
+            session.setAttribute("rafterAmount", rafterOff.getAmount());
+            session.setAttribute("rafterDesc", rafterMat.getDesc());
+
+            session.setAttribute("beamMPrice", carp.getRoof().getBeam().getPrice());
+            session.setAttribute("beamMat", beamOff.getMaterial());
+            session.setAttribute("beamAmount", beamOff.getAmount());
+            session.setAttribute("beamDesc", beamMat.getDesc());
+
+            session.setAttribute("woodpostMPrice", carp.getRoof().getWoodpost().getPrice());
+            session.setAttribute("woodpostMat", woodpostOff.getMaterial());
+            session.setAttribute("woodpostAmount", woodpostOff.getAmount());
+            session.setAttribute("woodpostDesc", woodpostMat.getDesc());
+
+            session.setAttribute("floorPrice", carp.getShed().getFloor().getPrice());
+            session.setAttribute("floorMat", floorOff.getMaterial());
+            session.setAttribute("floorAmount", floorOff.getAmount());
+            session.setAttribute("floorDesc", floorMat.getDesc());
+
+            
+            
+            session.setAttribute("rafterTest2", rafterOff.getTotalPrice());
+            session.setAttribute("test", carp.getHeight());
+            session.setAttribute("test2", carp.getRoof().getBeam().getMaterial());
+            session.setAttribute("shedTest1", carp.getShed().getFloor());
+            session.setAttribute("shedTest2", shedTest.getFloor().getMaterial());
+            session.setAttribute("shedTest3", shedTest.getFloor().getprice());
+            session.setAttribute("shedTest4", shedTest.getFloor().getAmount());
+
             session.setAttribute("carport", assemble.AssembleCarport(carport));
             session.setAttribute("roof", assemble.createRoof(carport));
             session.setAttribute("shed", assemble.createShed(carport));
-            
-        } catch (BuildException ex) {
-            return "orderPage";
-        }
 
+        } catch (Exception ex) {
+            response.setContentType("text/html,charset=UTF8");
+            try {
+                PrintWriter out = response.getWriter();
+                out.print("Noget gik galt i createOFFER");
+            } catch (IOException ex1) {
+                return "orderPage";
+            }
+        }
         if (request.getParameter("mat").equals("Se stykliste")) {
             return "listOfMaterialsPage";
         }
