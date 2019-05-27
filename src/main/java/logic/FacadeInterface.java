@@ -5,12 +5,14 @@
  */
 package logic;
 
+import data.Carport;
 import data.DataUpdater;
 import data.Delivery;
 import data.Demand;
 import data.Material;
 import data.NoDataException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -46,4 +48,6 @@ public interface FacadeInterface {
     public ArrayList<Delivery> getDeliveryLocations();
     
     public ArrayList<Demand> getAllDemands();
+    
+    public HashMap<String,String> CalCarport(Carport carport);
 }
