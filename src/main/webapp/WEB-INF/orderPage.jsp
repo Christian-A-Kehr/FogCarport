@@ -167,8 +167,8 @@
                 </tr>
             </table>
             <input type="hidden" name="command" value="CreateOffer">
-            <input type="submit" name="mat" value="Opret tilbud">
-            <input type="submit" name="mat" value="Se stykliste">
+            <input type="submit" name="path" value="Opret tilbud">
+            <input type="submit" name="path" value="Se stykliste">
         </form>
     </body>
 </html>
