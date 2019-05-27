@@ -5,6 +5,7 @@
  */
 package logic;
 
+import data.Carport;
 import data.DataAccessor;
 import data.DataUpdater;
 import data.Delivery;
@@ -12,46 +13,44 @@ import data.Demand;
 import data.Material;
 import data.NoDataException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  *
  * @author Christian Ambjørn Kehr
  */
-public class Facade implements FacadeInterface{
+public class Facade implements FacadeInterface {
 
     private DataAccessor data = new DataAccessor();
     private DataUpdater dataUp = new data.DataUpdater();
+    private Calculate cal = new Calculate();
 
     /////////////////////////////testing///////////////////////////////////
 //    public static void main(String[] args) throws NoDataException {
 //        Facade logic = new Facade();
-        //System.err.println(getAllMaterials());
-
+    //System.err.println(getAllMaterials());
 //         System.err.println(getListSpecificMaterials(type));
 //        String name = "Spær C18";
 //        getMaterial(name);
-        // System.err.println(getMaterialFromId(50));
+    // System.err.println(getMaterialFromId(50));
 //                 String type = "spær";
 //   System.out.println(getMaterialType());
 //        System.err.println(getDelivery(lal));
-        //DisplayAllMaterial();
-        //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
-        //saveMaterial(testMat);
-        //dataUp.updateMaterial(50, testMat);
-        //     String location = "Fyn";
+    //DisplayAllMaterial();
+    //Material testMat = new Material("Test", "dette er en test", "test", "Test", 50, 2, 50, 60, 50);
+    //saveMaterial(testMat);
+    //dataUp.updateMaterial(50, testMat);
+    //     String location = "Fyn";
 //        System.err.println(getDelivery(location));
-        //updateDeliveryPrice(location, 1475); // 1475
+    //updateDeliveryPrice(location, 1475); // 1475
 //        String variable = "Udhæng_max";
 //        System.err.println(getVariable(variable));
 //        updateDemandVariables(variable, 150); // 150
 //         System.err.println(getDeliveryLocations());
-    
-
 //    }
 ///////////////////////////////////dataAccessor///////////////////////////////////
     //tested
-
     @Override
     public ArrayList<Material> getAllMaterials() {
         ArrayList list = new ArrayList(data.getAllMaterials());
@@ -83,8 +82,6 @@ public class Facade implements FacadeInterface{
     }
 
     /////////////////////////////////DataUpdater///////////////////////////////////////////////////
-  
-
     //Tested
     @Override
     public void saveMaterial(Material material) {
@@ -116,11 +113,13 @@ public class Facade implements FacadeInterface{
     public void updateDeliveryPrice(String location, double price) {
         dataUp.updateDeliveryPrice(location, price);
     }
+
     //tested
 //    @Override
     public Demand getVariable(String name) throws NoDataException {
         return dataUp.getVariable(name);
     }
+
     // tested
     @Override
     public void updateDemandVariables(String name, int measurements) {
@@ -137,4 +136,10 @@ public class Facade implements FacadeInterface{
     public ArrayList<Demand> getAllDemands() {
         return data.getAllDemands();
     }
+
+    @Override
+    public HashMap<String, String> CalCarport(Carport carport) {
+        return cal.CalculateCarport(carport);
+    }
+
 }
