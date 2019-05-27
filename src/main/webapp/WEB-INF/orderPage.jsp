@@ -158,7 +158,7 @@
                             <% ArrayList<Delivery> deliveryList = (ArrayList<Delivery>) session.getAttribute("deliveryList");
                                 for (int i = 0; i < deliveryList.size(); i++) {
                             %>
-                            <option value="<%= deliveryList.get(i)%>"><%out.print(deliveryList.get(i).getLocation());%></option>
+                            <option value="<%= deliveryList.get(i).getLocation() %>"><%out.print(deliveryList.get(i).getLocation());%></option>
                             <%
                                 }
                             %>
