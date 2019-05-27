@@ -15,16 +15,10 @@ import data.Rooftile;
 import data.Shed;
 import data.WallCovering;
 import data.WoodPost;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Assemble;
-import logic.BuildException;
 import logic.Facade;
 import logic.FogException;
 
@@ -76,7 +70,7 @@ public class CreateOffer extends Command {
 
             Material rooftileMat = logic.getMaterialFromId(rooftileID);
             Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
-
+            
             session.setAttribute("rooftile", rooftileMat);
             session.setAttribute("rafter", rafterMat);
             session.setAttribute("rafterName", rafterMat.getName());
@@ -88,8 +82,12 @@ public class CreateOffer extends Command {
             Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
 
             Roof roof = new Roof(roofType, angle, length, width, beam, rafter, woodpost, rooftile);
-
+            
             Carport carport = new Carport(height, length, width, roof, shed);
+            
+            session.setAttribute("carportPrice", logic.CalCarport(carport).get("Carport "));
+            session.setAttribute("shedPrice", logic.CalCarport(carport).get("ShedPrice "));
+            session.setAttribute("roofPrice", logic.CalCarport(carport).get("RoofPrice "));
 
             Rafter rafterOff = (Rafter) assemble.createRafter(carport);
             Beam beamOff = (Beam) assemble.createBeam(carport);
@@ -133,15 +131,10 @@ public class CreateOffer extends Command {
             session.setAttribute("shed", assemble.createShed(carport));
 
         } catch (Exception ex) {
-            response.setContentType("text/html,charset=UTF8");
-            try {
-                PrintWriter out = response.getWriter();
-                out.print("Noget gik galt i createOFFER");
-            } catch (IOException ex1) {
-                return "orderPage";
-            }
+            ex.getMessage();
+//            return "orderPage";
         }
-        if (request.getParameter("mat").equals("Se stykliste")) {
+        if (request.getParameter("path").equals("Se stykliste")) {
             return "listOfMaterialsPage";
         }
         return "offerPage";
