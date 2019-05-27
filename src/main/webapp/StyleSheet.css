@@ -48,3 +48,6 @@ caption{
     width: 50%;
     align-items: flex-end;
 }
+#offerTable {
+    width: 100%;
+}
