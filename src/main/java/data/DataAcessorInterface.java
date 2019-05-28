@@ -27,10 +27,6 @@ public interface DataAcessorInterface {
     
     public Material getMaterialFromId (int id);
     
-    // used to get an offer from database
-    public Offer getOffer (int Id);
-
-    // Used to recover offers data to JSP and create objects
     public Carport getCarport (int Id);
     
     public Roof getRoof (String name);
