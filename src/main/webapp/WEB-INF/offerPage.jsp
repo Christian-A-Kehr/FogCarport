@@ -28,7 +28,8 @@
             <h2>Alle mål er i mm</h2>
             
             <p><%= session.getAttribute("carportPrice")%></p>
-            
+            <p><%= session.getAttribute("calTest")%></p>
+            <%--
             <table id="offerTable">
                 <tr>
                     <th>Del af carport</th><th>Materiale valg</th><th>Materiale type</th><th>Meter pris</th><th>Antal</th>
@@ -55,7 +56,6 @@
                     <td><%= session.getAttribute("woodpostMPrice")%></td>
                     <td></td>
                 </tr>
-                --%>
             </table>
             
             <p> Test yO <%= session.getAttribute("test")%></p>
@@ -68,6 +68,7 @@
             <p> ShedTest -- getFloor.getMaterial <% out.print(session.getAttribute("shedTest2")); %></p>
             <p> ShedTest -- getFloor.getPrice <% out.print(session.getAttribute("shedTest3")); %></p>
             <p> ShedTest -- getFloor.getAmount <% out.print(session.getAttribute("shedTest4")); %></p>
+                --%>
             
             <%--
             <% Carport carp = (Carport) session.getAttribute("carport"); %>
@@ -83,6 +84,7 @@
             <p>8 Skur  pris YOOOOOOO =  <%= carp.getShed().getWallCovering().getAmount()%> </p>
             <p>9 Skur totalpris YOOOOOOO =  <%= carp.getShed().getWallCovering().getTotalPrice()%> </p>
              --%>
+             <%--
             <p>Højde = <%= request.getParameter("height")%> </p>
             <p>Længde = <%= request.getParameter("length")%> </p>
             <p>Bredde = <%= request.getParameter("width")%> </p>
@@ -106,6 +108,7 @@
             <p>Levering = <%= request.getParameter("delivery")%> </p>
             <p>Kunde navn = <%= request.getParameter("customerName")%> </p>
             <p>Kunde email = <%= request.getParameter("customerEmail")%> </p>
+            --%>
         </div>
 
         <input type="button" id="printbutton" value="Gem tilbud">   

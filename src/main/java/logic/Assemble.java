@@ -31,26 +31,25 @@ public class Assemble implements AssembleInterface {
     private final Calculate CAL = new Calculate();
 
     @Override
-    public Carport AssembleCarport(Carport carport) throws BuildException{
+    public Carport AssembleCarport(Carport carport) {
 
-        Carport carportComplte;
+        Carport carportComplte = null;
         Roof roof;
-         try {
-        if (carport.getShed().getDepth() > 0 && carport.getShed().getWidth() > 0) {
-           
+        if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
+            try {
                 Shed shed = createShed(carport);
                 roof = createRoofViaShed(carport, shed);
                 carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
                 return carportComplte;
-            
+            } catch (BuildException ex) {
+                Logger.getLogger(Assemble.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             roof = createRoof(carport);
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
             return carportComplte;
         }
-        } catch (BuildException ex) {
-            throw new BuildException("fail at shed");
-            }
+        return carportComplte;
     }
 
     /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -154,22 +153,22 @@ public class Assemble implements AssembleInterface {
     @Override
     public WoodPost createWoodpost(Carport carport) {
         Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
-//        WoodPost Quick = carport.getRoof().getWoodpost();
-//        String material = Quick.getMaterial();
-//        int lenght = Quick.getLength();
-//        int height = carport.getHeight();
-//        int width = Quick.getWidth();
-//        int id = Quick.getId();
-//        double price = mat.getPrice();
-//        int amount = CAL.WoodPostNeeded(carport);
-//        double totalPrice = CAL.WooPostTotalPrice(carport);
-//
-//        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
+        WoodPost Quick = carport.getRoof().getWoodpost();
+        String material = Quick.getMaterial();
+        int lenght = Quick.getLength();
+        int height = carport.getHeight();
+        int width = Quick.getWidth();
+        int id = Quick.getId();
+        double price = mat.getPrice();
+        int amount = CAL.WoodPostNeeded(carport);
+        double totalPrice = CAL.WooPostTotalPrice(carport);
+
+        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
 
         // return woodpost
-        
-// hardcoded
-        Material standart = DATAACC.getMaterialFromId(6);
+        // hardcoded
+        DataUpdater dataUp = new DataUpdater();
+        Material standart = dataUp.getMaterialFromId(500);
 
         String Hmaterial = standart.getMaterial();
         int Hlenght = standart.getLength();
@@ -389,12 +388,13 @@ public class Assemble implements AssembleInterface {
         Material mat = DATAACC.getMaterialFromId(shed.getFloor().getId());
         Floor quick = shed.getFloor();
         String material = quick.getMaterial();
-        int lenght = shed.getDepth();
-        int width = shed.getWidth();
         int id = quick.getId();
+        int lenght = mat.getLength();
+        int width = mat.getWidth();
         double price = mat.getPrice();
-        int c = CAL.floorArea(shed) / (lenght * width);
-        int amount = ((int) Math.ceil(c / 100.0));
+        double fArea = lenght / 1000 * width / 1000;
+        double TileAmount = CAL.floorArea(shed) / fArea;
+        int amount = ((int) Math.ceil(TileAmount));
         double totalPrice = amount * price;
 
         Floor floor = new Floor(material, lenght, width, id, amount, price, totalPrice);

@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @author Christian Ambjørn Kehr
  * @author Claus Mikkelsen Findinge
  */
-class Calculate implements LogicInterface {
+public class Calculate implements LogicInterface {
 //huske at slette noteform i comamnd
 
     private DataAccessor dataaccessor = new DataAccessor();
@@ -301,7 +301,7 @@ class Calculate implements LogicInterface {
 
     @Override
     public int floorArea(Shed shed) {
-        int floorArea = shed.getDepth() / 1000 * shed.getWidth() / 1000;
+        int floorArea = (shed.getDepth() / 1000) * (shed.getWidth() / 1000);
         return floorArea;
     }
 
@@ -309,12 +309,13 @@ class Calculate implements LogicInterface {
     //
     @Override
     public HashMap<String, String> CalculateCarport(Carport carport) {
+        Assemble assemble = new Assemble();
         HashMap<String, String> prices = new HashMap();
         // roof prices
         double beamPrice = carport.getRoof().getBeam().getTotalPrice();
         double rafterPrice = carport.getRoof().getRafter().getTotalPrice();
         double rooftilesPrice = carport.getRoof().getRooftiles().getTotalPrice();
-        double battenPrice = carport.getRoof().getBatten().getTotalPrice();
+        double battenPrice = battensPrice(battensNeeded(carport), assemble.createBatten(carport).getPrice() , carport.getRoof());
         double wallcoverPrice = carport.getRoof().getWallCovering().getTotalPrice();
         double woodpostPrice = carport.getRoof().getWoodpost().getTotalPrice();
         double roofPrice = beamPrice + rafterPrice + rooftilesPrice + battenPrice + wallcoverPrice + woodpostPrice;

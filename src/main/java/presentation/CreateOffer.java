@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Assemble;
+import logic.Calculate;
 import logic.Facade;
 import logic.FogException;
 
@@ -30,7 +31,8 @@ public class CreateOffer extends Command {
 
     private Facade logic = new Facade();
     private Assemble assemble = new Assemble();
-
+    private Calculate cal = new Calculate();
+    
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
@@ -66,7 +68,7 @@ public class CreateOffer extends Command {
             Floor floor = new Floor(floorMat.getMaterial(), shedDepth, shedWidth, floorID);
 
             Material wallCoveringMat = logic.getMaterialFromId(wallCoveringID);
-            WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, shedDepth, shedWidth);
+            WallCovering wallCovering = new WallCovering(wallCoveringMat.getMaterial(), height, wallCoveringMat.getWidth(), wallCoveringID);
 
             Material rooftileMat = logic.getMaterialFromId(rooftileID);
             Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
@@ -85,16 +87,16 @@ public class CreateOffer extends Command {
             
             Carport carport = new Carport(height, length, width, roof, shed);
             
-            session.setAttribute("carportPrice", logic.CalCarport(carport).get("Carport "));
-            session.setAttribute("shedPrice", logic.CalCarport(carport).get("ShedPrice "));
-            session.setAttribute("roofPrice", logic.CalCarport(carport).get("RoofPrice "));
-
             Rafter rafterOff = (Rafter) assemble.createRafter(carport);
             Beam beamOff = (Beam) assemble.createBeam(carport);
             WoodPost woodpostOff = (WoodPost) assemble.createWoodpost(carport);
             Floor floorOff = (Floor) assemble.createFloor(shed);
             Carport carp = (Carport) assemble.AssembleCarport(carport);
             Shed shedTest = (Shed) assemble.createShed(carport);
+            
+//            session.setAttribute("carportPrice", logic.CalCarport(carport).get("Carport "));
+//            session.setAttribute("shedPrice", logic.CalCarport(carport).get("ShedPrice "));
+//            session.setAttribute("roofPrice", logic.CalCarport(carport).get("RoofPrice "));
 
             session.setAttribute("rafterMPrice", carp.getRoof().getRafter().getMprice());
             session.setAttribute("rafterMat", rafterOff.getMaterial());
@@ -129,6 +131,8 @@ public class CreateOffer extends Command {
             session.setAttribute("carport", assemble.AssembleCarport(carport));
             session.setAttribute("roof", assemble.createRoof(carport));
             session.setAttribute("shed", assemble.createShed(carport));
+            
+            session.setAttribute("calTest", cal.WooPostTotalPrice(carport));
 
         } catch (Exception ex) {
             ex.getMessage();

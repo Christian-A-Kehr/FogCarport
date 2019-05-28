@@ -25,7 +25,7 @@
             
             <table id="offerTable">
                 <tr>
-                    <th>Del af carport</th><th>Materiale valg</th><th>Yderligere info</th><th>Materiale type</th><th>Meter pris</th><th>Antal</th>
+                    <th>Del af carport</th><th>Materiale valg</th><th>Yderligere info</th><th>Materiale type</th><th>Vare nummer</th><th>Antal</th>
                 </tr>
                 <tr><th>Tag</th></tr>
                 <tr>
@@ -33,7 +33,7 @@
                     <td><%= session.getAttribute("rafterName")%></td>
                     <td><%= session.getAttribute("rafterDesc")%></td>
                     <td><%= session.getAttribute("rafterMat")%></td>
-                    <td><%= session.getAttribute("rafterMPrice")%></td>
+                    <td><%= request.getParameter("rafterChoice")%></td>
                     <td><%= session.getAttribute("rafterAmount")%></td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
                     <td><%= session.getAttribute("beam")%></td>
                     <td><%= session.getAttribute("beamDesc")%></td>
                     <td><%= session.getAttribute("beamMat")%></td>
-                    <td><%= session.getAttribute("beamMPrice")%></td>
+                    <td><%= request.getParameter("beamChoice")%></td>
                     <td><%= session.getAttribute("beamAmount")%></td>
                 </tr>
                 <tr>
@@ -49,20 +49,18 @@
                     <td><%= session.getAttribute("woodpost")%></td>
                     <td><%= session.getAttribute("woodpostDesc")%></td>
                     <td><%= session.getAttribute("woodpostMat")%></td>
-                    <td><%= session.getAttribute("woodpostMPrice")%></td>
+                    <td><%= request.getParameter("woodpostChoice")%></td>
                     <td><%= session.getAttribute("woodpostAmount")%></td>
                 </tr>
                 <tr><th>Skur</th></tr>
-                <%--
                 <tr>
                     <td>Gulv</td>
                     <td><%= session.getAttribute("floor")%></td>
                     <td><%= session.getAttribute("floorDesc")%></td>
                     <td><%= session.getAttribute("floorMat")%></td>
-                    <td><%= session.getAttribute("floorPrice")%></td>
+                    <td><%= request.getParameter("floorChoice")%></td>
                     <td><%= session.getAttribute("floorAmount")%></td>
                 </tr>
-                --%>
             </table>
         </div>
 
