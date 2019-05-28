@@ -58,5 +58,10 @@ public class Rooftile {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Rooftile{" + "material=" + material + ", lenght=" + lenght + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
+    }
     
 }
