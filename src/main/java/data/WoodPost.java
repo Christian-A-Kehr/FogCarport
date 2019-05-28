@@ -62,5 +62,10 @@ public class WoodPost {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "WoodPost{" + "material=" + material + ", length=" + length + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
+    }
     
 }
