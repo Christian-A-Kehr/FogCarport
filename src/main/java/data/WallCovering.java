@@ -58,4 +58,10 @@ public class WallCovering {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "WallCovering{" + "material=" + material + ", length=" + length + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
+    }
+    
 }
