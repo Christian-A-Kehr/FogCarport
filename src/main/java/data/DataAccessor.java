@@ -152,11 +152,6 @@ public class DataAccessor implements DataAcessorInterface {
     }
 
     @Override
-    public Offer getOffer(int Id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Carport getCarport(int Id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
