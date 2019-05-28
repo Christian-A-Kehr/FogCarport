@@ -66,5 +66,10 @@ public class Beam {
     public double getTotalPrice() {
         return totalPrice;
     }
- 
+
+    @Override
+    public String toString() {
+        return "Beam{" + "material=" + material + ", length=" + length + ", height=" + height + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
+    }
+
 }
