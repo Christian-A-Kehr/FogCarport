@@ -63,6 +63,11 @@ public class Batten {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Batten{" + "material=" + material + ", lenght=" + lenght + ", height=" + height + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
+    }
  
  
 }
