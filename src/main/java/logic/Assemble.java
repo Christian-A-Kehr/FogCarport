@@ -31,25 +31,24 @@ public class Assemble implements AssembleInterface {
     private final Calculate CAL = new Calculate();
 
     @Override
-    public Carport AssembleCarport(Carport carport) {
+    public Carport AssembleCarport(Carport carport) throws BuildException{
 
-        Carport carportComplte = null;
+        Carport carportComplte;
         Roof roof;
-        if (carport.getShed().getDepth() > 0 | carport.getShed().getWidth() > 0) {
             try {
+        if (carport.getShed().getDepth() > 0 || carport.getShed().getWidth() > 0) {
                 Shed shed = createShed(carport);
                 roof = createRoofViaShed(carport, shed);
                 carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
                 return carportComplte;
-            } catch (BuildException ex) {
-                Logger.getLogger(Assemble.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } else {
             roof = createRoof(carport);
             carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
             return carportComplte;
         }
-        return carportComplte;
+            } catch (Exception ex) {
+                throw new BuildException("failed at Assemble");
+            }
     }
 
     /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -245,22 +244,20 @@ public class Assemble implements AssembleInterface {
         int width = mat.getWidth();
         int id = Quick.getId();
         int sheedAmount = CAL.BeamsNeeded(carport.getShed().getWidth(), width);
-        int amount; 
-        double distanceLeft = carport.getWidth()- carport.getShed().getWidth();
+        int amount;
+        double distanceLeft = carport.getWidth() - carport.getShed().getWidth();
         if (distanceLeft == 0) {
-        amount = sheedAmount;
+            amount = sheedAmount;
+        } else {
+            double distanceLeftOneSide = distanceLeft + DATAACC.getVariabel(1);
+            int remaindingBeams = CAL.BeamsNeeded(distanceLeftOneSide, width);
+            if (remaindingBeams > 3) {
+                amount = sheedAmount + 1;
+            } else {
+                amount = sheedAmount + remaindingBeams - 2;
+            }
         }
-        else{
-           double distanceLeftOneSide = distanceLeft + DATAACC.getVariabel(1);
-        int remaindingBeams = CAL.BeamsNeeded(distanceLeftOneSide , width);
-        if (remaindingBeams > 3){
-            amount = sheedAmount + 1;
-        }
-        else{
-          amount = sheedAmount + remaindingBeams - 2;
-        }
-        }
-        
+
         amount = CAL.BeamsNeeded(distanceLeft, width);
         double price = mat.getPrice();
         double totalPrice = CAL.beamsPrice(carport);
@@ -391,8 +388,10 @@ public class Assemble implements AssembleInterface {
         int id = quick.getId();
         int lenght = mat.getLength();
         int width = mat.getWidth();
+        double calculateLength = mat.getLength();
+        double calculateWidth = mat.getWidth();
         double price = mat.getPrice();
-        double fArea = lenght / 1000 * width / 1000;
+        double fArea = (calculateLength / 1000) * (calculateWidth / 1000);
         double TileAmount = CAL.floorArea(shed) / fArea;
         int amount = ((int) Math.ceil(TileAmount));
         double totalPrice = amount * price;

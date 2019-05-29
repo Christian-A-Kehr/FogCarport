@@ -48,15 +48,6 @@ public class Floor {
         return id;
     }
 
-    public double getprice() {
-        return price;
-    }
-
-    @Override
-    public String toString() {
-        return "Floor{" + "name=" + material + ", length=" + length + ", width=" + width + ", id=" + id + ", M2price=" + price + '}';
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -67,6 +58,11 @@ public class Floor {
 
     public double getTotalPrice() {
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Floor{" + "material=" + material + ", length=" + length + ", width=" + width + ", id=" + id + ", amount=" + amount + ", price=" + price + ", totalPrice=" + totalPrice + '}';
     }
     
 }
