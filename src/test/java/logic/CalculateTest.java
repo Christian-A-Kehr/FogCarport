@@ -30,7 +30,7 @@ public class CalculateTest {
     int height = 2000;
     int lenght = 4000;
     int width = 5000;
-    Beam beam = new Beam("Spærtræ rem", 4000, 300, 195, 503, 4, 30, 480);
+    Beam beam = new Beam("Spærtræ rem", 4000, 300, 195, 14, 4, 30, 480);
     Rafter rafter = new Rafter("Spærtræ", 5000, 100, 45, 504, 10, 20, 1000);
     WoodPost woodpost = new WoodPost("Stolpe", 2100, 250, 505, 8, 100, 800);
     Batten batten = new Batten("Lægte", 4000, 300, 100, 506, 10, 15, 600);
@@ -148,7 +148,7 @@ public class CalculateTest {
         System.out.println("TotalPriceRaftersWithSlope");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 1842.34;
+        double expResult = 1842.0;
         double result = instance.TotalPriceRaftersWithSlope(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -205,7 +205,7 @@ public class CalculateTest {
         System.out.println("beamsPrice");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 189.0;
+        double expResult = 504.0;
         double result = instance.beamsPrice(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -360,9 +360,9 @@ public class CalculateTest {
     @Test
     public void testCalculateCarport() {
         HashMap<String, Double> newMap = new HashMap();
-        newMap.put("RoofPrice ", 6799.0);
-        newMap.put("ShedPrice ", 7625.0);
-        newMap.put("Carport ", 14424.0);
+        newMap.put("RoofPrice", 2679.0);
+        newMap.put("ShedPrice", 7625.0);
+        newMap.put("CarportPrice", 10304.0);
 
         System.out.println("CalculateCarport");
         Carport carport = testCarport;
@@ -396,7 +396,7 @@ public class CalculateTest {
         System.out.println("battensNeeded");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        int expResult = 14;
+        int expResult = 27;
         int result = instance.battensNeeded(carport);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
