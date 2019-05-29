@@ -103,14 +103,14 @@ public class Calculate implements LogicInterface {
     @Override
     public int NumberOfRaftersSlopedRoof(Carport carport) {
         int number = NumbersOfRaftersFlatRoof(carport.getLength()) * 2; // 3 because 2 ekstra rafters is add pr rafter.  
-        return number;
+        return Math.round(number);
     }
 
     @Override
     public double TotalPriceRaftersWithSlope(Carport carport) {
         double lenght = TotalLengthRaftersWithSlope(carport);
         double totalprice = (lenght / 1000) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
-        return totalprice;
+        return Math.round(totalprice);
 
     }
 
@@ -145,7 +145,11 @@ public class Calculate implements LogicInterface {
         //return Total;
     }
     // beams are cut to custom measures 
-
+    /**
+     * BeamsPrice can calulates the Total price for at carport, its made so that it can be called from outside of Assembl class
+     * @param carport The carport that needs to be calcualeted 
+     * @return 
+     */
     @Override
     public double beamsPrice(Carport carport) {
         Material mat = dataaccessor.getMaterialFromId(carport.getRoof().getBeam().getId());
@@ -153,7 +157,7 @@ public class Calculate implements LogicInterface {
         double beamWidth = mat.getWidth();
         double lenghtPrBeam = carport.getHeight();
         double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carportWidth, beamWidth)) * mat.getPrice();
-        return totalPrice;
+        return Math.round(totalPrice);
     }
 
     @Override
