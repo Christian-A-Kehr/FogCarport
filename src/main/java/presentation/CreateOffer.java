@@ -33,7 +33,14 @@ public class CreateOffer extends Command {
     private Facade logic = new Facade();
     private Assemble assemble = new Assemble();
     private Calculate cal = new Calculate();
-    
+
+    /**
+     * Handles userInput from orderPage.jsp and processes it to create an offer or a list of materials needed.
+     * @param request
+     * @param response
+     * @return jsp page depending on which button is pressed on the orderPage
+     * @throws FogException 
+     */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
@@ -41,8 +48,8 @@ public class CreateOffer extends Command {
 
             String roofType = request.getParameter("flatOrNot");
             int height = Integer.parseInt(request.getParameter("height"));
-            int length = Integer.parseInt(request.getParameter("height"));
-            int width = Integer.parseInt(request.getParameter("height"));
+            int length = Integer.parseInt(request.getParameter("length"));
+            int width = Integer.parseInt(request.getParameter("width"));
             int shedWidth = Integer.parseInt(request.getParameter("shedDepth"));
             int shedDepth = Integer.parseInt(request.getParameter("shedWidth"));
             int angle = Integer.parseInt(request.getParameter("angleChoice"));
@@ -56,8 +63,6 @@ public class CreateOffer extends Command {
 
             Material rafterMat = logic.getMaterialFromId(rafterID);
             Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterID);
-//            Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterMat.getHeight(), rafterMat.getWidth(), rafterID, amount, price, totalprice);
-//            String material, int lenght, int height, int thickness, int id, int amount, double price, double totalPrice
 
             Material beamMat = logic.getMaterialFromId(beamID);
             Beam beam = new Beam(beamMat.getMaterial(), length, beamID);
@@ -73,7 +78,7 @@ public class CreateOffer extends Command {
 
             Material rooftileMat = logic.getMaterialFromId(rooftileID);
             Rooftile rooftile = new Rooftile(rooftileMat.getMaterial(), rooftileMat.getLength(), rooftileMat.getWidth(), rooftileID);
-            
+
             session.setAttribute("rooftile", rooftileMat);
             session.setAttribute("rafter", rafterMat);
             session.setAttribute("rafterName", rafterMat.getName());
@@ -85,9 +90,9 @@ public class CreateOffer extends Command {
             Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
 
             Roof roof = new Roof(roofType, angle, length, width, beam, rafter, woodpost, rooftile);
-            
+
             Carport carport = new Carport(height, length, width, roof, shed);
-            
+
             Rafter fullRafter = (Rafter) assemble.createRafter(carport);
             Beam fullBeam = (Beam) assemble.createBeam(carport);
             WoodPost fullWoodpost = (WoodPost) assemble.createWoodpost(carport);
@@ -96,11 +101,11 @@ public class CreateOffer extends Command {
             Shed fullShed = (Shed) assemble.createShed(carport);
             Roof fullRoof = (Roof) assemble.createRoof(carport);
             Carport fullCarport = (Carport) assemble.AssembleCarport(carport);
-            
+
             session.setAttribute("carportPrice", cal.CalculateCarport(fullCarport).get("Carport"));
             session.setAttribute("shedPrice", cal.CalculateCarport(fullCarport).get("ShedPrice"));
             session.setAttribute("roofPrice", cal.CalculateCarport(fullCarport).get("RoofPrice"));
-            
+
             Delivery delivery = (Delivery) logic.getDelivery(request.getParameter("delivery"));
             double totalPrice = delivery.getPrice() + cal.CalculateCarport(fullCarport).get("CarportPrice");
             session.setAttribute("deliveryPrice", delivery.getPrice());
@@ -116,37 +121,30 @@ public class CreateOffer extends Command {
             session.setAttribute("beamMat", fullBeam.getMaterial());
             session.setAttribute("beamAmount", fullBeam.getAmount());
             session.setAttribute("beamDesc", beamMat.getDesc());
+            session.setAttribute("beamTotalPrice", fullCarport.getRoof().getBeam().getTotalPrice());
 
             session.setAttribute("woodpostMPrice", fullCarport.getRoof().getWoodpost().getPrice());
             session.setAttribute("woodpostMat", fullWoodpost.getMaterial());
             session.setAttribute("woodpostAmount", fullWoodpost.getAmount());
             session.setAttribute("woodpostDesc", woodpostMat.getDesc());
-            
+            session.setAttribute("woodpostTotalPrice", fullCarport.getRoof().getWoodpost().getTotalPrice());
+
             session.setAttribute("wallcoveringMPrice", fullCarport.getShed().getWallCovering().getPrice());
             session.setAttribute("wallcoveringMat", fullWallCovering.getMaterial());
             session.setAttribute("wallcoveringAmount", fullWallCovering.getAmount());
             session.setAttribute("wallcoveringDesc", wallCoveringMat.getDesc());
+            session.setAttribute("wallcoveringTotalPrice", fullCarport.getShed().getWallCovering().getTotalPrice());
 
             session.setAttribute("floorPrice", fullCarport.getShed().getFloor().getPrice());
             session.setAttribute("floorMat", fullFloor.getMaterial());
             session.setAttribute("floorAmount", fullFloor.getAmount());
             session.setAttribute("floorDesc", floorMat.getDesc());
+            session.setAttribute("floorTotalPrice", fullCarport.getShed().getFloor().getTotalPrice());
 
-            
-            
-            session.setAttribute("rafterTest2", fullRafter.getTotalPrice());
-            session.setAttribute("test", fullCarport.getHeight());
-            session.setAttribute("test2", fullCarport.getRoof().getBeam().getMaterial());
-            session.setAttribute("shedTest1", fullCarport.getShed().getFloor());
-            session.setAttribute("shedTest2", fullShed.getFloor().getMaterial());
-            session.setAttribute("shedTest3", fullShed.getFloor().getPrice());
-            session.setAttribute("shedTest4", fullShed.getFloor().getAmount());
 
             session.setAttribute("carport", assemble.AssembleCarport(carport));
             session.setAttribute("roof", assemble.createRoof(carport));
             session.setAttribute("shed", assemble.createShed(carport));
-            
-            session.setAttribute("calTest", cal.WooPostTotalPrice(carport));
 
         } catch (Exception ex) {
             ex.getMessage();
