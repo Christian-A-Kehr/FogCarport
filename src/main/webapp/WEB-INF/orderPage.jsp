@@ -78,7 +78,6 @@
                 <tr>
                     <th>Rem materiale valg</th>
                     <th>Spær materiale valg</th>
-                    <th>Spær afstand</th>
                 </tr>
                 <tr>
                 <tbody>
@@ -104,7 +103,6 @@
                         %>
                     </select>
                 </td>
-                <td><input name="rafterDistChoice" type="number" max="1000" value="0" ></td>
                 </tr>
                 </tbody>
             </table>
