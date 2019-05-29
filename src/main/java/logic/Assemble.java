@@ -67,9 +67,10 @@ public class Assemble implements AssembleInterface {
         Rooftile rooftile = createRoofTile(quick);
 
         if (carport.getRoof().getType().equals("Med rejsning")) {
-            Batten batten = createBatten(carport);
-            WallCovering wallCovering = createGabledWallcover(carport);
-            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
+//            Batten batten = createBatten(carport);
+//            WallCovering wallCovering = createGabledWallcover(carport);
+//            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
+            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile);
             return roof;
 
         } else {
@@ -92,9 +93,10 @@ public class Assemble implements AssembleInterface {
         WoodPost woodpost = createWoodpostViaShed(carport);
 
         if (carport.getRoof().getType().equals("Med rejsning")) {
-            Batten batten = createBatten(carport);
-            WallCovering wallCovering = createGabledWallcover(carport);
-            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
+//            Batten batten = createBatten(carport);
+//            WallCovering wallCovering = createGabledWallcover(carport);
+//            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile, batten, wallCovering);
+            roof = new Roof(type, angle, height, lenght, width, beam, rafter, woodpost, rooftile);
             return roof;
 
         } else {
