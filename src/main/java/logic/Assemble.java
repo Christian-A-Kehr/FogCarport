@@ -324,7 +324,7 @@ public class Assemble implements AssembleInterface {
         int lenght = carport.getWidth();
         int height = mat.getHeight();
         int width = mat.getWidth();
-        int id = carport.getRoof().getBatten().getId();
+        int id = mat.getMatNum();
         int amount = CAL.battensNeeded(carport);
         double price = mat.getPrice();
         double totalPrice = CAL.battensPrice(amount, price, carport.getRoof());
