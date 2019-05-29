@@ -35,11 +35,13 @@ public class CreateOffer extends Command {
     private Calculate cal = new Calculate();
 
     /**
-     * Handles userInput from orderPage.jsp and processes it to create an offer or a list of materials needed.
+     * Handles userInput from orderPage.jsp and processes it to create an offer
+     * or a list of materials needed.
+     *
      * @param request
      * @param response
      * @return jsp page depending on which button is pressed on the orderPage
-     * @throws FogException 
+     * @throws FogException
      */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
@@ -140,7 +142,6 @@ public class CreateOffer extends Command {
             session.setAttribute("floorAmount", fullFloor.getAmount());
             session.setAttribute("floorDesc", floorMat.getDesc());
             session.setAttribute("floorTotalPrice", fullCarport.getShed().getFloor().getTotalPrice());
-
 
             session.setAttribute("carport", assemble.AssembleCarport(carport));
             session.setAttribute("roof", assemble.createRoof(carport));

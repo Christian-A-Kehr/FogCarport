@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import logic.FogException;
 
 /**
- *
+ *Uses button command value to direct the user to the right page with the right data
+ * 
  * @author Mkhansen
  */
 abstract class Command {

@@ -14,7 +14,8 @@ import logic.Facade;
 import logic.FogException;
 
 /**
- *
+ *Sends the user to orderPage.jsp with the correct data pulled directly from the database
+ * 
  * @author Mkhansen
  */
 public class GoToOrderPage extends Command {

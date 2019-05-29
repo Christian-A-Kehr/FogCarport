@@ -19,6 +19,14 @@ public class CreateOrUpdateMaterial extends Command {
 
     private Facade logic = new Facade();
 
+    /**
+     * Creates or updates material in database based on userinput "matNumChoice"
+     * 
+     * @param request
+     * @param response
+     * @return
+     * @throws FogException 
+     */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         String name = request.getParameter("nameChoice");

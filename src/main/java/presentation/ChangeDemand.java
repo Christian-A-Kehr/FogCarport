@@ -11,7 +11,8 @@ import logic.Facade;
 import logic.FogException;
 
 /**
- *
+ *Used to update demands in the settingsPage.jsp
+ * 
  * @author Mkhansen
  */
 public class ChangeDemand extends Command {
