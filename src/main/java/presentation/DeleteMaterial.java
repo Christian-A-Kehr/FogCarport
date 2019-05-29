@@ -17,7 +17,13 @@ import logic.FogException;
 public class DeleteMaterial extends Command {
 
     private Facade logic = new Facade();
-
+/**
+ * Deletes chosen material from database based on parameter "deleteChoice"
+ * @param request
+ * @param response
+ * @return
+ * @throws FogException 
+ */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         logic.dropMaterial(Integer.parseInt(request.getParameter("deleteChoice")));

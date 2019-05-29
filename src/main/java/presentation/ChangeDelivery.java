@@ -11,7 +11,8 @@ import logic.Facade;
 import logic.FogException;
 
 /**
- *
+ *Used to change the price of a given delivery location in the settingsPage.jsp
+ * 
  * @author Mkhansen
  */
 public class ChangeDelivery extends Command {

@@ -24,6 +24,8 @@ public class Frontcontroller extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
+     * 
+     * Makes sure the user get to the right page based on commands
      *
      * @param request servlet request
      * @param response servlet response
