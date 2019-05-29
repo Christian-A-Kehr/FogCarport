@@ -32,7 +32,7 @@ public class CalculateTest {
     int width = 5000;
     Beam beam = new Beam("Spærtræ rem", 4000, 300, 195, 14, 4, 30, 480);
     Rafter rafter = new Rafter("Spærtræ", 5000, 100, 45, 504, 10, 20, 1000);
-    WoodPost woodpost = new WoodPost("Stolpe", 2100, 250, 505, 8, 100, 800);
+    WoodPost woodpost = new WoodPost("Stolpe", 2100, 250, 6, 8, 100, 800);
     Batten batten = new Batten("Lægte", 4000, 300, 100, 506, 10, 15, 600);
     Rooftile rooftile = new Rooftile("Trapezplade", 1000, 1000, 507, 20, 19.95, 399);
     WallCovering testWallcover = new WallCovering("Væg beklædning", 2000, 195, 501, 10, 100, 3000);
@@ -67,7 +67,7 @@ public class CalculateTest {
         System.out.println("WooPostTotalPrice");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 1260.0;
+        double expResult = 600.0;
         double result = instance.WooPostTotalPrice(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -120,7 +120,7 @@ public class CalculateTest {
         System.out.println("TotalPriceRaftersFlatRoof");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        double expResult = 600.0;
+        double expResult = 2010.0;
         double result = instance.TotalPriceRaftersFlatRoof(carport);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -249,7 +249,7 @@ public class CalculateTest {
         double price = 100.0;
         Roof roof = testRoof;
         Calculate instance = new Calculate();
-        double expResult = 0.0;
+        double expResult = 1000.0;
         double result = instance.calculateGabledWallCoveringPrice(boardsNeeded, price, roof);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.

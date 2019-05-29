@@ -151,30 +151,29 @@ public class Assemble implements AssembleInterface {
     // done
     @Override
     public WoodPost createWoodpost(Carport carport) {
-        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
-        WoodPost Quick = carport.getRoof().getWoodpost();
-        String material = Quick.getMaterial();
-        int lenght = Quick.getLength();
-        int height = carport.getHeight();
-        int width = Quick.getWidth();
-        int id = Quick.getId();
-        double price = mat.getPrice();
-        int amount = CAL.WoodPostNeeded(carport);
-        double totalPrice = CAL.WooPostTotalPrice(carport);
-
-        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
+//        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWoodpost().getId());
+//        WoodPost Quick = carport.getRoof().getWoodpost();
+//        String material = Quick.getMaterial();
+//        int lenght = Quick.getLength();
+//        int height = carport.getHeight();
+//        int width = Quick.getWidth();
+//        int id = Quick.getId();
+//        double price = mat.getPrice();
+//        int amount = CAL.WoodPostNeeded(carport);
+//        double totalPrice = CAL.WooPostTotalPrice(carport);
+//
+//        WoodPost woodPost = new WoodPost(material, lenght, width, id, amount, price, totalPrice);
 
         // return woodpost
-        // hardcoded
-        DataUpdater dataUp = new DataUpdater();
-        Material standart = dataUp.getMaterialFromId(500);
+       
+        Material standart = DATAACC.getMaterialFromId(6);
 
         String Hmaterial = standart.getMaterial();
         int Hlenght = standart.getLength();
-        int Hheight = mat.getHeight();
+        int Hheight = standart.getHeight();
         int Hwidth = standart.getWidth();
         int Hid = standart.getMatNum();
-        double Hprice = mat.getPrice();
+        double Hprice = standart.getPrice();
         int Hamount = CAL.WoodPostNeeded(carport);
         double HtotalPrice = CAL.WooPostTotalPrice(carport);
 

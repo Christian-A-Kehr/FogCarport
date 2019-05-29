@@ -31,11 +31,12 @@ public class Calculate implements LogicInterface {
     public int WoodPostNeeded(Carport carport) {
         double standartWoodpostwidth = dataaccessor.getVariabel(6);
         double carportLength = carport.getLength();
+        double beamWidth = dataaccessor.getMaterialFromId(carport.getRoof().getBeam().getId()).getWidth();
         double woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
         double overHang1 = dataaccessor.getVariabel(1); // 150 mm
         double overHang2 = dataaccessor.getVariabel(1); // 150 mm
         double stretchForWoodposts = (carportLength - (overHang1 + overHang2));
-        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (standartWoodpostwidth + woodPostsDistance) * BeamsNeeded(carport.getWidth(), carport.getRoof().getBeam().getWidth());
+        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (standartWoodpostwidth + woodPostsDistance) * BeamsNeeded(carport.getWidth(), beamWidth);
         int rounded = (int) Math.ceil(totalNumberwoodpostsDouble);
         return rounded;
     }
@@ -43,18 +44,20 @@ public class Calculate implements LogicInterface {
     public int WoodPostNeededViaShed(Roof roof, Shed shed) {
         double standartWoodpostwidth = dataaccessor.getVariabel(6);
         double carportLength = roof.getLength();
+        double beamWidth = dataaccessor.getMaterialFromId(roof.getBeam().getId()).getWidth();
         double woodPostsDistance = dataaccessor.getVariabel(2); // 4000 mm
         double overHang1 = dataaccessor.getVariabel(1); // 150 mm
         double overHang2 = dataaccessor.getVariabel(1); // 150 mm
         double stretchForWoodposts = (carportLength - (overHang1 + overHang2));
-        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (roof.getWoodpost().getWidth() + woodPostsDistance) * BeamsNeeded(roof.getWidth(), roof.getWoodpost().getWidth());
+        double totalNumberwoodpostsDouble = (stretchForWoodposts + woodPostsDistance) / (roof.getWoodpost().getWidth() + woodPostsDistance) * BeamsNeeded(roof.getWidth(), beamWidth);
         int rounded = (int) Math.ceil(totalNumberwoodpostsDouble);
         return rounded;
     }
 
     @Override
     public double WooPostTotalPrice(Carport carport) {
-        double totalPrice = (WoodPostNeeded(carport) * (carport.getHeight())) * carport.getRoof().getWoodpost().getprice() / 1000;
+        Material mat = dataaccessor.getMaterialFromId(6);
+        double totalPrice = WoodPostNeeded(carport) * (carport.getHeight() / 1000) * mat.getPrice();
         return totalPrice;
     }
 
@@ -81,7 +84,8 @@ public class Calculate implements LogicInterface {
 
     @Override
     public double TotalPriceRaftersFlatRoof(Carport carport) {
-        double totalRafterPrice = (TotalLengthRaftersFlatRoof(carport) / 1000) * carport.getRoof().getRafter().getMprice(); // Der divideres med 1000 for at kunne gange med meterprisen.
+        double rafterPrice = dataaccessor.getMaterialFromId(8).getPrice();
+        double totalRafterPrice = (TotalLengthRaftersFlatRoof(carport) / 1000) * rafterPrice; // Der divideres med 1000 for at kunne gange med meterprisen.
         return totalRafterPrice;
 
     }
@@ -126,6 +130,7 @@ public class Calculate implements LogicInterface {
         int Total = (totalBeamsNeeded / 1000) + 2; // outer sides
         return Total;
     }
+
     @Override
     public int BeamsNeededShed(double carportWidth, double shedWidth, double beamWidth) {
         double coveringDistances = carportWidth;
@@ -141,14 +146,17 @@ public class Calculate implements LogicInterface {
         double totalNumbersBeams = (stretchForBeams + beamsDistance) / ((beamWidth + beamsDistance));
         int totalBeamsNeeded = (int) (Math.ceil(totalNumbersBeams));
         int Total = (totalBeamsNeeded / 1000) + 2; // outer sides
-        return  totalBeamsNeeded;
+        return totalBeamsNeeded;
         //return Total;
     }
+
     // beams are cut to custom measures 
     /**
-     * BeamsPrice can calulates the Total price for at carport, its made so that it can be called from outside of Assembl class
-     * @param carport The carport that needs to be calcualeted 
-     * @return 
+     * BeamsPrice can calulates the Total price for at carport, its made so that
+     * it can be called from outside of Assembl class
+     *
+     * @param carport The carport that needs to be calcualeted
+     * @return
      */
     @Override
     public double beamsPrice(Carport carport) {
@@ -176,11 +184,19 @@ public class Calculate implements LogicInterface {
 
         return gableAreaOneSide;
     }
-
+/**
+ * Calculate price for none flat roof
+ * @param boardsNeeded amount of wallcoverPart needed to cover the roof
+ * @param price the price for 1 wallcoverPart
+ * @param roof needs roof to calculate a roofHeight
+ * @return 
+ */
     @Override
     public double calculateGabledWallCoveringPrice(int boardsNeeded, double price, Roof roof) {
         // needs to calulate the number of boards needed
-        int WallCoverAmount = boardsNeeded * (calulateGabledHeight(roof) / roof.getWallCovering().getLength());
+       Material material = dataaccessor.getMaterialFromId(roof.getWallCovering().getId());
+       Material mat = dataaccessor.getMaterialFromId(4);
+        double WallCoverAmount = boardsNeeded * (calulateGabledHeight(roof) / mat.getLength());
         Double totalPrice = WallCoverAmount * price;
         return totalPrice;
     }
@@ -224,9 +240,9 @@ public class Calculate implements LogicInterface {
     //claus
     @Override
     public int battensNeeded(Carport carport) {
-        Material mat = dataaccessor.getMaterialFromId(18);
+        Material mat = dataaccessor.getMaterialFromId(18); // standart
         double battensHeight = mat.getHeight();
-        double battensDistance = 100; // This is an example. Find legislation!
+        double battensDistance = 100;  
 
         double stretchBattensOneSide = ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle())));
         double stretchBattensTotal = 2 * stretchBattensOneSide;
@@ -246,8 +262,10 @@ public class Calculate implements LogicInterface {
     @Override
     public int WallCoveringsNeededDepth(Shed shed, WoodPost woodpost) {
         //overlay used for 100 mm width wallcover => standart width
+        double woodpostwidth = dataaccessor.getMaterialFromId(6).getWidth();
+        
         double overlay = dataaccessor.getVariabel(5); // 150
-        double shedCoverDepth = shed.getDepth() - (2 * woodpost.getWidth() - (2 * dataaccessor.getVariabel(1))); // 1200
+        double shedCoverDepth = shed.getDepth() - (2 * woodpostwidth - (2 * dataaccessor.getVariabel(1))); // 1200
         double wallCoverWidth = shed.getWallCovering().getWidth();
         double woodPostWidth = woodpost.getWidth();
         // distance to second board 
