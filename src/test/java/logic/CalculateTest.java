@@ -359,16 +359,16 @@ public class CalculateTest {
      */
     @Test
     public void testCalculateCarport() {
-        HashMap<String, String> newMap = new HashMap();
-        newMap.put("RoofPrice ", 6799.0 + " kr");
-        newMap.put("ShedPrice ", 7625.0 + " kr");
-        newMap.put("Carport ", 14424.0 + " kr");
+        HashMap<String, Double> newMap = new HashMap();
+        newMap.put("RoofPrice ", 6799.0);
+        newMap.put("ShedPrice ", 7625.0);
+        newMap.put("Carport ", 14424.0);
 
         System.out.println("CalculateCarport");
         Carport carport = testCarport;
         Calculate instance = new Calculate();
-        HashMap<String, String> expResult = newMap;
-        HashMap<String, String> result = instance.CalculateCarport(carport);
+        HashMap<String, Double> expResult = newMap;
+        HashMap<String, Double> result = instance.CalculateCarport(carport);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
