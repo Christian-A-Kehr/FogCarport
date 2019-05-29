@@ -102,7 +102,7 @@ public class CreateOffer extends Command {
             Roof fullRoof = (Roof) assemble.createRoof(carport);
             Carport fullCarport = (Carport) assemble.AssembleCarport(carport);
 
-            session.setAttribute("carportPrice", cal.CalculateCarport(fullCarport).get("Carport"));
+            session.setAttribute("carportPrice", cal.CalculateCarport(fullCarport).get("CarportPrice"));
             session.setAttribute("shedPrice", cal.CalculateCarport(fullCarport).get("ShedPrice"));
             session.setAttribute("roofPrice", cal.CalculateCarport(fullCarport).get("RoofPrice"));
 
