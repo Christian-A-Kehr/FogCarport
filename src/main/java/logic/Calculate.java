@@ -18,15 +18,19 @@ import java.util.HashMap;
 /**
  *
  * @author Christian Ambjørn Kehr
- * @author Claus Mikkelsen Findinge
  */
-public class Calculate implements LogicInterface {
+public class Calculate implements CalculateInterface {
 //huske at slette noteform i comamnd
 
     private DataAccessor dataaccessor = new DataAccessor();
     // roof. length 0,8 + 0,3 
 
     /////////////////////////////////roof///////////////////////////////////////////////
+    /**
+     *
+     * @param carport takes a carport and produces the amount of woodpost needed
+     * @return
+     */
     @Override
     public int WoodPostNeeded(Carport carport) {
         double standartWoodpostwidth = dataaccessor.getVariabel(6);
@@ -41,6 +45,14 @@ public class Calculate implements LogicInterface {
         return rounded;
     }
 
+    /**
+     * uses assemble method to produce amount of woodpost needed in a carport
+     * with a shed Can be used with woodpost need to finde total amount.
+     *
+     * @param roof Dimension of the roof
+     * @param shed
+     * @return
+     */
     public int WoodPostNeededViaShed(Roof roof, Shed shed) {
         double standartWoodpostwidth = dataaccessor.getVariabel(6);
         double carportLength = roof.getLength();
@@ -54,6 +66,13 @@ public class Calculate implements LogicInterface {
         return rounded;
     }
 
+    /**
+     * Findes the price, when comparring lenght and amount of woodpost neede. is
+     * /1000 to get mm.
+     *
+     * @param carport needed for the height
+     * @return
+     */
     @Override
     public double WooPostTotalPrice(Carport carport) {
         Material mat = dataaccessor.getMaterialFromId(6);
@@ -61,6 +80,11 @@ public class Calculate implements LogicInterface {
         return totalPrice;
     }
 
+    /**
+     * 
+     * @param Distance 
+     * @return
+     */
     @Override
     public int NumbersOfRaftersFlatRoof(double Distance) {
         double rafterWidth = dataaccessor.getVariabel(4);  // 195;
@@ -184,18 +208,20 @@ public class Calculate implements LogicInterface {
 
         return gableAreaOneSide;
     }
-/**
- * Calculate price for none flat roof
- * @param boardsNeeded amount of wallcoverPart needed to cover the roof
- * @param price the price for 1 wallcoverPart
- * @param roof needs roof to calculate a roofHeight
- * @return 
- */
+
+    /**
+     * Calculate price for none flat roof
+     *
+     * @param boardsNeeded amount of wallcoverPart needed to cover the roof
+     * @param price the price for 1 wallcoverPart
+     * @param roof needs roof to calculate a roofHeight
+     * @return
+     */
     @Override
     public double calculateGabledWallCoveringPrice(int boardsNeeded, double price, Roof roof) {
         // needs to calulate the number of boards needed
-       Material material = dataaccessor.getMaterialFromId(roof.getWallCovering().getId());
-       Material mat = dataaccessor.getMaterialFromId(4);
+        Material material = dataaccessor.getMaterialFromId(roof.getWallCovering().getId());
+        Material mat = dataaccessor.getMaterialFromId(4);
         double WallCoverAmount = boardsNeeded * (calulateGabledHeight(roof) / mat.getLength());
         Double totalPrice = WallCoverAmount * price;
         return totalPrice;
@@ -242,7 +268,7 @@ public class Calculate implements LogicInterface {
     public int battensNeeded(Carport carport) {
         Material mat = dataaccessor.getMaterialFromId(18); // standart
         double battensHeight = mat.getHeight();
-        double battensDistance = 100;  
+        double battensDistance = 100;
 
         double stretchBattensOneSide = ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle())));
         double stretchBattensTotal = 2 * stretchBattensOneSide;
@@ -263,7 +289,7 @@ public class Calculate implements LogicInterface {
     public int WallCoveringsNeededDepth(Shed shed, WoodPost woodpost) {
         //overlay used for 100 mm width wallcover => standart width
         double woodpostwidth = dataaccessor.getMaterialFromId(6).getWidth();
-        
+
         double overlay = dataaccessor.getVariabel(5); // 150
         double shedCoverDepth = shed.getDepth() - (2 * woodpostwidth - (2 * dataaccessor.getVariabel(1))); // 1200
         double wallCoverWidth = shed.getWallCovering().getWidth();

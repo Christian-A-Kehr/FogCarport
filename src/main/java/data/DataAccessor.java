@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mkhansen
+ * @author Mkhansen + Christian A kehr
  */
 public class DataAccessor implements DataAcessorInterface {
     //int Variabel; // used to get variables in getVariable
