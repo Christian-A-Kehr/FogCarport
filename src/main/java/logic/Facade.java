@@ -138,7 +138,7 @@ public class Facade implements FacadeInterface {
     }
 
     @Override
-    public HashMap<String, String> CalCarport(Carport carport) {
+    public HashMap<String, Double> CalCarport(Carport carport) {
         return cal.CalculateCarport(carport);
     }
 

@@ -219,7 +219,8 @@ public class Calculate implements LogicInterface {
     //claus
     @Override
     public int battensNeeded(Carport carport) {
-        double battensHeight = carport.getRoof().getBatten().getHeight();
+        Material mat = dataaccessor.getMaterialFromId(18);
+        double battensHeight = mat.getHeight();
         double battensDistance = 100; // This is an example. Find legislation!
 
         double stretchBattensOneSide = ((carport.getWidth() / 2) / Math.cos(Math.toRadians(carport.getRoof().getAngle())));
@@ -308,25 +309,25 @@ public class Calculate implements LogicInterface {
     //////////////////////////////////// Carport //////////////////////////////////
     //
     @Override
-    public HashMap<String, String> CalculateCarport(Carport carport) {
+    public HashMap<String, Double> CalculateCarport(Carport carport) {
         Assemble assemble = new Assemble();
-        HashMap<String, String> prices = new HashMap();
+        HashMap<String, Double> prices = new HashMap();
         // roof prices
         double beamPrice = carport.getRoof().getBeam().getTotalPrice();
         double rafterPrice = carport.getRoof().getRafter().getTotalPrice();
         double rooftilesPrice = carport.getRoof().getRooftiles().getTotalPrice();
-        double battenPrice = battensPrice(battensNeeded(carport), assemble.createBatten(carport).getPrice() , carport.getRoof());
-        double wallcoverPrice = carport.getRoof().getWallCovering().getTotalPrice();
+//        double battenPrice = battensPrice(carport.getRoof().getBatten().getAmount() , carport.getRoof().getBatten().getPrice() , carport.getRoof());
+//        double wallcoverPrice = calculateGabledWallCoveringPrice(carport.getRoof().getWallCovering().getAmount(), carport.getRoof().getWallCovering().getPrice(), carport.getRoof());
         double woodpostPrice = carport.getRoof().getWoodpost().getTotalPrice();
-        double roofPrice = beamPrice + rafterPrice + rooftilesPrice + battenPrice + wallcoverPrice + woodpostPrice;
+        double roofPrice = beamPrice + rafterPrice + rooftilesPrice /* + battenPrice  + wallcoverPrice*/ + woodpostPrice;
         // add to map
-        prices.put("RoofPrice ", roofPrice + " kr");
+        prices.put("RoofPrice", roofPrice);
         //  Shed prices  
         Shed Quick = carport.getShed();
         double shedPrice = Quick.getWallCovering().getTotalPrice() + Quick.getFloor().getTotalPrice();
-        prices.put("ShedPrice ", shedPrice + " kr");
+        prices.put("ShedPrice", shedPrice);
         double carportPrice = shedPrice + roofPrice;
-        prices.put("Carport ", carportPrice + " kr");
+        prices.put("CarportPrice", carportPrice);
 
         return prices;
     }

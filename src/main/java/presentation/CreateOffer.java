@@ -7,6 +7,7 @@ package presentation;
 
 import data.Beam;
 import data.Carport;
+import data.Delivery;
 import data.Floor;
 import data.Material;
 import data.Rafter;
@@ -51,7 +52,7 @@ public class CreateOffer extends Command {
             int beamID = Integer.parseInt(request.getParameter("beamChoice"));
             int woodPostID = Integer.parseInt(request.getParameter("woodpostChoice"));
             int floorID = Integer.parseInt(request.getParameter("floorChoice"));
-            int wallCoveringID = Integer.parseInt(request.getParameter("shedChoice"));
+            int wallCoveringID = Integer.parseInt(request.getParameter("wallcoveringChoice"));
 
             Material rafterMat = logic.getMaterialFromId(rafterID);
             Rafter rafter = new Rafter(rafterMat.getMaterial(), width, rafterID);
@@ -79,7 +80,7 @@ public class CreateOffer extends Command {
             session.setAttribute("beam", beamMat.getName());
             session.setAttribute("woodpost", woodpostMat.getName());
             session.setAttribute("floor", floorMat.getName());
-            session.setAttribute("wallCovering", wallCoveringMat);
+            session.setAttribute("wallCovering", wallCoveringMat.getName());
 
             Shed shed = new Shed(shedDepth, shedWidth, wallCovering, floor);
 
@@ -87,46 +88,59 @@ public class CreateOffer extends Command {
             
             Carport carport = new Carport(height, length, width, roof, shed);
             
-            Rafter rafterOff = (Rafter) assemble.createRafter(carport);
-            Beam beamOff = (Beam) assemble.createBeam(carport);
-            WoodPost woodpostOff = (WoodPost) assemble.createWoodpost(carport);
-            Floor floorOff = (Floor) assemble.createFloor(shed);
-            Carport carp = (Carport) assemble.AssembleCarport(carport);
-            Shed shedTest = (Shed) assemble.createShed(carport);
+            Rafter fullRafter = (Rafter) assemble.createRafter(carport);
+            Beam fullBeam = (Beam) assemble.createBeam(carport);
+            WoodPost fullWoodpost = (WoodPost) assemble.createWoodpost(carport);
+            Floor fullFloor = (Floor) assemble.createFloor(shed);
+            WallCovering fullWallCovering = (WallCovering) assemble.createWallcover(carport);
+            Shed fullShed = (Shed) assemble.createShed(carport);
+            Roof fullRoof = (Roof) assemble.createRoof(carport);
+            Carport fullCarport = (Carport) assemble.AssembleCarport(carport);
             
-//            session.setAttribute("carportPrice", logic.CalCarport(carport).get("Carport "));
-//            session.setAttribute("shedPrice", logic.CalCarport(carport).get("ShedPrice "));
-//            session.setAttribute("roofPrice", logic.CalCarport(carport).get("RoofPrice "));
+            session.setAttribute("carportPrice", cal.CalculateCarport(fullCarport).get("Carport"));
+            session.setAttribute("shedPrice", cal.CalculateCarport(fullCarport).get("ShedPrice"));
+            session.setAttribute("roofPrice", cal.CalculateCarport(fullCarport).get("RoofPrice"));
+            
+            Delivery delivery = (Delivery) logic.getDelivery(request.getParameter("delivery"));
+            double totalPrice = delivery.getPrice() + cal.CalculateCarport(fullCarport).get("CarportPrice");
+            session.setAttribute("deliveryPrice", delivery.getPrice());
+            session.setAttribute("totalPrice", totalPrice);
 
-            session.setAttribute("rafterMPrice", carp.getRoof().getRafter().getMprice());
-            session.setAttribute("rafterMat", rafterOff.getMaterial());
-            session.setAttribute("rafterAmount", rafterOff.getAmount());
+            session.setAttribute("rafterMPrice", fullCarport.getRoof().getRafter().getMprice());
+            session.setAttribute("rafterMat", fullRafter.getMaterial());
+            session.setAttribute("rafterAmount", fullRafter.getAmount());
             session.setAttribute("rafterDesc", rafterMat.getDesc());
+            session.setAttribute("rafterTotalPrice", fullCarport.getRoof().getRafter().getTotalPrice());
 
-            session.setAttribute("beamMPrice", carp.getRoof().getBeam().getPrice());
-            session.setAttribute("beamMat", beamOff.getMaterial());
-            session.setAttribute("beamAmount", beamOff.getAmount());
+            session.setAttribute("beamMPrice", fullCarport.getRoof().getBeam().getPrice());
+            session.setAttribute("beamMat", fullBeam.getMaterial());
+            session.setAttribute("beamAmount", fullBeam.getAmount());
             session.setAttribute("beamDesc", beamMat.getDesc());
 
-            session.setAttribute("woodpostMPrice", carp.getRoof().getWoodpost().getPrice());
-            session.setAttribute("woodpostMat", woodpostOff.getMaterial());
-            session.setAttribute("woodpostAmount", woodpostOff.getAmount());
+            session.setAttribute("woodpostMPrice", fullCarport.getRoof().getWoodpost().getPrice());
+            session.setAttribute("woodpostMat", fullWoodpost.getMaterial());
+            session.setAttribute("woodpostAmount", fullWoodpost.getAmount());
             session.setAttribute("woodpostDesc", woodpostMat.getDesc());
+            
+            session.setAttribute("wallcoveringMPrice", fullCarport.getShed().getWallCovering().getPrice());
+            session.setAttribute("wallcoveringMat", fullWallCovering.getMaterial());
+            session.setAttribute("wallcoveringAmount", fullWallCovering.getAmount());
+            session.setAttribute("wallcoveringDesc", wallCoveringMat.getDesc());
 
-            session.setAttribute("floorPrice", carp.getShed().getFloor().getPrice());
-            session.setAttribute("floorMat", floorOff.getMaterial());
-            session.setAttribute("floorAmount", floorOff.getAmount());
+            session.setAttribute("floorPrice", fullCarport.getShed().getFloor().getPrice());
+            session.setAttribute("floorMat", fullFloor.getMaterial());
+            session.setAttribute("floorAmount", fullFloor.getAmount());
             session.setAttribute("floorDesc", floorMat.getDesc());
 
             
             
-            session.setAttribute("rafterTest2", rafterOff.getTotalPrice());
-            session.setAttribute("test", carp.getHeight());
-            session.setAttribute("test2", carp.getRoof().getBeam().getMaterial());
-            session.setAttribute("shedTest1", carp.getShed().getFloor());
-            session.setAttribute("shedTest2", shedTest.getFloor().getMaterial());
-            session.setAttribute("shedTest3", shedTest.getFloor().getprice());
-            session.setAttribute("shedTest4", shedTest.getFloor().getAmount());
+            session.setAttribute("rafterTest2", fullRafter.getTotalPrice());
+            session.setAttribute("test", fullCarport.getHeight());
+            session.setAttribute("test2", fullCarport.getRoof().getBeam().getMaterial());
+            session.setAttribute("shedTest1", fullCarport.getShed().getFloor());
+            session.setAttribute("shedTest2", fullShed.getFloor().getMaterial());
+            session.setAttribute("shedTest3", fullShed.getFloor().getPrice());
+            session.setAttribute("shedTest4", fullShed.getFloor().getAmount());
 
             session.setAttribute("carport", assemble.AssembleCarport(carport));
             session.setAttribute("roof", assemble.createRoof(carport));

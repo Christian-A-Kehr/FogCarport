@@ -49,5 +49,12 @@ caption{
     align-items: flex-end;
 }
 #offerTable {
-    width: 100%;
+    width: 98%;
+}
+#greyth{
+    background-color: grey;
+    color: black;
+}
+#fogInfo{
+    text-align: right;
 }

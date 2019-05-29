@@ -13,7 +13,7 @@ import java.util.HashMap;
 public interface LogicInterface {
    
    // all calculations i made in mm therefor int is used isted of double
-    public HashMap<String, String> CalculateCarport(Carport carport);
+    public HashMap<String, Double> CalculateCarport(Carport carport);
 
     // woodpost
     public int WoodPostNeeded(Carport carport); // skal laves om til int length (nuværende = carport)

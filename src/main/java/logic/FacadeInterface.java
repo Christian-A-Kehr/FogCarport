@@ -49,5 +49,5 @@ public interface FacadeInterface {
     
     public ArrayList<Demand> getAllDemands();
     
-    public HashMap<String,String> CalCarport(Carport carport);
+    public HashMap<String,Double> CalCarport(Carport carport);
 }

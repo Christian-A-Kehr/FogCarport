@@ -118,7 +118,7 @@
                 </tr>
                 <tr>
                     <td>                        
-                        <select name="shedChoice">
+                        <select name="wallcoveringChoice">
                             <% ArrayList<Material> shedMats = (ArrayList<Material>) session.getAttribute("allShedMats");
                                 for (int i = 0; i < shedMats.size(); i++) {
                             %>

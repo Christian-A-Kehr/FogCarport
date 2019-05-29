@@ -27,7 +27,7 @@
                 <tr>
                     <th>Del af carport</th><th>Materiale valg</th><th>Yderligere info</th><th>Materiale type</th><th>Vare nummer</th><th>Antal</th>
                 </tr>
-                <tr><th>Tag</th></tr>
+                <tr><th id="greyth">Tag</th><td colspan="5"></td></tr>
                 <tr>
                     <td>Spær</td>
                     <td><%= session.getAttribute("rafterName")%></td>
@@ -52,7 +52,15 @@
                     <td><%= request.getParameter("woodpostChoice")%></td>
                     <td><%= session.getAttribute("woodpostAmount")%></td>
                 </tr>
-                <tr><th>Skur</th></tr>
+                <tr><th id="greyth">Skur</th></tr>
+                 <tr>
+                    <td>Brædde beklædning</td>
+                    <td><%= session.getAttribute("wallCovering")%></td>
+                    <td><%= session.getAttribute("wallcoveringDesc")%></td>
+                    <td><%= session.getAttribute("wallcoveringMat")%></td>
+                    <td><%= request.getParameter("wallcoveringChoice")%></td>
+                    <td><%= session.getAttribute("wallcoveringAmount")%></td>
+                </tr>
                 <tr>
                     <td>Gulv</td>
                     <td><%= session.getAttribute("floor")%></td>

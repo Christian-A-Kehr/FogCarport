@@ -22,93 +22,60 @@
         <div id="pdfprint">
             <h1>Tilbud</h1>
             <h2 id="fog">FOG</h2>
+            <div id="fogInfo">
             <p>Johannes Fog A/S</p>
             <p>Firskovvej 20 - 2800 Lyngby</p>
             <p>CVR-nr. 16314439</p>
-            <h2>Alle mål er i mm</h2>
-            
-            <p><%= session.getAttribute("carportPrice")%></p>
-            <p><%= session.getAttribute("calTest")%></p>
-            <%--
+            </div>
+            <h2></h2>
+
+            <p><%= request.getParameter("customerName")%> -- <%= request.getParameter("customerEmail")%></p>
             <table id="offerTable">
                 <tr>
-                    <th>Del af carport</th><th>Materiale valg</th><th>Materiale type</th><th>Meter pris</th><th>Antal</th>
+                    <th>Del af carport</th><th>Materiale valg</th><th>Materiale type</th><th>Total pris</th>
                 </tr>
+                <tr><th id="greyth">Tag</th><td colspan="5"></td></tr>
                 <tr>
                     <td>Spær</td>
                     <td><%= session.getAttribute("rafterName")%></td>
                     <td><%= session.getAttribute("rafterMat")%></td>
-                    <td><%= session.getAttribute("rafterMPrice")%></td>
-                    <td><%= session.getAttribute("rafterAmount")%></td>
+                    <td><%= request.getParameter("rafterTotalPrice")%></td>
                 </tr>
                 <tr>
                     <td>Rem</td>
                     <td><%= session.getAttribute("beam")%></td>
                     <td><%= session.getAttribute("beamMat")%></td>
-                    <td><%= session.getAttribute("beamMPrice")%></td>
-                    <td><%= session.getAttribute("beamAmount")%></td>
+                    <td><%= request.getParameter("beamChoice")%></td>
                 </tr>
-                <%--
                 <tr>
                     <td>Stolper</td>
                     <td><%= session.getAttribute("woodpost")%></td>
                     <td><%= session.getAttribute("woodpostMat")%></td>
-                    <td><%= session.getAttribute("woodpostMPrice")%></td>
-                    <td></td>
+                    <td><%= request.getParameter("woodpostChoice")%></td>
+                </tr>
+                <tr><th id="greyth">Skur</th></tr>
+                <tr>
+                    <td>Brædde beklædning</td>
+                    <td><%= session.getAttribute("wallCovering")%></td>
+                    <td><%= session.getAttribute("wallcoveringMat")%></td>
+                    <td><%= request.getParameter("wallcoveringChoice")%></td>
+                </tr>
+                <tr>
+                    <td>Gulv</td>
+                    <td><%= session.getAttribute("floor")%></td>
+                    <td><%= session.getAttribute("floorMat")%></td>
+                    <td><%= request.getParameter("floorChoice")%></td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="3"></td><td>Total pris for carport</td><td><%= session.getAttribute("carportPrice")%></td>
+                </tr>
+                <tr>
+                    <td>Leverings omkostninger til <%= request.getParameter("delivery")%></td><td><%= session.getAttribute("deliveryPrice")%></td>
+                </tr>
+                <tr>
+                    <td>I alt</td><td><%= session.getAttribute("totalPrice")%></td>
                 </tr>
             </table>
-            
-            <p> Test yO <%= session.getAttribute("test")%></p>
-            <p> Test yO <%= session.getAttribute("test2")%></p>
-            <p> RafterTest yO mPrice <% out.print(session.getAttribute("rafterTest")); %></p>
-            <p> RafterTest yO totalprice <% out.print(session.getAttribute("rafterTest2")); %></p>
-            <p> RafterTest yO amount <% out.print(session.getAttribute("rafterTest3")); %></p>
-            
-            <p> ShedTest -- getFloor <% out.print(session.getAttribute("shedTest1")); %></p>
-            <p> ShedTest -- getFloor.getMaterial <% out.print(session.getAttribute("shedTest2")); %></p>
-            <p> ShedTest -- getFloor.getPrice <% out.print(session.getAttribute("shedTest3")); %></p>
-            <p> ShedTest -- getFloor.getAmount <% out.print(session.getAttribute("shedTest4")); %></p>
-                --%>
-            
-            <%--
-            <% Carport carp = (Carport) session.getAttribute("carport"); %>
-            <% Shed shed = (Shed) session.getAttribute("shed"); %>
-            <% Roof roof = (Roof) session.getAttribute("roof");%>
-            <p>1 Carport højde YOOOOOOO = <%= carp.getHeight()%></p>
-            <p>2 Carport Med/Uden rejsning YOOOOOOO = <%= carp.getRoof().getType()%></p>
-            <p>4 skur bredde YOOOOOOO = <%= shed.getWidth()%></p>
-            <p>5 Skur dybde YOOOOOOO = <%= shed.getDepth()%> </p>
-            <p>5 Skur dybde YOOOOOOO = <%= carp.getShed().getDepth()%> </p>
-            <p>6 Skur pris YOOOOOOO = ${shed.getFloor().getprice()}</p>
-            <p>7 Skur beklædning pris YOOOOOOO =  <%= carp.getShed().getWallCovering().getPrice()%> </p>
-            <p>8 Skur  pris YOOOOOOO =  <%= carp.getShed().getWallCovering().getAmount()%> </p>
-            <p>9 Skur totalpris YOOOOOOO =  <%= carp.getShed().getWallCovering().getTotalPrice()%> </p>
-             --%>
-             <%--
-            <p>Højde = <%= request.getParameter("height")%> </p>
-            <p>Længde = <%= request.getParameter("length")%> </p>
-            <p>Bredde = <%= request.getParameter("width")%> </p>
-            <p>Med/Uden rejsning = <%= request.getParameter("flatOrNot")%> </p>
-            <p>Tag materiale = <%= request.getParameter("rooftileChoice")%> </p>
-            <p>Stolpe materiale = <%= request.getParameter("woodpostChoice")%> </p>
-            <p>Valg af grader = <%= request.getParameter("angleChoice")%> </p>
-            <p>Rem materiale = <%= request.getParameter("beamChoice")%> </p>
-            <p>Spær materiale = <%= request.getParameter("rafterChoice")%> </p>
-            <p>Spær afstand = <%= request.getParameter("rafterDistChoice")%> </p>
-            <% Material mat = (Material) session.getAttribute("rafter");%>
-            <p>Spær ID = <%= mat.getMatNum()%> </p>
-            <p>*spærID = <%= mat.getName()%></p>
-
-            <p>** ${rafter.matNum}</p>
-            <p>** ${rafter.name}</p>
-            <p>Skur materiale = <%= request.getParameter("shedChoice")%> </p>
-            <p>Skur dybde = <%= request.getParameter("shedDepth")%> </p>
-            <p>Skur bredde = <%= request.getParameter("shedWidth")%> </p>
-            <p>Valg af gulv = <%= request.getParameter("floorChoice")%> </p>
-            <p>Levering = <%= request.getParameter("delivery")%> </p>
-            <p>Kunde navn = <%= request.getParameter("customerName")%> </p>
-            <p>Kunde email = <%= request.getParameter("customerEmail")%> </p>
-            --%>
         </div>
 
         <input type="button" id="printbutton" value="Gem tilbud">   
