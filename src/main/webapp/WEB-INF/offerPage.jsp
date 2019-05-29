@@ -23,13 +23,13 @@
             <h1>Tilbud</h1>
             <h2 id="fog">FOG</h2>
             <div id="fogInfo">
-            <p>Johannes Fog A/S</p>
-            <p>Firskovvej 20 - 2800 Lyngby</p>
-            <p>CVR-nr. 16314439</p>
+                <p>Johannes Fog A/S</p>
+                <p>Firskovvej 20 - 2800 Lyngby</p>
+                <p>CVR-nr. 16314439</p>
             </div>
             <h2></h2>
 
-            <p><%= request.getParameter("customerName")%> -- <%= request.getParameter("customerEmail")%></p>
+            <p> Kunde information <%= request.getParameter("customerName")%> -- <%= request.getParameter("customerEmail")%></p>
             <table id="offerTable">
                 <tr>
                     <th>Del af carport</th><th>Materiale valg</th><th>Materiale type</th><th>Total pris</th>
@@ -39,32 +39,32 @@
                     <td>Spær</td>
                     <td><%= session.getAttribute("rafterName")%></td>
                     <td><%= session.getAttribute("rafterMat")%></td>
-                    <td><%= request.getParameter("rafterTotalPrice")%></td>
+                    <td><%= session.getAttribute("rafterTotalPrice")%></td>
                 </tr>
                 <tr>
                     <td>Rem</td>
                     <td><%= session.getAttribute("beam")%></td>
                     <td><%= session.getAttribute("beamMat")%></td>
-                    <td><%= request.getParameter("beamChoice")%></td>
+                    <td><%= session.getAttribute("beamTotalPrice")%></td>
                 </tr>
                 <tr>
                     <td>Stolper</td>
                     <td><%= session.getAttribute("woodpost")%></td>
                     <td><%= session.getAttribute("woodpostMat")%></td>
-                    <td><%= request.getParameter("woodpostChoice")%></td>
+                    <td><%= session.getAttribute("woodpostTotalPrice")%></td>
                 </tr>
                 <tr><th id="greyth">Skur</th></tr>
                 <tr>
                     <td>Brædde beklædning</td>
                     <td><%= session.getAttribute("wallCovering")%></td>
                     <td><%= session.getAttribute("wallcoveringMat")%></td>
-                    <td><%= request.getParameter("wallcoveringChoice")%></td>
+                    <td><%= session.getAttribute("wallcoveringTotalPrice")%></td>
                 </tr>
                 <tr>
                     <td>Gulv</td>
                     <td><%= session.getAttribute("floor")%></td>
                     <td><%= session.getAttribute("floorMat")%></td>
-                    <td><%= request.getParameter("floorChoice")%></td>
+                    <td><%= session.getAttribute("floorTotalPrice")%></td>
                 </tr>
                 <tr>
                     <td colspan="2" rowspan="3"></td><td>Total pris for carport</td><td><%= session.getAttribute("carportPrice")%></td>
