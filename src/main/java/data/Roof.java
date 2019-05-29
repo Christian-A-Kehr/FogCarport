@@ -16,7 +16,7 @@ public class Roof {
     private Beam beam;
     private Rafter rafter;
     private WoodPost woodpost;
-    private Rooftile rooftiles;   
+    private Rooftile rooftiles;
     private Batten battens;
     private WallCovering wallCovering;
 
@@ -30,10 +30,9 @@ public class Roof {
         this.rafter = rafter;
         this.woodpost = woodpost;
         this.rooftiles = rooftile;
-        this.battens = battens; 
+        this.battens = battens;
         this.wallCovering = wallCovering;
     }
-
 
     public Roof(String type, int angle, int length, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftile) {
         this.type = type;
@@ -44,6 +43,20 @@ public class Roof {
         this.rafter = rafter;
         this.woodpost = woodpost;
         this.rooftiles = rooftile;
+    }
+
+    public Roof(String type, int angle, int height, int lenght, int width, Beam beam, Rafter rafter, WoodPost woodpost, Rooftile rooftile) {
+        this.type = type;
+        this.angle = angle;
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.beam = beam;
+        this.rafter = rafter;
+        this.woodpost = woodpost;
+        this.rooftiles = rooftile;
+        this.battens = battens;
+        this.wallCovering = wallCovering;
     }
 
     public String getType() {
@@ -111,6 +124,5 @@ public class Roof {
     public String toString() {
         return "Roof{" + "type=" + type + ", angle=" + angle + ", height=" + height + ", length=" + length + ", width=" + width + ", beam=" + beam + ", rafter=" + rafter + ", woodpost=" + woodpost + ", rooftiles=" + rooftiles + ", battens=" + battens + ", wallCovering=" + wallCovering + '}';
     }
-
 
 }
