@@ -31,24 +31,24 @@ public class Assemble implements AssembleInterface {
     private final Calculate CAL = new Calculate();
 
     @Override
-    public Carport AssembleCarport(Carport carport) throws BuildException{
+    public Carport AssembleCarport(Carport carport) throws BuildException {
 
         Carport carportComplte;
         Roof roof;
-            try {
-        if (carport.getShed().getDepth() > 0 || carport.getShed().getWidth() > 0) {
+        try {
+            if (carport.getShed().getDepth() > 0 || carport.getShed().getWidth() > 0) {
                 Shed shed = createShed(carport);
                 roof = createRoofViaShed(carport, shed);
                 carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof, shed);
                 return carportComplte;
-        } else {
-            roof = createRoof(carport);
-            carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
-            return carportComplte;
-        }
-            } catch (Exception ex) {
-                throw new BuildException("failed at Assemble");
+            } else {
+                roof = createRoof(carport);
+                carportComplte = new Carport(carport.getHeight(), carport.getLength(), carport.getWidth(), roof);
+                return carportComplte;
             }
+        } catch (Exception ex) {
+            throw new BuildException("failed at Assemble");
+        }
     }
 
     /////////////////////////////////////////////////Roof//////////////////////////////////////////////////////
@@ -286,18 +286,13 @@ public class Assemble implements AssembleInterface {
     //  Hardcoded shit incomming
     @Override
     public WallCovering createGabledWallcover(Carport carport) {
-        // Lav understående bruger input for det fucker med koden man skal hardcode det lort!
 
-//        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCovering().getId());
-//        WallCovering quick = carport.getRoof().getWallCovering();
-        // fuck up plan... bruger oversåtende hvis du får tid til at lave det ordenligt 
-        int Standart = 501;
-        WallCovering quick = new WallCovering("Væg beklædning", 0, 100, 10);
-        DataUpdater dataUP = new DataUpdater();
-        Material mat = dataUP.getMaterialFromId(Standart);
+        Material mat = DATAACC.getMaterialFromId(carport.getRoof().getWallCovering().getId());
+        WallCovering quick = carport.getRoof().getWallCovering();
+
         if (carport.getRoof().getType().equals("Med rejsning")) {
             String material = quick.getMaterial();
-            int lenght = quick.getLength();
+            int lenght = mat.getLength();
             int width = quick.getWidth();
             int id = quick.getId();
             int amount = CAL.calculateGabledWallcoverAmount(carport.getRoof());

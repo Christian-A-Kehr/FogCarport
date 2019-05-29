@@ -110,7 +110,7 @@ public class Calculate implements LogicInterface {
     public double TotalPriceRaftersWithSlope(Carport carport) {
         double lenght = TotalLengthRaftersWithSlope(carport);
         double totalprice = (lenght / 1000) * carport.getRoof().getRafter().getMprice();  // // Der divideres med 1000 for at kunne gange med meterprisen.
-        return Math.floor(totalprice * 100) / 100;
+        return totalprice;
 
     }
 
@@ -148,11 +148,12 @@ public class Calculate implements LogicInterface {
 
     @Override
     public double beamsPrice(Carport carport) {
+        Material mat = dataaccessor.getMaterialFromId(carport.getRoof().getBeam().getId());
         double carportWidth = carport.getWidth();
-        double beamWidth = carport.getRoof().getBeam().getWidth();
+        double beamWidth = mat.getWidth();
         double lenghtPrBeam = carport.getHeight();
-        double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carportWidth, beamWidth)) * carport.getRoof().getBeam().getprice();
-        return Math.round(totalPrice);
+        double totalPrice = ((lenghtPrBeam / 1000) * BeamsNeeded(carportWidth, beamWidth)) * mat.getPrice();
+        return totalPrice;
     }
 
     @Override
