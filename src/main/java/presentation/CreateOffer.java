@@ -149,7 +149,7 @@ public class CreateOffer extends Command {
 
         } catch (Exception ex) {
             ex.getMessage();
-//            return "orderPage";
+            return "orderPage";
         }
         if (request.getParameter("path").equals("Se stykliste")) {
             return "listOfMaterialsPage";
