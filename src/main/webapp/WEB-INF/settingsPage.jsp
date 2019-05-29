@@ -81,7 +81,7 @@
                 </td>
                 <tr>
                 <input type="hidden" name="command" value="CreateOrUpdateMaterial">
-                <td colspan="9" ><input type="submit" onclick="alert('Materiale tilføjet')" value="Tilføj/Opdatér Materiale"></td>
+                <td colspan="9" ><input type="submit" onclick="alert('Materiale opdateret')" value="Tilføj/Opdatér Materiale"></td>
             </form>
         </tr>
     </table>
